@@ -762,6 +762,7 @@ Object.keys(byGen).sort((a,b) => a - b).forEach(genNum => {
 
     const tr = document.createElement("tr");
     tr.dataset.name = name || "";
+    tr.dataset.code = code;
 
     const tdCode = document.createElement("td");
     tdCode.className = "num";
@@ -1052,6 +1053,15 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
     const visible = block.querySelectorAll("tbody tr:not(.row-hidden)").length;
     block.style.display = q && visible === 0 ? "none" : "";
   });
+
+  if (q){
+    const visibleRows = Array.from(document.querySelectorAll("tbody tr:not(.row-hidden)"))
+      .filter(tr => tr.dataset.name);
+    if (visibleRows.length === 1){
+      const tr = visibleRows[0];
+      showLineage(tr.dataset.code, tr);
+    }
+  }
 });
 </script>
 </body>

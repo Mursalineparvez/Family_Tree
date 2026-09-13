@@ -246,6 +246,31 @@
     overflow-y:auto;
   }
   .org-scroll{overflow-x:auto; padding:10px 4px 22px;}
+  .zoom-toolbar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .zoom-btn{
+    width:30px; height:30px;
+    border-radius:8px;
+    border:1px solid var(--forest-mid);
+    background:rgba(255,255,255,.25);
+    color:inherit;
+    font-size:1.05rem;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .15s ease, transform .15s ease;
+    font-family:'Hind Siliguri', sans-serif;
+  }
+  .zoom-btn:hover{background:rgba(255,255,255,.45); transform:translateY(-1px);}
+  .zoom-btn:active{transform:translateY(0);}
+  .zoom-level{font-size:.82rem; min-width:48px; text-align:center; font-weight:600; opacity:.85;}
   ul.org-tree{
     display:flex;
     justify-content:center;
@@ -502,7 +527,6 @@
     <li class="note-card"><span class="note-num">৬</span><span class="note-body"><b>মোঃ জমির আলী</b> তাঁর পরিবারসহ বাবরকান্দিতে শ্বশুরবাড়িতে চলে যান। বর্তমানে তাঁর ছেলে <b>মোঃ সাদ্দাম</b> ও <b>মোঃ রমজান</b> সেখানে বসবাস করছেন।</span></li>
     <li class="note-card"><span class="note-num">৭</span><span class="note-body"><b>মোঃ শহিদ মিয়া</b> তাঁর বাড়ি ও জমিজমা বিক্রি করে গাজীপুরের সালনায় চলে যান। বর্তমানে তিনি পুত্র <b>মোঃ মোহাম্মদ আলী</b>, <b>মোঃ শুক্কর আলী</b> ও <b>মোঃ হায়দার আলী</b>কে নিয়ে সেখানে বসবাস করছেন।</span></li>
     <li class="note-card"><span class="note-num">৮</span><span class="note-body"><b>মোঃ হোসেন মিয়া</b> তাঁর পরিবারসহ পাকিস্তানে চলে যান।</span></li>
-    <li class="note-card"><span class="note-num">৯</span><span class="note-body"><b>মোঃ জোবায়ের</b>-এর প্রকৃত পিতা <b>মোঃ মোহাম্মদ আলি</b> (মোঃ তোফাজ্জলের ছেলে)। মূল নথিতে ক্রমিক নম্বর অনুযায়ী মধ্যবর্তী একটি ধাপ অনুপস্থিত থাকায় তালিকায় ভুলবশত তাঁকে মোঃ আমান উল্লাহর সন্তান হিসেবে দেখানো হচ্ছিল, যা সংশোধন করা হয়েছে।</span></li>
   </ul>
 
   <footer>
@@ -857,15 +881,34 @@ function renderOrganicTree(rootCode){
       '</div>';
   });
 
-  return '<div class="organic-tree-wrap" style="width:' + width + 'px; height:' + height + 'px;">' +
+  zoomSeq++;
+  const zid = 'treezoom' + zoomSeq;
+  return '<div class="zoom-toolbar">' +
+      '<button type="button" class="zoom-btn" onclick="adjustTreeZoom(\'' + zid + '\', -0.1)" title="ছোট করুন">−</button>' +
+      '<span class="zoom-level" id="' + zid + '-lbl">১০০%</span>' +
+      '<button type="button" class="zoom-btn" onclick="adjustTreeZoom(\'' + zid + '\', 0.1)" title="বড় করুন">+</button>' +
+      '<button type="button" class="zoom-btn" onclick="adjustTreeZoom(\'' + zid + '\', 0)" title="রিসেট">⟲</button>' +
+    '</div>' +
+    '<div class="org-scroll"><div class="organic-tree-wrap" id="' + zid + '" data-zoom="1" style="width:' + width + 'px; height:' + height + 'px;">' +
     '<svg class="organic-edges" width="' + width + '" height="' + height + '">' + edgesSvg + '</svg>' +
     nodesHtml + compassRoseSvg() +
-    '</div>';
+    '</div></div>';
+}
+
+let zoomSeq = 0;
+function adjustTreeZoom(id, delta){
+  const el = document.getElementById(id);
+  if (!el) return;
+  let z = parseFloat(el.dataset.zoom || "1");
+  z = delta === 0 ? 1 : Math.min(1.6, Math.max(0.4, +(z + delta).toFixed(2)));
+  el.dataset.zoom = z;
+  el.style.zoom = z;
+  const lbl = document.getElementById(id + "-lbl");
+  if (lbl) lbl.textContent = toBn(Math.round(z * 100)) + "%";
 }
 
 // ---------- full tree (always visible) ----------
-document.getElementById("fullTreeContainer").innerHTML =
-  '<div class="org-scroll">' + renderOrganicTree("1") + '</div>';
+document.getElementById("fullTreeContainer").innerHTML = renderOrganicTree("1");
 
 // clicking any card anywhere (full tree or branch panel) shows that person's lineage
 document.addEventListener("click", (e) => {
@@ -899,7 +942,7 @@ function showLineage(code, tr){
 
   const kids = (childrenMap.get(code) || []);
   descendantBody.innerHTML = kids.length
-    ? '<div class="org-scroll">' + renderOrganicTree(code) + '</div>'
+    ? renderOrganicTree(code)
     : '<p class="panel-empty">এই ব্যক্তির কোনো সন্তানের তথ্য এই তালিকায় নথিভুক্ত নেই — ইনিই এই শাখার শেষ নাম।</p>';
   descendantPanel.classList.add("visible");
 

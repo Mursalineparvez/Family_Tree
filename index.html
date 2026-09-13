@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>শিকড়ের সন্ধানে — আমাদের গৌরবময় বংশতালিকা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1F4A34;
+    --forest-deep:#0F2A1D;
+    --forest-mid:#2E5D45;
+    --parchment:#FBF6E8;
+    --parchment-2:#F2E9CF;
+    --card:#FFFEF9;
+    --gold:#AD8A3D;
+    --gold-light:#E7CE8E;
+    --gold-pale:#F1E4BF;
+    --text:#241F16;
+    --muted:#7C7159;
+    --rule:#E3D8B8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind Siliguri', sans-serif;
+    background:var(--parchment);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{font-family:'Noto Serif Bengali', serif;}
+  ::selection{background:var(--gold-light); color:var(--forest-deep);}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(130% 160% at 50% -20%, #FFFDF5 0%, #FBF3DD 35%, #F0EBD3 60%, #E3F1E4 100%);
+    color:var(--forest-deep);
+    text-align:center;
+    padding:76px 20px 58px;
+    overflow:hidden;
+    border-bottom:1px solid var(--rule);
+  }
+  .hero::before, .hero::after{
+    content:"";
+    position:absolute;
+    border:1px solid rgba(173,138,61,.28);
+    border-radius:50%;
+    left:50%; top:38%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .hero::before{width:520px; height:520px;}
+  .hero::after{width:760px; height:760px; border-color:rgba(173,138,61,.16);}
+  .hero-inner{position:relative; z-index:2; max-width:720px; margin:0 auto;}
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:var(--gold);
+    font-size:.85rem;
+    letter-spacing:.06em;
+    margin-bottom:18px;
+  }
+  .eyebrow .rule{width:28px; height:1px; background:var(--gold); display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.1rem, 6vw, 3.4rem);
+    margin:0 0 14px;
+    font-weight:700;
+    color:var(--forest-deep);
+    letter-spacing:.01em;
+  }
+  .hero p.lede{
+    font-size:1.08rem;
+    color:var(--forest-mid);
+    max-width:520px;
+    margin:0 auto 34px;
+  }
+  .stat-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:0;
+    flex-wrap:wrap;
+  }
+  .stat{padding:0 26px; text-align:center;}
+  .stat + .stat{border-left:1px solid rgba(31,74,52,.18);}
+  .stat .num{
+    display:block;
+    font-family:'Noto Serif Bengali', serif;
+    font-size:1.7rem;
+    font-weight:700;
+    color:var(--gold);
+  }
+  .stat .lbl{font-size:.8rem; color:var(--muted); margin-top:2px;}
+
+  /* ================= TOOLBAR ================= */
+  .toolbar-wrap{
+    background:var(--card);
+    border-bottom:1px solid var(--rule);
+  }
+  .toolbar{
+    max-width:880px;
+    margin:0 auto;
+    padding:18px 20px;
+  }
+  .search-wrap{position:relative;}
+  .search-wrap svg{
+    position:absolute; left:16px; top:50%;
+    transform:translateY(-50%);
+    width:16px; height:16px;
+    color:var(--muted);
+  }
+  .search-wrap input{
+    width:100%;
+    padding:13px 18px 13px 42px;
+    font-size:1rem;
+    font-family:'Hind Siliguri', sans-serif;
+    border:1px solid var(--rule);
+    border-radius:26px;
+    background:var(--parchment);
+    color:var(--text);
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .search-wrap input:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px var(--gold-pale);
+  }
+  .search-hint{font-size:.82rem; color:var(--muted); margin-top:8px; text-align:center;}
+
+  /* ================= MAIN ================= */
+  main{max-width:880px; margin:0 auto; padding:40px 20px 10px;}
+
+  .section-head{margin:44px 0 18px; text-align:center;}
+  .section-head:first-child{margin-top:0;}
+  .section-head h2{
+    font-size:1.15rem;
+    color:var(--forest);
+    margin:0 0 6px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-head p{margin:0; color:var(--muted); font-size:.9rem;}
+
+  /* ---- lineage / descendant panels ---- */
+  .tree-panel{
+    background:linear-gradient(165deg, #FFFAEA 0%, #F7E4A8 48%, #E9C875 100%);
+    color:var(--forest-deep);
+    border-radius:14px;
+    padding:22px 24px 26px;
+    margin-bottom:22px;
+    box-shadow:0 10px 30px rgba(140,105,20,.22);
+    border:1px solid rgba(173,138,61,.35);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    padding-top:0; padding-bottom:0;
+    transition:opacity .35s ease, max-height .45s ease, padding .45s ease;
+  }
+  .tree-panel.visible{
+    opacity:1;
+    max-height:1800px;
+    padding-top:22px;
+    padding-bottom:26px;
+  }
+  .full-tree-wrap.visible{
+    max-height:none;
+    padding-top:22px;
+    padding-bottom:26px;
+  }
+  .tree-panel .panel-title{
+    font-family:'Noto Serif Bengali', serif;
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--forest-deep);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .tree-panel .panel-empty{
+    color:var(--forest-mid);
+    font-size:.95rem;
+    text-align:center;
+    padding:6px 0;
+  }
+
+  .chain-tree{display:flex; flex-direction:column; overflow-x:auto; padding-bottom:4px;}
+  .chain-item{position:relative; display:flex; align-items:center; padding:6px 0 6px 28px;}
+  .chain-item:not(.first)::before{
+    content:""; position:absolute; left:0; top:-8px;
+    width:2px; height:calc(50% + 8px);
+    background:rgba(15,42,29,.3);
+  }
+  .chain-item:not(.first)::after{
+    content:""; position:absolute; left:0; top:50%;
+    width:22px; height:2px;
+    background:rgba(15,42,29,.3);
+  }
+  .node-box{
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(15,42,29,.2);
+    border-radius:8px;
+    padding:9px 18px;
+    font-weight:600;
+    font-size:.98rem;
+    white-space:nowrap;
+  }
+  .chain-item.current .node-box{
+    background:#fff;
+    color:var(--forest-deep);
+    border-color:#fff;
+    box-shadow:0 4px 14px rgba(140,105,20,.28);
+  }
+  .gen-tag{
+    font-size:.7rem;
+    color:var(--gold);
+    margin-right:9px;
+    white-space:nowrap;
+    font-family:'Hind Siliguri', sans-serif;
+    font-weight:500;
+  }
+  .chain-item.current .gen-tag{color:var(--forest-mid);}
+
+  ul.d-tree, ul.d-children{list-style:none; margin:0; padding:0;}
+
+  /* ---- organic branch-style tree (curved branches, compact leaf nodes) ---- */
+  .full-tree-wrap{
+    width:100vw;
+    position:relative;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    border-radius:0;
+  }
+  .full-tree-wrap .org-scroll{
+    max-height:82vh;
+    overflow-y:auto;
+  }
+  .org-scroll{overflow-x:auto; padding:10px 4px 22px;}
+  ul.org-tree{
+    display:flex;
+    justify-content:center;
+    padding-top:0;
+  }
+  ul.org-tree ul{
+    display:flex;
+    justify-content:center;
+    padding-top:34px;
+    position:relative;
+  }
+  ul.org-tree li{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    list-style:none;
+    position:relative;
+    padding:34px 8px 0 8px;
+  }
+  /* curved branch-fork connectors */
+  ul.org-tree li::before, ul.org-tree li::after{
+    content:"";
+    position:absolute; top:0; right:50%;
+    width:50%; height:34px;
+    border-top:3px solid rgba(231,206,142,.65);
+  }
+  ul.org-tree li::before{
+    border-right:3px solid rgba(231,206,142,.65);
+    border-radius:0 0 0 16px;
+  }
+  ul.org-tree li::after{
+    right:auto; left:50%;
+    border-left:3px solid rgba(231,206,142,.65);
+    border-radius:0 0 16px 0;
+  }
+  ul.org-tree li:only-child::before, ul.org-tree li:only-child::after{display:none;}
+  ul.org-tree li:only-child{padding-top:0;}
+  ul.org-tree li:first-child::before, ul.org-tree li:last-child::after{border:0 none;}
+  ul.org-tree li:last-child::before{
+    border-right:3px solid rgba(231,206,142,.65);
+    border-radius:0 0 0 16px;
+  }
+  ul.org-tree li:first-child::after{
+    border-left:3px solid rgba(231,206,142,.65);
+    border-radius:0 0 16px 0;
+  }
+  ul.org-tree > li{padding-top:0;}
+  ul.org-tree > li::before, ul.org-tree > li::after{display:none;}
+  ul.org-tree ul::before{
+    content:"";
+    position:absolute; top:0; left:50%;
+    border-left:3px solid rgba(231,206,142,.65);
+    width:0; height:34px;
+  }
+
+  /* ---- organic curved-branch tree (SVG bezier branches, like a hand-drawn family tree) ---- */
+  .organic-tree-wrap{position:relative; margin:0 auto;}
+  svg.organic-edges{position:absolute; top:0; left:0; pointer-events:none;}
+  .organic-node{position:absolute; transform:translate(-50%, 0);}
+  svg.compass-rose{
+    position:absolute; right:6px; bottom:2px;
+    width:52px; height:52px;
+    opacity:.55;
+    pointer-events:none;
+  }
+  svg.compass-rose .cr-line{stroke:var(--gold); stroke-width:1.3;}
+  svg.compass-rose .cr-dot{fill:var(--gold);}
+
+  .person-card{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--card);
+    border:1.6px solid var(--forest-mid);
+    border-radius:20px;
+    padding:6px 13px 6px 9px;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 2px 6px rgba(15,42,29,.1);
+    white-space:nowrap;
+  }
+  .person-card:hover{transform:translateY(-2px); box-shadow:0 5px 12px rgba(15,42,29,.18);}
+  .person-card .avatar{
+    width:9px; height:9px;
+    border-radius:2px;
+    background:var(--forest-mid);
+    flex:0 0 auto;
+  }
+  .person-card .p-name{
+    font-size:.74rem;
+    font-weight:600;
+    color:var(--forest-deep);
+  }
+  .person-card .p-name.unknown{
+    font-style:italic; font-weight:400; color:var(--muted);
+  }
+  .person-card .p-code{
+    display:none;
+  }
+  .person-card.root{
+    border-color:var(--gold);
+    border-width:2px;
+    background:var(--gold-pale);
+    padding:9px 20px 9px 14px;
+    border-radius:24px;
+  }
+  .person-card.root .avatar{background:var(--gold); width:11px; height:11px;}
+  .person-card.root .p-name{font-size:.9rem; color:var(--forest-deep);}
+  .person-card.active{outline:2.5px solid #2E7D9A; outline-offset:2px;}
+
+  /* ---- generation tables ---- */
+  .gen-block{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:12px;
+    margin-bottom:22px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(36,31,22,.04);
+  }
+  .gen-block-head{
+    background:var(--parchment-2);
+    padding:13px 20px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1px solid var(--rule);
+  }
+  .gen-block-head h3{
+    margin:0; font-size:1.02rem; color:var(--forest);
+  }
+  .gen-block-head span{font-size:.8rem; color:var(--muted);}
+  .table-scroll{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse;}
+  th, td{text-align:left; padding:12px 20px; font-size:.96rem;}
+  thead th{
+    font-size:.76rem; letter-spacing:.03em; color:var(--muted);
+    font-weight:600; padding-top:12px; padding-bottom:8px;
+    border-bottom:1px solid var(--rule);
+  }
+  tbody tr{border-bottom:1px solid var(--rule);}
+  tbody tr:last-child{border-bottom:none;}
+  tbody tr:nth-child(even){background:rgba(242,233,207,.35);}
+  tbody tr:hover{background:var(--gold-pale);}
+  tbody tr.selected-row{background:var(--gold-light) !important;}
+  td.num{white-space:nowrap; color:var(--muted); font-size:.85rem; font-variant-numeric:tabular-nums;}
+  td.name{font-weight:600; cursor:pointer; color:var(--forest);}
+  td.name:hover{text-decoration:underline;}
+  td.name.unknown{font-weight:400; font-style:italic; color:var(--muted); cursor:default;}
+  td.name.unknown:hover{text-decoration:none;}
+  td.parent{color:var(--muted); font-size:.9rem;}
+  td.parent b{color:var(--forest-mid); font-weight:600;}
+  tr.row-hidden{display:none;}
+
+  /* ---- notes ---- */
+  .note-list{margin:0; padding:0; list-style:none;}
+  .note-card{
+    display:flex; gap:14px;
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--gold);
+    border-radius:8px;
+    padding:15px 18px;
+    margin-bottom:12px;
+  }
+  .note-num{
+    flex:0 0 auto; width:26px; height:26px;
+    border-radius:50%;
+    background:var(--forest);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Noto Serif Bengali', serif;
+    font-size:.8rem; font-weight:600;
+  }
+  .note-body{font-size:.95rem; padding-top:2px;}
+
+  footer{
+    max-width:880px; margin:36px auto 0;
+    padding:22px 20px 56px;
+    border-top:1px solid var(--rule);
+    color:var(--muted); font-size:.86rem;
+  }
+  footer p{margin:0 0 8px;}
+  footer strong{color:var(--forest);}
+
+  @media (max-width:560px){
+    .hero{padding:56px 16px 44px;}
+    .stat{padding:0 14px;}
+    th, td{padding:9px 10px; font-size:.88rem;}
+    ul.d-children{margin-left:12px; padding-left:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="rule"></span>বংশলতিকা<span class="rule"></span></div>
+    <h1>শিকড়ের সন্ধানে</h1>
+    <p class="lede">আমাদের গৌরবময় বংশতালিকা — মোঃ ধন গাজী থেকে শুরু হওয়া আট প্রজন্মের এক ধারাবাহিক ইতিহাস।</p>
+    <div class="stat-row">
+      <div class="stat"><span class="num" id="statGens">৮</span><span class="lbl">প্রজন্ম</span></div>
+      <div class="stat"><span class="num" id="statMembers">০</span><span class="lbl">নথিভুক্ত সদস্য</span></div>
+      <div class="stat"><span class="num">১</span><span class="lbl">আদি পুরুষ</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar-wrap">
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="নাম লিখে খুঁজুন, যেমন: ফজলুল হক">
+    </div>
+    <div class="search-hint">যেকোনো নামে ক্লিক করলে তাঁর সম্পূর্ণ বংশধারা ও পরবর্তী শাখা নিচে ট্রি আকারে দেখা যাবে।</div>
+  </div>
+</div>
+
+<main>
+
+  <div class="section-head">
+    <h2>🌳 সম্পূর্ণ বংশ-ট্রি</h2>
+    <p>আদি পুরুষ থেকে শুরু করে সব প্রজন্ম একসাথে — যেকোনো বক্সে ক্লিক করলে তাঁর বংশধারা নিচে দেখা যাবে</p>
+  </div>
+  <div class="tree-panel visible full-tree-wrap" id="fullTreeContainer"></div>
+
+  <div class="tree-panel" id="lineagePanel">
+    <div class="panel-title">🧭&nbsp; বংশধারা — আদি পুরুষ থেকে এই পর্যন্ত</div>
+    <div id="lineageBody"></div>
+  </div>
+
+  <div class="tree-panel full-tree-wrap" id="descendantPanel">
+    <div class="panel-title">🌿&nbsp; এঁর থেকে যাঁরা এসেছেন</div>
+    <div id="descendantBody"></div>
+  </div>
+
+  <div class="section-head">
+    <h2>🪶 বংশ পরিক্রমা</h2>
+    <p>প্রজন্ম অনুযায়ী সম্পূর্ণ তালিকা — যেকোনো নামে ক্লিক করলে ট্রি দেখা যাবে</p>
+  </div>
+
+  <div id="genContainer"></div>
+
+  <div class="section-head">
+    <h2>🖋️ বিশেষ দ্রষ্টব্য</h2>
+    <p>বংশতালিকার পাশাপাশি সংরক্ষিত কিছু গুরুত্বপূর্ণ পারিবারিক ঘটনা</p>
+  </div>
+
+  <ul class="note-list">
+    <li class="note-card"><span class="note-num">১</span><span class="note-body">উল্লেখযোগ্য তথ্য-প্রমাণ না থাকায় মেয়েদের প্রসঙ্গ এই তালিকায় অন্তর্ভুক্ত করা হয়নি।</span></li>
+    <li class="note-card"><span class="note-num">২</span><span class="note-body"><b>মোঃ লাল মিয়া</b>কে রেখে তাঁর পিতা <b>মোঃ ছমিরউদ্দীন</b> মৃত্যুবরণ করেন। অন্যদিকে <b>মোঃ আড়াই মোল্লা</b>র স্ত্রীও মৃত্যুবরণ করেন। পরবর্তীতে আড়াই মোল্লা ছমিরউদ্দীনের বিধবা স্ত্রীকে বিবাহ করেন, এবং এই দাম্পত্য জীবনে <b>মোঃ ছিদ্দিকুর রহমান</b> জন্মগ্রহণ করেন। (মূল নথিতে তাঁর ক্রমিক নম্বর ১.১.১.২ থাকলেও, প্রকৃত পিতৃপরিচয় অনুযায়ী এই তালিকায় তাঁকে আড়াই মোল্লার সন্তান হিসেবে দেখানো হয়েছে।)</span></li>
+    <li class="note-card"><span class="note-num">৩</span><span class="note-body"><b>ডেঙ্গ মোল্লা</b> তাঁর ঘরবাড়ি <b>হাজী এঙ্গ মিয়া</b>র নিকট বুঝিয়ে দিয়ে সরস্বতীর চরে চলে যান।</span></li>
+    <li class="note-card"><span class="note-num">৪</span><span class="note-body"><b>মোঃ হজা মিয়া</b> স্ত্রী ও এক পুত্র সন্তান রেখে মৃত্যুবরণ করেন। পরবর্তীতে তাঁর স্ত্রী দ্বিতীয় বিবাহ করেন এবং ছেলেসহ মনিরপুরে চলে যান।</span></li>
+    <li class="note-card"><span class="note-num">৫</span><span class="note-body"><b>মোঃ পয়জারী মিয়া</b>র কোনো সন্তানাদি ছিল না। তিনি লালন-পালনের উদ্দেশ্যে <b>মোঃ আয়জারী মিয়া</b>র বড় ছেলে <b>মোঃ জাফর আলী</b>কে নিতে চাইলে আয়জারী মিয়া রাজি হননি; পরিবর্তে ডেঙ্গ মোল্লাকে বাড়িতে আনার পরামর্শ দেন। পরে পয়জারী মিয়া ডেঙ্গ মোল্লাকে সরস্বতী থেকে নিজ বাড়িতে নিয়ে আসেন, এবং তিনি ধীরে ধীরে পয়জারী মিয়ার সম্পত্তির মালিক হয়ে ওঠেন — যদিও তাঁর নিজস্ব কোনো পৈতৃক সম্পদ ছিল না।</span></li>
+    <li class="note-card"><span class="note-num">৬</span><span class="note-body"><b>মোঃ জমির আলী</b> তাঁর পরিবারসহ বাবরকান্দিতে শ্বশুরবাড়িতে চলে যান। বর্তমানে তাঁর ছেলে <b>মোঃ সাদ্দাম</b> ও <b>মোঃ রমজান</b> সেখানে বসবাস করছেন।</span></li>
+    <li class="note-card"><span class="note-num">৭</span><span class="note-body"><b>মোঃ শহিদ মিয়া</b> তাঁর বাড়ি ও জমিজমা বিক্রি করে গাজীপুরের সালনায় চলে যান। বর্তমানে তিনি পুত্র <b>মোঃ মোহাম্মদ আলী</b>, <b>মোঃ শুক্কর আলী</b> ও <b>মোঃ হায়দার আলী</b>কে নিয়ে সেখানে বসবাস করছেন।</span></li>
+    <li class="note-card"><span class="note-num">৮</span><span class="note-body"><b>মোঃ হোসেন মিয়া</b> তাঁর পরিবারসহ পাকিস্তানে চলে যান।</span></li>
+    <li class="note-card"><span class="note-num">৯</span><span class="note-body"><b>মোঃ জোবায়ের</b>-এর প্রকৃত পিতা <b>মোঃ মোহাম্মদ আলি</b> (মোঃ তোফাজ্জলের ছেলে)। মূল নথিতে ক্রমিক নম্বর অনুযায়ী মধ্যবর্তী একটি ধাপ অনুপস্থিত থাকায় তালিকায় ভুলবশত তাঁকে মোঃ আমান উল্লাহর সন্তান হিসেবে দেখানো হচ্ছিল, যা সংশোধন করা হয়েছে।</span></li>
+  </ul>
+
+  <footer>
+    <p><strong>তথ্যসূত্র:</strong> মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।</p>
+    <p>যেসব ক্রমিক সংখ্যার বিপরীতে নাম মূল নথিতে স্পষ্টভাবে পাওয়া যায়নি, সেগুলো তালিকায় "নাম অজানা" হিসেবে দেখানো হয়েছে, যাতে অনুমাননির্ভর কোনো তথ্য যুক্ত না হয়।</p>
+  </footer>
+</main>
+
+<script>
+// ---------- DATA: [code, name-or-null] ----------
+const DATA = [
+  ["1","মোঃ ধন গাজী"],
+
+  ["1.1","মোঃ আয়জারী"],
+  ["1.2","মোঃ পয়জারী"],
+  ["1.3","মোঃ মজম সরকার"],
+  ["1.4","মোঃ হজা মিয়া"],
+  ["1.5","মোঃ মাজি খা"],
+
+  ["1.1.1","মোঃ ছমির উদ্দীন"],
+  ["1.1.2","মোঃ জাফর আলি"],
+  ["1.1.3","মোঃ রহিম উদ্দীন"],
+  ["1.5.1","মোঃ আড়াই মোল্লা"],
+  ["1.5.2","মোঃ মনরুদ্দীন প্রধান"],
+
+  ["1.1.1.1","মোঃ লাল মিয়া"],
+  ["1.1.2.1","মোঃ আলী মিয়া"],
+  ["1.1.1.2","মোঃ ছিদ্দিকুর রহমান"],
+  ["1.5.2.1","মোঃ সুলতান"],
+
+  ["1.1.1.1.1","হাজী মোঃ ইজ্জত আলী"],
+  ["1.1.1.1.2","মোঃ আব্দুর ছামাদ"],
+  ["1.1.2.1.1","আব্দর রশিদ"],
+  ["1.1.2.1.2","মোঃ শহিদ মিয়া"],
+  ["1.1.2.1.3","মোঃ মুর্শিদ মিয়া"],
+  ["1.1.2.1.4","মোঃ রব মিয়া"],
+  ["1.1.1.2.2","মোঃ জয়নব আলী"],
+  ["1.1.1.2.3","মোঃ জমির আলী"],
+  ["1.1.1.2.4","মোঃ আমির আলি"],
+  ["1.5.2.1.1","মোঃ মোকলেস"],
+  ["1.5.2.1.2","মোঃ মিজানুর রহমান"],
+  ["1.5.2.1.3","মোঃ আমিনুল ইসলাম"],
+
+  ["1.1.1.2.1","মোঃ সাহেব আলি"],
+  ["1.1.1.1.1.1","ডাঃ আব্দুর রহমান"],
+  ["1.1.1.1.1.2","মোঃ ফজলুল হক"],
+  ["1.1.1.1.1.3","মোঃ গিয়াস উদ্দিন"],
+  ["1.1.1.1.1.4","মোঃ আলাউদ্দিন"],
+  ["1.1.1.1.1.5","মোঃ মাসুম"],
+  ["1.1.1.1.2.1","মোঃ জলিল মিয়া"],
+  ["1.1.1.1.2.2","মোঃ নবী হোসেন"],
+  ["1.1.1.1.2.3","মোঃ তোফাজ্জল"],
+  ["1.1.1.1.2.4","মোঃ আবুল হাকিম"],
+  ["1.1.1.1.2.5","মোঃ উলিউল্লাহ"],
+  ["1.1.2.1.1.1","মোঃ হোসেন মিয়া"],
+  ["1.1.2.1.1.2","মোঃ এমেল মিয়া"],
+  ["1.1.2.1.2.1","মোঃ মোহাম্মদ আলি"],
+  ["1.1.2.1.2.2","মোঃ শুক্কর আলি"],
+  ["1.1.2.1.2.3","মোঃ হায়দার আলি"],
+  ["1.1.2.1.3.1","মোঃ জজ মিয়া"],
+  ["1.1.2.1.3.2","মোঃ মাইনদ্দিন"],
+  ["1.1.2.1.3.3","মোঃ রমজান আলি"],
+  ["1.1.2.1.3.4","মোঃ খলিল"],
+  ["1.1.2.1.4.1","মোঃ শরিফ"],
+  ["1.1.2.1.4.2","মোঃ আরিফ"],
+  ["1.1.2.1.4.3","মোঃ মিনার"],
+  ["1.1.2.1.4.4","মোঃ মিলন"],
+  ["1.1.1.2.1.1","মোঃ কামাল"],
+  ["1.1.1.2.1.2","মোঃ রবিউল"],
+  ["1.1.1.2.1.3","মোঃ ইয়াকুব"],
+  ["1.1.1.2.2.1","মোঃ ইলিয়াস"],
+  ["1.1.1.2.2.2","মোঃ জামান"],
+  ["1.1.1.2.2.3","মোঃ ইউসফ"],
+  ["1.1.1.2.3.1","মোঃ সাদ্দাম"],
+  ["1.1.1.2.3.2","মোঃ রমজান"],
+  ["1.1.1.2.4.1","মোঃ রাব্বি"],
+
+  ["1.1.1.1.1.1.1","ডাঃ সজিব"],
+  ["1.1.1.1.1.2.1","ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ"],
+  ["1.1.1.1.1.2.2","মোঃ ফাহিম আবরার"],
+  ["1.1.1.1.1.3.1","মোঃ মেহেদি হাসান"],
+  ["1.1.1.1.1.4.1","মোঃ আজিজ"],
+  ["1.1.1.1.1.5.1","মোঃ রোহান"],
+  ["1.1.1.1.2.1.1","মোঃ শেখ ফরিদ"],
+  ["1.1.1.1.2.1.2","মোঃ আনার হোসেন"],
+  ["1.1.1.1.2.1.3","মোঃ দেলোয়ার"],
+  ["1.1.1.1.2.2.1","মোঃ ফারুক"],
+  ["1.1.1.1.2.2.2","মোঃ বরকত উল্লাহ"],
+  ["1.1.1.1.2.2.3","মোঃ আমান উল্লাহ"],
+  ["1.1.1.1.2.3.1","মোঃ দিদার"],
+  ["1.1.1.1.2.3.2","মোঃ মোহাম্মদ আলি"],
+  ["1.1.1.1.2.4.1","মোঃ মামুন"],
+  ["1.1.1.1.2.5.1","মোঃ শামিম"],
+  ["1.1.2.1.1.2.1","মোঃ শান্ত"],
+  ["1.1.2.1.3.1.1","মোঃ সালেহ মুছা"],
+  ["1.1.2.1.3.1.2","মোঃ চানবাদশা"],
+  ["1.1.2.1.3.2.1","মোঃ আহাদ"],
+  ["1.1.2.1.3.2.2","মোঃ সাইদুল"],
+  ["1.1.2.1.4.1.1","মোঃ ইয়াকুব"],
+  ["1.1.2.1.4.2.1","মোঃ আবির"],
+
+  // ৮ম প্রজন্ম — কিছু নাম মূল নথিতে অস্পষ্ট
+  ["1.1.1.2.1.1.1", null],
+  ["1.1.1.2.1.2.1", null],
+  ["1.1.1.2.2.1.1", null],
+  ["1.1.1.2.2.2.1", null],
+  ["1.1.1.1.2.1.1.1", null],
+  ["1.1.1.1.2.1.2.1", null],
+  ["1.1.1.1.2.2.1.1","মোঃ ফয়সাল"],
+  ["1.1.1.1.2.2.2.1", null],
+  ["1.1.1.1.2.2.3.2.1","মোঃ জোবায়ের"]
+];
+
+// ---------- helpers ----------
+const bnDigits = ["০","১","২","৩","৪","৫","৬","৭","৮","৯"];
+const genLabel = ["১ম প্রজন্ম","২য় প্রজন্ম","৩য় প্রজন্ম","৪র্থ প্রজন্ম","৫ম প্রজন্ম","৬ষ্ঠ প্রজন্ম","৭ম প্রজন্ম","৮ম প্রজন্ম"];
+function toBn(str){ return String(str).replace(/[0-9]/g, d => bnDigits[+d]); }
+
+const byCode = new Map();
+DATA.forEach(([code, name]) => byCode.set(code, name));
+
+// বিশেষ দ্রষ্টব্য (২) অনুযায়ী: মোঃ ছিদ্দিক র রহমান-এর প্রকৃত পিতা মোঃ আড়াই মোল্লা
+// (তাঁর মূল ক্রমিক নম্বর ১.১.১.২ অপরিবর্তিত রাখা হয়েছে, শুধু বংশধারার প্রকৃত
+// সম্পর্ক অনুযায়ী তাঁকে আড়াই মোল্লার (১.৫.১) সন্তান হিসেবে ট্রি-তে দেখানো হচ্ছে)
+const PARENT_OVERRIDES = {
+  "1.1.1.2": "1.5.1",
+  "1.1.1.1.2.2.3.2.1": "1.1.1.1.2.3.2"
+};
+
+function parentCode(code){
+  if (PARENT_OVERRIDES[code]) return PARENT_OVERRIDES[code];
+  const parts = code.split(".");
+  for(let i = parts.length - 1; i > 0; i--){
+    const candidate = parts.slice(0, i).join(".");
+    if (byCode.has(candidate)) return candidate;
+  }
+  return null;
+}
+
+const childrenMap = new Map();
+DATA.forEach(([code]) => childrenMap.set(code, []));
+DATA.forEach(([code]) => {
+  const p = parentCode(code);
+  if (p) childrenMap.get(p).push(code);
+});
+
+function sortCodes(a, b){
+  const pa = a.split(".").map(Number);
+  const pb = b.split(".").map(Number);
+  for(let i=0;i<Math.max(pa.length,pb.length);i++){
+    const x = pa[i] ?? -1, y = pb[i] ?? -1;
+    if (x !== y) return x - y;
+  }
+  return 0;
+}
+
+const depthCache = new Map();
+function depthOf(code){
+  if (depthCache.has(code)) return depthCache.get(code);
+  const p = parentCode(code);
+  const d = p ? depthOf(p) + 1 : 1;
+  depthCache.set(code, d);
+  return d;
+}
+
+const byGen = {};
+DATA.forEach(([code]) => {
+  const gen = depthOf(code);
+  (byGen[gen] = byGen[gen] || []).push(code);
+});
+
+const container = document.getElementById("genContainer");
+let totalMembers = 0;
+
+Object.keys(byGen).sort((a,b) => a - b).forEach(genNum => {
+  const codes = byGen[genNum].sort(sortCodes);
+
+  const block = document.createElement("div");
+  block.className = "gen-block";
+
+  const head = document.createElement("div");
+  head.className = "gen-block-head";
+  head.innerHTML = "<h3>" + (genLabel[genNum - 1] || (toBn(genNum) + "তম প্রজন্ম")) + "</h3>" +
+                    "<span>" + toBn(codes.length) + " জন</span>";
+  block.appendChild(head);
+
+  const wrap = document.createElement("div");
+  wrap.className = "table-scroll";
+  const table = document.createElement("table");
+  table.innerHTML = "<thead><tr><th>ক্রমিক নম্বর</th><th>নাম</th><th>কার ছেলে</th></tr></thead>";
+  const tbody = document.createElement("tbody");
+
+  codes.forEach(code => {
+    const name = byCode.get(code);
+    const pCode = parentCode(code);
+    const parentName = pCode ? byCode.get(pCode) : null;
+
+    const tr = document.createElement("tr");
+    tr.dataset.name = name || "";
+
+    const tdCode = document.createElement("td");
+    tdCode.className = "num";
+    tdCode.textContent = toBn(code);
+
+    const tdName = document.createElement("td");
+    tdName.className = name ? "name" : "name unknown";
+    tdName.textContent = name || "নাম অজানা";
+    if (name) tdName.addEventListener("click", () => showLineage(code, tr));
+
+    const tdParent = document.createElement("td");
+    tdParent.className = "parent";
+    tdParent.innerHTML = parentName
+      ? "→ <b>" + parentName + "</b>-এর ছেলে"
+      : "🌱 আদি পুরুষ";
+
+    tr.appendChild(tdCode);
+    tr.appendChild(tdName);
+    tr.appendChild(tdParent);
+    tbody.appendChild(tr);
+    totalMembers++;
+  });
+
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+  block.appendChild(wrap);
+  container.appendChild(block);
+});
+
+document.getElementById("statMembers").textContent = toBn(totalMembers);
+document.getElementById("statGens").textContent = toBn(Object.keys(byGen).length);
+
+// ---------- lineage + descendant trees ----------
+const lineageBody = document.getElementById("lineageBody");
+const lineagePanel = document.getElementById("lineagePanel");
+const descendantPanel = document.getElementById("descendantPanel");
+const descendantBody = document.getElementById("descendantBody");
+let selectedRow = null;
+
+function getChain(code){
+  const chain = [];
+  let current = code;
+  while (current){
+    chain.push({ code: current, name: byCode.get(current) });
+    current = parentCode(current);
+  }
+  return chain.reverse();
+}
+
+function renderDescendantNode(code, isRoot){
+  const name = byCode.get(code);
+  const kids = (childrenMap.get(code) || []).slice().sort(sortCodes);
+  let html = '<li>';
+  html += '<div class="person-card' + (isRoot ? ' root' : '') + '" data-code="' + code + '">' +
+            '<span class="avatar"></span>' +
+            '<span class="p-name' + (name ? '' : ' unknown') + '">' + (name || 'নাম অজানা') + '</span>' +
+            '<span class="p-code">' + toBn(code) + '</span>' +
+          '</div>';
+  if (kids.length){
+    html += '<ul>' + kids.map(k => renderDescendantNode(k, false)).join('') + '</ul>';
+  }
+  html += '</li>';
+  return html;
+}
+
+// ---------- organic curved-branch tree layout ----------
+const UNIT_W = 172;   // horizontal spacing per leaf slot
+const ROW_H  = 116;   // vertical spacing per generation
+const NODE_H = 34;    // approx node box height, for branch anchor points
+
+function hashCode(str){
+  let h = 0;
+  for(let i = 0; i < str.length; i++){ h = (h * 31 + str.charCodeAt(i)) | 0; }
+  return Math.abs(h);
+}
+
+function computeLayout(rootCode){
+  const positions = {};
+  const rootDepth = depthOf(rootCode);
+
+  function place(code, xStart){
+    const kids = (childrenMap.get(code) || []).slice().sort(sortCodes);
+    const depth = depthOf(code) - rootDepth;
+    if (!kids.length){
+      positions[code] = { x: xStart + 0.5, y: depth };
+      return xStart + 1;
+    }
+    let cursor = xStart;
+    const childCenters = [];
+    kids.forEach(k => {
+      const before = cursor;
+      cursor = place(k, cursor);
+      childCenters.push((before + cursor) / 2);
+    });
+    const cx = (childCenters[0] + childCenters[childCenters.length - 1]) / 2;
+    positions[code] = { x: cx, y: depth };
+    return cursor;
+  }
+  place(rootCode, 0);
+  return positions;
+}
+
+function compassRoseSvg(){
+  return '<svg class="compass-rose" viewBox="0 0 60 60">' +
+    '<circle class="cr-line" cx="30" cy="30" r="22" fill="none"/>' +
+    '<line class="cr-line" x1="30" y1="4" x2="30" y2="56"/>' +
+    '<line class="cr-line" x1="4" y1="30" x2="56" y2="30"/>' +
+    '<line class="cr-line" x1="12" y1="12" x2="48" y2="48"/>' +
+    '<line class="cr-line" x1="48" y1="12" x2="12" y2="48"/>' +
+    '<circle class="cr-dot" cx="30" cy="30" r="3.4"/>' +
+    '</svg>';
+}
+
+function renderOrganicTree(rootCode){
+  const positions = computeLayout(rootCode);
+  const codes = Object.keys(positions);
+  let maxX = 0, maxY = 0;
+  codes.forEach(c => {
+    maxX = Math.max(maxX, positions[c].x);
+    maxY = Math.max(maxY, positions[c].y);
+  });
+  const width = Math.max(280, (maxX + 0.6) * UNIT_W);
+  const height = (maxY + 1) * ROW_H + 40;
+
+  let edgesSvg = '';
+  codes.forEach(c => {
+    const kids = (childrenMap.get(c) || []);
+    kids.forEach(k => {
+      if (!positions[k]) return;
+      const p = positions[c], q = positions[k];
+      const x1 = p.x * UNIT_W, y1 = p.y * ROW_H + NODE_H;
+      const x2 = q.x * UNIT_W, y2 = q.y * ROW_H;
+      const midY = (y1 + y2) / 2;
+      const jitter = (hashCode(k) % 24) - 12;
+      const sw = Math.max(1.3, 3.6 - p.y * 0.32);
+      const op = Math.max(0.42, 0.85 - p.y * 0.06);
+      edgesSvg += '<path d="M ' + x1 + ' ' + y1 + ' C ' + (x1 + jitter) + ' ' + midY + ', ' +
+        (x2 - jitter) + ' ' + midY + ', ' + x2 + ' ' + y2 + '" fill="none" stroke="var(--forest-mid)" ' +
+        'stroke-width="' + sw + '" stroke-linecap="round" opacity="' + op + '"/>';
+    });
+  });
+
+  let nodesHtml = '';
+  codes.forEach(c => {
+    const name = byCode.get(c);
+    const pos = positions[c];
+    const isRoot = c === rootCode;
+    nodesHtml += '<div class="person-card organic-node' + (isRoot ? ' root' : '') + '" ' +
+      'style="left:' + (pos.x * UNIT_W) + 'px; top:' + (pos.y * ROW_H) + 'px;" data-code="' + c + '">' +
+      '<span class="avatar"></span>' +
+      '<span class="p-name' + (name ? '' : ' unknown') + '">' + (name || 'নাম অজানা') + '</span>' +
+      '<span class="p-code">' + toBn(c) + '</span>' +
+      '</div>';
+  });
+
+  return '<div class="organic-tree-wrap" style="width:' + width + 'px; height:' + height + 'px;">' +
+    '<svg class="organic-edges" width="' + width + '" height="' + height + '">' + edgesSvg + '</svg>' +
+    nodesHtml + compassRoseSvg() +
+    '</div>';
+}
+
+// ---------- full tree (always visible) ----------
+document.getElementById("fullTreeContainer").innerHTML =
+  '<div class="org-scroll">' + renderOrganicTree("1") + '</div>';
+
+// clicking any card anywhere (full tree or branch panel) shows that person's lineage
+document.addEventListener("click", (e) => {
+  const card = e.target.closest(".person-card");
+  if (!card) return;
+  const code = card.dataset.code;
+  if (!code || !byCode.get(code)) return;
+  showLineage(code, null);
+});
+
+function showLineage(code, tr){
+  if (selectedRow) selectedRow.classList.remove("selected-row");
+  selectedRow = tr || null;
+  if (tr) tr.classList.add("selected-row");
+
+  document.querySelectorAll(".person-card.active").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll('.person-card[data-code="' + code + '"]').forEach(el => el.classList.add("active"));
+
+  const chain = getChain(code);
+  lineageBody.innerHTML = '<div class="chain-tree">' + chain.map((item, i) => {
+    const isLast = i === chain.length - 1;
+    const gen = depthOf(item.code);
+    const genText = genLabel[gen - 1] || (toBn(gen) + "তম প্রজন্ম");
+    const classes = "chain-item" + (i === 0 ? " first" : "") + (isLast ? " current" : "");
+    const indent = i * 26;
+    return '<div class="' + classes + '" style="margin-left:' + indent + 'px;">' +
+             '<div class="node-box"><span class="gen-tag">' + genText + '</span>' + item.name + '</div>' +
+           '</div>';
+  }).join("") + '</div>';
+  lineagePanel.classList.add("visible");
+
+  const kids = (childrenMap.get(code) || []);
+  descendantBody.innerHTML = kids.length
+    ? '<div class="org-scroll">' + renderOrganicTree(code) + '</div>'
+    : '<p class="panel-empty">এই ব্যক্তির কোনো সন্তানের তথ্য এই তালিকায় নথিভুক্ত নেই — ইনিই এই শাখার শেষ নাম।</p>';
+  descendantPanel.classList.add("visible");
+
+  lineagePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ---------- search ----------
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  const q = e.target.value.trim();
+  document.querySelectorAll("tbody tr").forEach(tr => {
+    if (!q){ tr.classList.remove("row-hidden"); return; }
+    tr.classList.toggle("row-hidden", !tr.dataset.name.includes(q));
+  });
+  document.querySelectorAll(".gen-block").forEach(block => {
+    const visible = block.querySelectorAll("tbody tr:not(.row-hidden)").length;
+    block.style.display = q && visible === 0 ? "none" : "";
+  });
+});
+</script>
+</body>
+</html>

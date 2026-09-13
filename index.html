@@ -27,7 +27,10 @@
   body{
     margin:0;
     font-family:'Hind Siliguri', sans-serif;
-    background:var(--parchment);
+    background:
+      radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, #FDFBF3 0%, #F8F1DE 55%, #F3EACE 100%);
+    background-attachment:fixed;
     color:var(--text);
     line-height:1.7;
     overflow-x:hidden;
@@ -39,12 +42,13 @@
   .hero{
     position:relative;
     background:
-      radial-gradient(130% 160% at 50% -20%, #FFFDF5 0%, #FBF3DD 35%, #F0EBD3 60%, #E3F1E4 100%);
+      radial-gradient(130% 160% at 50% -20%, #FFFEFA 0%, #FBF2DC 32%, #EFE7CE 58%, #E1EEE2 100%);
     color:var(--forest-deep);
     text-align:center;
     padding:76px 20px 58px;
     overflow:hidden;
     border-bottom:1px solid var(--rule);
+    box-shadow:inset 0 -18px 30px -24px rgba(15,42,29,.18);
   }
   .hero::before, .hero::after{
     content:"";
@@ -101,10 +105,11 @@
 
   /* ================= TOOLBAR ================= */
   .toolbar-wrap{
-    background:var(--card);
+    background:linear-gradient(165deg, #FFFEFA 0%, #FBF6E8 100%);
     border:1px solid var(--rule);
     border-radius:14px;
     margin-bottom:22px;
+    box-shadow:0 3px 12px rgba(36,31,22,.05);
   }
   .toolbar{
     margin:0 auto;
@@ -152,13 +157,13 @@
 
   /* ---- lineage / descendant panels ---- */
   .tree-panel{
-    background:linear-gradient(165deg, #FFFAEA 0%, #F7E4A8 48%, #E9C875 100%);
+    background:linear-gradient(165deg, #FFFCF4 0%, #F3E4BC 50%, #E6CE99 100%);
     color:var(--forest-deep);
     border-radius:14px;
     padding:22px 24px 26px;
     margin-bottom:22px;
-    box-shadow:0 10px 30px rgba(140,105,20,.22);
-    border:1px solid rgba(173,138,61,.35);
+    box-shadow:0 12px 28px rgba(140,105,20,.16), inset 0 1px 0 rgba(255,255,255,.6);
+    border:1px solid rgba(173,138,61,.32);
     opacity:0;
     max-height:0;
     overflow:hidden;
@@ -353,13 +358,13 @@
     display:inline-flex;
     align-items:center;
     gap:6px;
-    background:var(--card);
-    border:1.6px solid var(--forest-mid);
+    background:linear-gradient(165deg, #FFFFFF 0%, #FBF6E8 100%);
+    border:1.4px solid rgba(46,93,69,.55);
     border-radius:20px;
     padding:6px 13px 6px 9px;
     cursor:pointer;
     transition:transform .15s ease, box-shadow .15s ease;
-    box-shadow:0 2px 6px rgba(15,42,29,.1);
+    box-shadow:0 3px 8px rgba(15,42,29,.14);
     white-space:nowrap;
   }
   .person-card:hover{transform:translateY(-2px); box-shadow:0 5px 12px rgba(15,42,29,.18);}
@@ -393,12 +398,12 @@
 
   /* ---- generation tables ---- */
   .gen-block{
-    background:var(--card);
+    background:linear-gradient(165deg, #FFFEFA 0%, #FBF6E8 100%);
     border:1px solid var(--rule);
     border-radius:12px;
     margin-bottom:22px;
     overflow:hidden;
-    box-shadow:0 2px 10px rgba(36,31,22,.04);
+    box-shadow:0 4px 16px rgba(36,31,22,.06);
   }
   .gen-block-head{
     background:var(--parchment-2);
@@ -438,12 +443,13 @@
   .note-list{margin:0; padding:0; list-style:none;}
   .note-card{
     display:flex; gap:14px;
-    background:var(--card);
+    background:linear-gradient(165deg, #FFFEFA 0%, #FBF6E8 100%);
     border:1px solid var(--rule);
     border-left:4px solid var(--gold);
     border-radius:8px;
     padding:15px 18px;
     margin-bottom:12px;
+    box-shadow:0 3px 10px rgba(36,31,22,.05);
   }
   .note-num{
     flex:0 0 auto; width:26px; height:26px;
@@ -463,6 +469,24 @@
     color:var(--muted); font-size:.86rem;
   }
   footer p{margin:0 0 8px;}
+  .contact-block{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .contact-name{color:var(--forest-deep);}
+  .contact-link{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    color:var(--forest-mid);
+    font-weight:600;
+    text-decoration:none;
+    border-bottom:1px dashed var(--forest-mid);
+  }
+  .contact-link:hover{color:var(--forest-deep); border-bottom-style:solid;}
+  .contact-link svg{width:15px; height:15px; flex:0 0 auto;}
   footer strong{color:var(--forest);}
 
   @media (max-width:560px){
@@ -541,7 +565,15 @@
 
   <footer>
     <p><strong>তথ্যসূত্র:</strong> মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।</p>
-    <p>যেসব ক্রমিক সংখ্যার বিপরীতে নাম মূল নথিতে স্পষ্টভাবে পাওয়া যায়নি, সেগুলো তালিকায় "নাম অজানা" হিসেবে দেখানো হয়েছে, যাতে অনুমাননির্ভর কোনো তথ্য যুক্ত না হয়।</p>
+    <p>কোনো তথ্যে ভুল থাকলে অথবা কোনো তথ্য হালনাগাদ করার প্রয়োজন হলে যোগাযোগ করার জন্য অনুরোধ করা হলো:</p>
+    <p class="contact-block">
+      <span class="contact-name"><strong>ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ</strong></span>
+      <a class="contact-link" href="https://wa.me/8801567963471" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16 0C7.16 0 0 7.16 0 16c0 2.82.74 5.47 2.03 7.76L0 32l8.45-2.22A15.9 15.9 0 0 0 16 32c8.84 0 16-7.16 16-16S24.84 0 16 0z"/><path fill="#fff" d="M23.47 19.14c-.4-.2-2.36-1.16-2.72-1.3-.37-.13-.63-.2-.9.2-.27.4-1.03 1.3-1.26 1.56-.23.27-.46.3-.86.1-.4-.2-1.68-.62-3.2-1.98-1.18-1.05-1.98-2.35-2.21-2.75-.23-.4-.02-.61.17-.81.18-.18.4-.46.6-.7.2-.23.27-.4.4-.66.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68-.23-.02-.5-.02-.76-.02-.27 0-.7.1-1.06.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.8 4.28 6.79 6 .95.41 1.69.66 2.27.84.95.3 1.82.26 2.5.16.76-.11 2.36-.96 2.7-1.9.33-.92.33-1.72.23-1.9-.1-.16-.36-.26-.76-.46z"/></svg>
+        ০১৫৬৭৯৬৩৪৭১
+      </a>
+      <a class="contact-link" href="mailto:mdmursalineparvez@gmail.com">✉️&nbsp;mdmursalineparvez@gmail.com</a>
+    </p>
   </footer>
 </main>
 

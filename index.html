@@ -642,7 +642,7 @@ const DATA = [
   ["1.1.1.2.1.3","মোঃ ইয়াকুব"],
   ["1.1.1.2.2.1","মোঃ ইলিয়াস"],
   ["1.1.1.2.2.2","মোঃ জামান"],
-  ["1.1.1.2.2.3","মোঃ ইউসফ"],
+  ["1.1.1.2.2.3","মোঃ ইউসুফ"],
   ["1.1.1.2.3.1","মোঃ সাদ্দাম"],
   ["1.1.1.2.3.2","মোঃ রমজান"],
   ["1.1.1.2.4.1","মোঃ রাব্বি"],
@@ -972,20 +972,154 @@ function downloadTreeImage(id){
 
   const caption = document.createElement("div");
   caption.style.cssText =
-    "font-family:'Hind Siliguri',sans-serif; font-size:16px; line-height:1.8; color:#2E5D45; " +
-    "padding:24px 30px 30px; border-top:1px solid rgba(46,93,69,.3);";
+    "font-family:'Hind Siliguri',sans-serif; font-size:16px; line-height:1.9; color:#2E5D45; " +
+    "padding:20px 44px 6px; text-align:center; position:relative; z-index:1;";
   caption.innerHTML =
-    "<b>তথ্যসূত্র:</b> মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে " +
-    "ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।";
+    "<div style=\"font-family:'Noto Serif Bengali',serif; font-weight:700; color:#AD8A3D; font-size:17px; margin-bottom:6px; letter-spacing:.02em;\">তথ্যসূত্র:</div>" +
+    "<div>মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে " +
+    "ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।</div>";
+
+  // small flourish icon used beside the title and at the very bottom
+  const flourishIcon = (flip) =>
+    '<svg width="30" height="14" viewBox="0 0 60 28" style="' + (flip ? "transform:scaleX(-1);" : "") + '">' +
+      '<path d="M2 24C14 24 18 6 30 6" fill="none" stroke="#AD8A3D" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<path d="M30 6C34 10 38 6 40 2" fill="none" stroke="#AD8A3D" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<circle cx="41" cy="2" r="2.4" fill="#AD8A3D"/>' +
+    '</svg>';
+
+  // decorative divider (leaf + lines) used under the header and above the caption
+  const divider = (mt, mb) =>
+    '<div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:' + mt + 'px 0 ' + mb + 'px; position:relative; z-index:1;">' +
+      '<span style="width:90px; height:1px; background:linear-gradient(90deg, transparent, #AD8A3D);"></span>' +
+      '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C7 6 4 11 6 16c1.4 3.4 4.4 5 6 6 1.6-1 4.6-2.6 6-6 2-5-1-10-6-14z" fill="#2E5D45" opacity=".9"/><path d="M12 3v17" stroke="#F1E4BF" stroke-width="1" opacity=".8"/></svg>' +
+      '<span style="width:90px; height:1px; background:linear-gradient(90deg, #AD8A3D, transparent);"></span>' +
+    '</div>';
+
+  // header banner: emblem + flourish-flanked title + subtitle
+  const header = document.createElement("div");
+  header.style.cssText = "text-align:center; padding:34px 30px 4px; position:relative; z-index:1;";
+  header.innerHTML =
+    '<svg width="58" height="58" viewBox="0 0 64 64" style="display:block; margin:0 auto 12px;">' +
+      '<circle cx="32" cy="32" r="30" fill="none" stroke="#AD8A3D" stroke-width="1.3" opacity=".6"/>' +
+      '<circle cx="32" cy="32" r="25" fill="none" stroke="#AD8A3D" stroke-width=".7" opacity=".35"/>' +
+      '<path d="M32 46V33" stroke="#8a6b2e" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<path d="M32 38c-6-1-10-6-10-12 6 0 10 3 12 8" fill="#2E5D45"/>' +
+      '<path d="M32 36c6-1 10-6 10-12-6 0-10 3-12 8" fill="#3a7a58"/>' +
+      '<path d="M32 30c-5-1-8-5-8-9 5 0 8 2 9 6" fill="#2E5D45"/>' +
+      '<path d="M32 28c5-1 8-5 8-9-5 0-8 2-9 6" fill="#3a7a58"/>' +
+      '<circle cx="32" cy="18" r="3.6" fill="#AD8A3D"/>' +
+    '</svg>' +
+    '<div style="display:flex; align-items:center; justify-content:center; gap:14px;">' +
+      flourishIcon(true) +
+      '<div style="font-family:\'Noto Serif Bengali\',serif; font-weight:700; font-size:28px; color:#1F4A34; letter-spacing:.03em;">শিকড়ের সন্ধানে</div>' +
+      flourishIcon(false) +
+    '</div>' +
+    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:13.5px; color:#7C7159; margin-top:6px; letter-spacing:.02em;">আমাদের গৌরবময় বংশতালিকা</div>' +
+    divider(18, 0);
+
+  const footerDivider = document.createElement("div");
+  footerDivider.innerHTML = divider(26, 0);
+
+  const closingMark = document.createElement("div");
+  closingMark.style.cssText = "text-align:center; padding:14px 0 4px; position:relative; z-index:1;";
+  closingMark.innerHTML =
+    '<svg width="15" height="15" viewBox="0 0 24 24" style="display:inline-block; opacity:.8;"><path d="M12 2C7 6 4 11 6 16c1.4 3.4 4.4 5 6 6 1.6-1 4.6-2.6 6-6 2-5-1-10-6-14z" fill="#AD8A3D"/></svg>';
+
+  // very faint background watermark — a big spreading banyan-style tree, sits behind all inner content
+  const watermark = document.createElement("div");
+  watermark.style.cssText =
+    "position:absolute; inset:0; display:flex; align-items:center; justify-content:center; " +
+    "opacity:.05; pointer-events:none; z-index:0;";
+  watermark.innerHTML =
+    '<svg width="94%" height="94%" viewBox="0 0 260 220">' +
+      // ground roots spreading wide
+      '<path d="M130 216c-16-8-30-10-52-9" fill="none" stroke="#2E5D45" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M130 216c16-8 30-10 52-9" fill="none" stroke="#2E5D45" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M130 216c-6-6-9-11-9-20" fill="none" stroke="#2E5D45" stroke-width="3.4" stroke-linecap="round"/>' +
+      '<path d="M130 216c6-6 9-11 9-20" fill="none" stroke="#2E5D45" stroke-width="3.4" stroke-linecap="round"/>' +
+      '<path d="M130 216V128" fill="none" stroke="#2E5D45" stroke-width="9" stroke-linecap="round"/>' +
+      // wide banyan-style branch skeleton
+      '<path d="M130 150c-30-8-50-24-62-48" fill="none" stroke="#2E5D45" stroke-width="6" stroke-linecap="round"/>' +
+      '<path d="M130 150c30-8 50-24 62-48" fill="none" stroke="#2E5D45" stroke-width="6" stroke-linecap="round"/>' +
+      '<path d="M130 128c-40-4-68-16-86-38" fill="none" stroke="#2E5D45" stroke-width="4.6" stroke-linecap="round"/>' +
+      '<path d="M130 128c40-4 68-16 86-38" fill="none" stroke="#2E5D45" stroke-width="4.6" stroke-linecap="round"/>' +
+      '<path d="M100 108c-12-10-18-20-18-32" fill="none" stroke="#2E5D45" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M160 108c12-10 18-20 18-32" fill="none" stroke="#2E5D45" stroke-width="3" stroke-linecap="round"/>' +
+      // hanging aerial (prop) roots — a signature banyan feature
+      '<path d="M78 96c-2 26-2 46 2 66" fill="none" stroke="#2E5D45" stroke-width="2.2" opacity=".8" stroke-linecap="round"/>' +
+      '<path d="M182 96c2 26 2 46-2 66" fill="none" stroke="#2E5D45" stroke-width="2.2" opacity=".8" stroke-linecap="round"/>' +
+      '<path d="M56 108c-3 20-3 36 1 52" fill="none" stroke="#2E5D45" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>' +
+      '<path d="M204 108c3 20 3 36-1 52" fill="none" stroke="#2E5D45" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>' +
+      // broad, layered spreading canopy (banyan trees fan out much wider than they are tall)
+      '<circle cx="130" cy="60" r="46" fill="#2E5D45"/>' +
+      '<circle cx="70" cy="80" r="34" fill="#2E5D45"/>' +
+      '<circle cx="190" cy="80" r="34" fill="#2E5D45"/>' +
+      '<circle cx="34" cy="98" r="24" fill="#2E5D45"/>' +
+      '<circle cx="226" cy="98" r="24" fill="#2E5D45"/>' +
+      '<circle cx="100" cy="34" r="28" fill="#2E5D45"/>' +
+      '<circle cx="160" cy="34" r="28" fill="#2E5D45"/>' +
+      '<circle cx="130" cy="14" r="24" fill="#2E5D45"/>' +
+      '<circle cx="60" cy="112" r="18" fill="#2E5D45"/>' +
+      '<circle cx="200" cy="112" r="18" fill="#2E5D45"/>' +
+      '<circle cx="130" cy="102" r="22" fill="#2E5D45"/>' +
+    '</svg>';
+
+  const inner = document.createElement("div");
+  inner.style.cssText = "position:relative; display:inline-block; background:#FFFDF6; width:" + treeWidth + "; overflow:hidden;";
+  inner.appendChild(watermark);
+  inner.appendChild(header);
+  inner.appendChild(clone);
+  inner.appendChild(footerDivider);
+  inner.appendChild(caption);
+  inner.appendChild(closingMark);
+
+  // graceful curling vine-and-leaf corner ornament (matches the tree theme)
+  const cornerSvg = (rot) =>
+    '<svg viewBox="0 0 100 100" width="70" height="70" style="position:absolute; ' + rot.pos +
+    ' transform:rotate(' + rot.deg + 'deg); pointer-events:none;">' +
+    '<path d="M6 92 V30 Q6 6 30 6 H92" fill="none" stroke="#AD8A3D" stroke-width="3.2" stroke-linecap="round"/>' +
+    '<path d="M6 74 V38 Q6 20 24 20 H62" fill="none" stroke="#AD8A3D" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>' +
+    '<path d="M6 92c0-10 4-14 10-14" fill="none" stroke="#AD8A3D" stroke-width="2" stroke-linecap="round" opacity=".7"/>' +
+    '<path d="M92 6c-10 0-14 4-14 10" fill="none" stroke="#AD8A3D" stroke-width="2" stroke-linecap="round" opacity=".7"/>' +
+    '<g transform="translate(14,14)">' +
+      '<path d="M0 20C5 9 14 2 26 0 23 12 16 18 0 20Z" fill="#2E5D45" opacity=".92"/>' +
+      '<path d="M0 34C7 20 18 13 34 11 29 25 18 32 0 34Z" fill="#3a7a58" opacity=".85"/>' +
+      '<path d="M2 8C6 4 12 1 18 0" fill="none" stroke="#F1E4BF" stroke-width=".7" opacity=".6"/>' +
+    '</g>' +
+    '<circle cx="30" cy="30" r="4" fill="#AD8A3D"/>' +
+    '<circle cx="30" cy="30" r="1.6" fill="#FFFDF6"/>' +
+    '</svg>';
+
+  // beaded dot border, set just inside the main gold rule for extra richness
+  const beadStripH = (pos) =>
+    '<div style="position:absolute; ' + pos + '; left:64px; right:64px; height:3px; ' +
+    'background-image:radial-gradient(circle, #AD8A3D 1.6px, transparent 2px); background-size:13px 3px; opacity:.8;"></div>';
+  const beadStripV = (pos) =>
+    '<div style="position:absolute; ' + pos + '; top:64px; bottom:64px; width:3px; ' +
+    'background-image:radial-gradient(circle, #AD8A3D 1.6px, transparent 2px); background-size:3px 13px; opacity:.8;"></div>';
+
+  const frame = document.createElement("div");
+  frame.style.cssText =
+    "position:relative; display:inline-block; padding:46px; border-radius:6px; " +
+    "background: radial-gradient(140% 100% at 50% 0%, #FFFDF6 0%, #FBF3DD 55%, #F3E9CE 100%); " +
+    "border:2px solid #AD8A3D; " +
+    "box-shadow:inset 0 0 0 6px #FFFDF6, inset 0 0 0 8px #AD8A3D, inset 0 0 0 13px #FFFDF6, inset 0 0 0 14px rgba(173,138,61,.5), 0 18px 46px rgba(31,74,52,.22);";
+  frame.innerHTML =
+    beadStripH("top:26px") + beadStripH("bottom:26px") +
+    beadStripV("left:26px") + beadStripV("right:26px") +
+    cornerSvg({ pos: "top:12px; left:12px;", deg: 0 }) +
+    cornerSvg({ pos: "top:12px; right:12px;", deg: 90 }) +
+    cornerSvg({ pos: "bottom:12px; right:12px;", deg: 180 }) +
+    cornerSvg({ pos: "bottom:12px; left:12px;", deg: 270 });
+  frame.appendChild(inner);
 
   const wrapper = document.createElement("div");
   wrapper.style.cssText =
-    "position:fixed; left:-99999px; top:0; display:inline-block; background:#FFFBEE; width:" + treeWidth + ";";
-  wrapper.appendChild(clone);
-  wrapper.appendChild(caption);
+    "position:fixed; left:-99999px; top:0; display:inline-block; background:#F3E9CE; padding:30px;";
+  wrapper.appendChild(frame);
   document.body.appendChild(wrapper);
 
-  html2canvas(wrapper, { scale: 3, backgroundColor: "#FFFBEE", useCORS: true }).then((canvas) => {
+  html2canvas(wrapper, { scale: 3, backgroundColor: "#F3E9CE", useCORS: true }).then((canvas) => {
     wrapper.remove();
     const link = document.createElement("a");
     link.download = "shikorer-sondhane-bongshotalika.png";

@@ -286,6 +286,39 @@
     margin-left:auto;
   }
   .download-btn svg{width:14px; height:14px;}
+
+  .lineage-download-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    width:auto;
+    height:30px;
+    padding:0 14px;
+    border-radius:8px;
+    border:1px solid var(--forest-mid);
+    background:rgba(255,255,255,.25);
+    color:inherit;
+    cursor:pointer;
+    font-family:'Hind Siliguri', sans-serif;
+    font-size:.82rem;
+    font-weight:600;
+    line-height:1;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .lineage-download-btn .ldb-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+  }
+  .lineage-download-btn .ldb-icon svg{width:14px; height:14px; stroke:currentColor;}
+  .lineage-download-btn:hover{background:rgba(255,255,255,.45); transform:translateY(-1px);}
+  .lineage-download-btn:active{transform:translateY(0);}
+  .lineage-download-btn:disabled{opacity:.7; cursor:default; transform:none;}
+  @media (max-width:560px){
+    .lineage-download-btn span.ldb-label{display:none;}
+    .lineage-download-btn{padding:0 8px; gap:0;}
+  }
   ul.org-tree{
     display:flex;
     justify-content:center;
@@ -501,7 +534,7 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <div class="eyebrow"><span class="rule"></span>বংশলতিকা<span class="rule"></span></div>
+    <div class="eyebrow"><span class="rule"></span>বংশতালিকা<span class="rule"></span></div>
     <h1>শিকড়ের সন্ধানে</h1>
     <p class="lede">আমাদের গৌরবময় বংশতালিকা — মোঃ ধন গাজী থেকে শুরু হওয়া আট প্রজন্মের এক ধারাবাহিক ইতিহাস, যা প্রায় আড়াইশত বছরেরও বেশি সময় ধরে বহমান।</p>
     <div class="stat-row">
@@ -521,7 +554,15 @@
   <div class="tree-panel visible full-tree-wrap" id="fullTreeContainer"></div>
 
   <div class="tree-panel" id="lineagePanel">
-    <div class="panel-title">🧭&nbsp; বংশধারা — আদি পুরুষ থেকে এই পর্যন্ত</div>
+    <div class="panel-title" style="justify-content:space-between;">
+      <span>🧭&nbsp; বংশধারা — আদি পুরুষ থেকে এই পর্যন্ত</span>
+      <button type="button" class="lineage-download-btn" onclick="downloadLineageImage(this)" title="বংশধারার ছবি ডাউনলোড করুন">
+        <span class="ldb-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/></svg>
+        </span>
+        <span class="ldb-label">বংশধারা সেভ করুন</span>
+      </button>
+    </div>
     <div id="lineageBody"></div>
   </div>
 
@@ -952,24 +993,7 @@ function adjustTreeZoom(id, delta){
   if (lbl) lbl.textContent = toBn(Math.round(z * 100)) + "%";
 }
 
-function downloadTreeImage(id){
-  const el = document.getElementById(id);
-  if (!el || typeof html2canvas === "undefined") return;
-  const btn = document.querySelector('button[onclick*="' + id + '"][onclick*="downloadTreeImage"]');
-  const originalLabel = btn ? btn.innerHTML : null;
-  if (btn){ btn.innerHTML = "প্রস্তুত হচ্ছে…"; btn.disabled = true; }
-
-  const treeWidth = el.style.width || (el.getBoundingClientRect().width + "px");
-
-  // offscreen clone: reset zoom, drop unknown-name (leaf) cards, add source caption below
-  const clone = el.cloneNode(true);
-  clone.removeAttribute("id");
-  clone.style.zoom = 1;
-  clone.querySelectorAll(".person-card .p-name.unknown").forEach((nameEl) => {
-    const card = nameEl.closest(".person-card");
-    if (card) card.remove();
-  });
-
+function buildFramedFigure(contentNode, widthPx){
   const caption = document.createElement("div");
   caption.style.cssText =
     "font-family:'Hind Siliguri',sans-serif; font-size:16px; line-height:1.9; color:#2E5D45; " +
@@ -1065,10 +1089,10 @@ function downloadTreeImage(id){
     '</svg>';
 
   const inner = document.createElement("div");
-  inner.style.cssText = "position:relative; display:inline-block; background:#FFFDF6; width:" + treeWidth + "; overflow:hidden;";
+  inner.style.cssText = "position:relative; display:inline-block; background:#FFFDF6; width:" + widthPx + "; overflow:hidden;";
   inner.appendChild(watermark);
   inner.appendChild(header);
-  inner.appendChild(clone);
+  inner.appendChild(contentNode);
   inner.appendChild(footerDivider);
   inner.appendChild(caption);
   inner.appendChild(closingMark);
@@ -1113,16 +1137,27 @@ function downloadTreeImage(id){
     cornerSvg({ pos: "bottom:12px; left:12px;", deg: 270 });
   frame.appendChild(inner);
 
+  return frame;
+}
+
+function exportFramedImage(buildFrameFn, filename, btn, bgColor){
+  if (typeof html2canvas === "undefined") return;
+  const originalLabel = btn ? btn.innerHTML : null;
+  if (btn){ btn.innerHTML = "প্রস্তুত হচ্ছে…"; btn.disabled = true; }
+
+  const bg = bgColor || "#F3E9CE";
+  const frame = buildFrameFn();
+
   const wrapper = document.createElement("div");
   wrapper.style.cssText =
-    "position:fixed; left:-99999px; top:0; display:inline-block; background:#F3E9CE; padding:30px;";
+    "position:fixed; left:-99999px; top:0; display:inline-block; background:" + bg + "; padding:30px;";
   wrapper.appendChild(frame);
   document.body.appendChild(wrapper);
 
-  html2canvas(wrapper, { scale: 3, backgroundColor: "#F3E9CE", useCORS: true }).then((canvas) => {
+  html2canvas(wrapper, { scale: 3, backgroundColor: bg, useCORS: true }).then((canvas) => {
     wrapper.remove();
     const link = document.createElement("a");
-    link.download = "shikorer-sondhane-bongshotalika.png";
+    link.download = filename;
     link.href = canvas.toDataURL("image/png");
     document.body.appendChild(link);
     link.click();
@@ -1132,6 +1167,154 @@ function downloadTreeImage(id){
     wrapper.remove();
     if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; }
   });
+}
+
+function downloadTreeImage(id){
+  const el = document.getElementById(id);
+  if (!el) return;
+  const btn = document.querySelector('button[onclick*="' + id + '"][onclick*="downloadTreeImage"]');
+
+  const treeWidth = el.style.width || (el.getBoundingClientRect().width + "px");
+
+  // offscreen clone: reset zoom, drop unknown-name (leaf) cards
+  const clone = el.cloneNode(true);
+  clone.removeAttribute("id");
+  clone.style.zoom = 1;
+  clone.querySelectorAll(".person-card .p-name.unknown").forEach((nameEl) => {
+    const card = nameEl.closest(".person-card");
+    if (card) card.remove();
+  });
+
+  exportFramedImage(() => buildFramedFigure(clone, treeWidth), "shikorer-sondhane-bongshotalika.png", btn, "#F3E9CE");
+}
+
+function downloadLineageImage(btn){
+  const el = document.getElementById("lineageBody");
+  if (!el || !el.querySelector(".chain-tree")) return;
+
+  const clone = el.cloneNode(true);
+  clone.style.padding = "6px 10px";
+  const measuredWidth = Math.max(360, Math.min(760, el.getBoundingClientRect().width + 20)) + "px";
+
+  exportFramedImage(() => buildLineageCertificateFigure(clone, measuredWidth), "shikorer-sondhane-bongshodhara.png", btn, "#F2E6D3");
+}
+
+// ---------- a fully different, certificate-style frame for the lineage-chain download ----------
+function buildLineageCertificateFigure(contentNode, widthPx){
+  // kicker + big title + subtitle, with a laurel-style ring emblem (very different from the tree emblem)
+  const header = document.createElement("div");
+  header.style.cssText = "text-align:center; padding:38px 34px 6px; position:relative; z-index:1;";
+  header.innerHTML =
+    '<svg width="64" height="64" viewBox="0 0 64 64" style="display:block; margin:0 auto 14px;">' +
+      '<circle cx="32" cy="32" r="27" fill="#FBF3E2" stroke="#9C6B30" stroke-width="2.4"/>' +
+      '<circle cx="32" cy="32" r="20" fill="none" stroke="#9C6B30" stroke-width=".8" opacity=".55"/>' +
+      // laurel sprigs left & right
+      '<g stroke="#2E5D45" stroke-width="1.6" fill="#2E5D45" opacity=".92">' +
+        '<path d="M14 40c4 2 8 1 11-2M13 34c4 1 8 0 11-3M14 28c4 0 7-1 10-4" fill="none" stroke-linecap="round"/>' +
+        '<path d="M50 40c-4 2-8 1-11-2M51 34c-4 1-8 0-11-3M50 28c-4 0-7-1-10-4" fill="none" stroke-linecap="round"/>' +
+      '</g>' +
+      '<path d="M32 20v12l8 6" fill="none" stroke="#9C6B30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="32" cy="20" r="2.6" fill="#9C6B30"/>' +
+    '</svg>' +
+    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:12.5px; letter-spacing:.14em; color:#9C6B30; font-weight:700; margin-bottom:4px;">শিকড়ের সন্ধানে</div>' +
+    '<div style="font-family:\'Noto Serif Bengali\',serif; font-weight:700; font-size:27px; color:#1F4A34;">প্রজন্মের পর প্রজন্ম, এক গৌরবগাথা</div>' +
+    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:13px; color:#7C6A45; margin-top:6px;">আদি পুরুষ থেকে বর্তমান পর্যন্ত ধারাবাহিক শাখা</div>' +
+    '<div style="display:flex; align-items:center; justify-content:center; gap:10px; margin:18px 0 0;">' +
+      '<span style="width:60px; height:2px; background:#9C6B30; opacity:.5;"></span>' +
+      '<span style="width:7px; height:7px; background:#9C6B30; transform:rotate(45deg); display:inline-block;"></span>' +
+      '<span style="width:110px; height:1px; background:#9C6B30; opacity:.3;"></span>' +
+      '<span style="width:7px; height:7px; background:#9C6B30; transform:rotate(45deg); display:inline-block;"></span>' +
+      '<span style="width:60px; height:2px; background:#9C6B30; opacity:.5;"></span>' +
+    '</div>';
+
+  const footerRule = document.createElement("div");
+  footerRule.style.cssText = "text-align:center; margin:22px 0 0; position:relative; z-index:1;";
+  footerRule.innerHTML =
+    '<span style="display:inline-block; width:140px; height:1px; background:#9C6B30; opacity:.35;"></span>';
+
+  // caption presented as a stamped note box, not a plain paragraph
+  const caption = document.createElement("div");
+  caption.style.cssText =
+    "font-family:'Hind Siliguri',sans-serif; font-size:15px; line-height:1.85; color:#4a3f2a; " +
+    "margin:20px 34px 0; padding:16px 22px; text-align:center; position:relative; z-index:1; " +
+    "background:rgba(156,107,48,.06); border:1px dashed rgba(156,107,48,.5); border-radius:10px;";
+  caption.innerHTML =
+    "<div style=\"font-family:'Noto Serif Bengali',serif; font-weight:700; color:#9C6B30; font-size:15px; margin-bottom:5px;\">তথ্যসূত্র:</div>" +
+    "<div>মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে " +
+    "ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।</div>";
+
+  const sealMark = document.createElement("div");
+  sealMark.style.cssText = "text-align:center; padding:18px 0 6px; position:relative; z-index:1;";
+  sealMark.innerHTML =
+    '<svg width="30" height="30" viewBox="0 0 40 40">' +
+      '<circle cx="20" cy="20" r="17" fill="none" stroke="#9C6B30" stroke-width="1.4" opacity=".6"/>' +
+      '<circle cx="20" cy="20" r="11" fill="none" stroke="#9C6B30" stroke-width=".8" opacity=".4"/>' +
+      '<path d="M20 11v9l6 4" fill="none" stroke="#2E5D45" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="20" cy="11" r="2" fill="#2E5D45"/>' +
+    '</svg>';
+
+  // radiating "family wheel" watermark — deliberately different from the banyan-tree watermark
+  const watermark = document.createElement("div");
+  watermark.style.cssText =
+    "position:absolute; inset:0; display:flex; align-items:center; justify-content:center; " +
+    "opacity:.05; pointer-events:none; z-index:0;";
+  let rays = "";
+  for (let i = 0; i < 16; i++){
+    const angle = (i * 360) / 16;
+    rays += '<line x1="100" y1="100" x2="100" y2="6" stroke="#9C6B30" stroke-width="2" ' +
+      'transform="rotate(' + angle + ' 100 100)"/>';
+  }
+  watermark.innerHTML =
+    '<svg width="76%" height="76%" viewBox="0 0 200 200">' +
+      '<circle cx="100" cy="100" r="94" fill="none" stroke="#2E5D45" stroke-width="2"/>' +
+      '<circle cx="100" cy="100" r="70" fill="none" stroke="#2E5D45" stroke-width="1.4"/>' +
+      '<circle cx="100" cy="100" r="46" fill="none" stroke="#2E5D45" stroke-width="1.4"/>' +
+      '<circle cx="100" cy="100" r="22" fill="none" stroke="#2E5D45" stroke-width="1.4"/>' +
+      '<g opacity=".6">' + rays + '</g>' +
+      '<circle cx="100" cy="100" r="5" fill="#2E5D45"/>' +
+    '</svg>';
+
+  const inner = document.createElement("div");
+  inner.style.cssText = "position:relative; display:inline-block; background:#FFFCF3; width:" + widthPx + "; overflow:hidden;";
+  inner.appendChild(watermark);
+  inner.appendChild(header);
+  const contentWrap = document.createElement("div");
+  contentWrap.style.cssText = "padding:8px 30px 0; position:relative; z-index:1;";
+  contentWrap.appendChild(contentNode);
+  inner.appendChild(contentWrap);
+  inner.appendChild(footerRule);
+  inner.appendChild(caption);
+  inner.appendChild(sealMark);
+
+  // circular "wax seal" medallions at the corners instead of curling vines
+  const cornerMedallion = (pos) =>
+    '<svg width="52" height="52" viewBox="0 0 52 52" style="position:absolute; ' + pos + '; pointer-events:none;">' +
+      '<circle cx="26" cy="26" r="23" fill="#FFFCF3" stroke="#9C6B30" stroke-width="2.6"/>' +
+      '<circle cx="26" cy="26" r="17" fill="none" stroke="#9C6B30" stroke-width=".8" opacity=".5"/>' +
+      '<g stroke="#2E5D45" stroke-width="1.3" opacity=".85">' +
+        '<line x1="26" y1="9" x2="26" y2="14"/>' +
+        '<line x1="26" y1="38" x2="26" y2="43"/>' +
+        '<line x1="9" y1="26" x2="14" y2="26"/>' +
+        '<line x1="38" y1="26" x2="43" y2="26"/>' +
+      '</g>' +
+      '<circle cx="26" cy="26" r="3.4" fill="#9C6B30"/>' +
+    '</svg>';
+
+  const frame = document.createElement("div");
+  frame.style.cssText =
+    "position:relative; display:inline-block; padding:44px; border-radius:26px; " +
+    "background: radial-gradient(130% 100% at 50% 0%, #FFFCF3 0%, #F7EAD2 55%, #EFDDB4 100%); " +
+    "border:1px solid #9C6B30; " +
+    "box-shadow:inset 0 0 0 5px #FFFCF3, inset 0 0 0 6px rgba(156,107,48,.55), " +
+    "inset 0 0 0 11px #FFFCF3, inset 0 0 0 12px rgba(46,93,69,.28), 0 18px 46px rgba(74,63,42,.22);";
+  frame.innerHTML =
+    cornerMedallion("top:10px; left:10px;") +
+    cornerMedallion("top:10px; right:10px;") +
+    cornerMedallion("bottom:10px; right:10px;") +
+    cornerMedallion("bottom:10px; left:10px;");
+  frame.appendChild(inner);
+
+  return frame;
 }
 
 // ---------- full tree (always visible) ----------

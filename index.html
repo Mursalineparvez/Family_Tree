@@ -1194,7 +1194,19 @@ function downloadLineageImage(btn){
 
   const clone = el.cloneNode(true);
   clone.style.padding = "6px 10px";
-  const measuredWidth = Math.max(360, Math.min(760, el.getBoundingClientRect().width + 20)) + "px";
+
+  // Measure the tree's natural, unconstrained width (not the narrow on-screen
+  // width on phones) so every device downloads a version with the full
+  // information visible, not clipped on the right.
+  const probe = clone.cloneNode(true);
+  probe.style.cssText = "position:absolute; visibility:hidden; left:-9999px; top:-9999px; width:max-content; padding:6px 10px;";
+  const probeTree = probe.querySelector(".chain-tree");
+  if (probeTree) probeTree.style.overflow = "visible";
+  document.body.appendChild(probe);
+  const naturalWidth = probe.scrollWidth;
+  document.body.removeChild(probe);
+
+  const measuredWidth = Math.max(360, Math.min(1000, naturalWidth + 80)) + "px";
 
   exportFramedImage(() => buildLineageCertificateFigure(clone, measuredWidth), "shikorer-sondhane-bongshodhara.png", btn, "#F2E6D3");
 }

@@ -1161,7 +1161,8 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   wrapper.id = exportId;
   wrapper.style.cssText =
     "position:absolute; left:0; top:0; z-index:-2147483647; opacity:0; pointer-events:none; " +
-    "display:inline-block; width:max-content; background:" + bg + "; padding:30px;";
+    "display:inline-block; width:max-content; background:" + bg + "; padding:30px; " +
+    "-webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;";
   wrapper.appendChild(frame);
   document.body.appendChild(wrapper);
 
@@ -1170,15 +1171,15 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   window.scrollTo(0, 0);
   const restoreScroll = () => window.scrollTo(prevScrollX, prevScrollY);
 
-  // Mobile browsers (especially iOS Safari) cap canvas size: roughly 16.7M total
-  // pixels and ~4096px per side. A wide descendant tree at scale 3 blows past
-  // that and the download silently fails, so pick the best scale that still fits.
+  // Modern phone browsers can handle far larger canvases than old iOS Safari's
+  // 4096×4096 / 16M-pixel ceiling, so raise the cap to keep text sharp — while
+  // still backing off automatically for very wide trees instead of failing.
   const w = Math.max(1, wrapper.scrollWidth);
   const h = Math.max(1, wrapper.scrollHeight);
-  const MAX_SIDE = 4096;
-  const MAX_AREA = 16000000;
-  let scale = Math.min(3, MAX_SIDE / w, MAX_SIDE / h, Math.sqrt(MAX_AREA / (w * h)));
-  scale = Math.max(0.5, +scale.toFixed(2));
+  const MAX_SIDE = 8000;
+  const MAX_AREA = 45000000;
+  let scale = Math.min(4, MAX_SIDE / w, MAX_SIDE / h, Math.sqrt(MAX_AREA / (w * h)));
+  scale = Math.max(1.5, +scale.toFixed(2));
 
   const saveCanvas = (canvas) => {
     const finish = (href, revoke) => {

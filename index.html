@@ -1150,11 +1150,15 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   const bg = bgColor || "#F3E9CE";
   const frame = buildFrameFn();
 
-  // Keep the export node inside the normal document flow area (top-left,
-  // invisible) rather than parked far offscreen. html2canvas lays the clone out
-  // in an iframe sized to the viewport, so a node at left:-99999px on a narrow
-  // phone screen ends up outside the capture region and the render fails.
+  // Keep the export node inside the normal document flow area (top-left) rather
+  // than parked far offscreen: html2canvas lays the clone out in an iframe sized
+  // to the viewport, so a node at left:-99999px on a narrow phone screen ends up
+  // outside the capture region and the render fails. It is hidden on the live
+  // page with opacity/z-index, then made fully visible inside the clone (see
+  // onclone below) — otherwise the captured image comes out blank.
+  const exportId = "export-stage-" + Date.now();
   const wrapper = document.createElement("div");
+  wrapper.id = exportId;
   wrapper.style.cssText =
     "position:absolute; left:0; top:0; z-index:-2147483647; opacity:0; pointer-events:none; " +
     "display:inline-block; width:max-content; background:" + bg + "; padding:30px;";
@@ -1219,7 +1223,17 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
       scrollX: 0,
       scrollY: 0,
       windowWidth: w + 200,
-      windowHeight: h + 200
+      windowHeight: h + 200,
+      onclone: (doc) => {
+        // The live node is transparent so it never flashes on screen; the clone
+        // that actually gets painted must be fully opaque and on top.
+        const staged = doc.getElementById(exportId);
+        if (staged){
+          staged.style.opacity = "1";
+          staged.style.zIndex = "2147483647";
+          staged.style.visibility = "visible";
+        }
+      }
     });
 
   const cleanup = () => { wrapper.remove(); restoreScroll(); };

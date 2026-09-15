@@ -1145,6 +1145,8 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   const originalLabel = btn ? btn.innerHTML : null;
   if (btn){ btn.innerHTML = "প্রস্তুত হচ্ছে…"; btn.disabled = true; }
 
+  const restore = () => { if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; } };
+
   const bg = bgColor || "#F3E9CE";
   const frame = buildFrameFn();
 
@@ -1154,18 +1156,60 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   wrapper.appendChild(frame);
   document.body.appendChild(wrapper);
 
-  html2canvas(wrapper, { scale: 3, backgroundColor: bg, useCORS: true }).then((canvas) => {
+  // Mobile browsers (especially iOS Safari) cap canvas size: roughly 16.7M total
+  // pixels and ~4096px per side. A wide descendant tree at scale 3 blows past
+  // that and the download silently fails, so pick the best scale that still fits.
+  const w = Math.max(1, wrapper.scrollWidth);
+  const h = Math.max(1, wrapper.scrollHeight);
+  const MAX_SIDE = 4096;
+  const MAX_AREA = 16000000;
+  let scale = Math.min(3, MAX_SIDE / w, MAX_SIDE / h, Math.sqrt(MAX_AREA / (w * h)));
+  scale = Math.max(0.5, +scale.toFixed(2));
+
+  const saveCanvas = (canvas) => {
+    const finish = (href, revoke) => {
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = href;
+      link.rel = "noopener";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      if (revoke) setTimeout(() => URL.revokeObjectURL(href), 60000);
+      restore();
+    };
+
+    // Blob + object URL keeps memory low on phones; data URL is the fallback.
+    if (canvas.toBlob){
+      canvas.toBlob((blob) => {
+        if (blob) finish(URL.createObjectURL(blob), true);
+        else {
+          try { finish(canvas.toDataURL("image/png"), false); }
+          catch (e){ restore(); alert("ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।"); }
+        }
+      }, "image/png");
+    } else {
+      try { finish(canvas.toDataURL("image/png"), false); }
+      catch (e){ restore(); alert("ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।"); }
+    }
+  };
+
+  const attempt = (s) =>
+    html2canvas(wrapper, { scale: s, backgroundColor: bg, useCORS: true, logging: false });
+
+  attempt(scale).then((canvas) => {
     wrapper.remove();
-    const link = document.createElement("a");
-    link.download = filename;
-    link.href = canvas.toDataURL("image/png");
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; }
+    saveCanvas(canvas);
   }).catch(() => {
-    wrapper.remove();
-    if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; }
+    // One more try at the smallest scale before giving up.
+    attempt(Math.min(1, scale)).then((canvas) => {
+      wrapper.remove();
+      saveCanvas(canvas);
+    }).catch(() => {
+      wrapper.remove();
+      restore();
+      alert("ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।");
+    });
   });
 }
 
@@ -1174,7 +1218,9 @@ function downloadTreeImage(id){
   if (!el) return;
   const btn = document.querySelector('button[onclick*="' + id + '"][onclick*="downloadTreeImage"]');
 
-  const treeWidth = el.style.width || (el.getBoundingClientRect().width + "px");
+  // Use the tree's own layout width (set when it was rendered), never the
+  // on-screen box width, which on phones is limited by the scroll container.
+  const treeWidth = el.style.width || (el.scrollWidth + "px");
 
   // offscreen clone: reset zoom, drop unknown-name (leaf) cards
   const clone = el.cloneNode(true);

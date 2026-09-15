@@ -1150,11 +1150,21 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   const bg = bgColor || "#F3E9CE";
   const frame = buildFrameFn();
 
+  // Keep the export node inside the normal document flow area (top-left,
+  // invisible) rather than parked far offscreen. html2canvas lays the clone out
+  // in an iframe sized to the viewport, so a node at left:-99999px on a narrow
+  // phone screen ends up outside the capture region and the render fails.
   const wrapper = document.createElement("div");
   wrapper.style.cssText =
-    "position:fixed; left:-99999px; top:0; display:inline-block; background:" + bg + "; padding:30px;";
+    "position:absolute; left:0; top:0; z-index:-2147483647; opacity:0; pointer-events:none; " +
+    "display:inline-block; width:max-content; background:" + bg + "; padding:30px;";
   wrapper.appendChild(frame);
   document.body.appendChild(wrapper);
+
+  // html2canvas 1.4.1 misplaces the capture window when the page is scrolled.
+  const prevScrollX = window.pageXOffset, prevScrollY = window.pageYOffset;
+  window.scrollTo(0, 0);
+  const restoreScroll = () => window.scrollTo(prevScrollX, prevScrollY);
 
   // Mobile browsers (especially iOS Safari) cap canvas size: roughly 16.7M total
   // pixels and ~4096px per side. A wide descendant tree at scale 3 blows past
@@ -1194,19 +1204,41 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
     }
   };
 
+  // Explicit geometry + a virtual window larger than the node: without these the
+  // clone is laid out at phone width and everything past the screen edge is lost.
   const attempt = (s) =>
-    html2canvas(wrapper, { scale: s, backgroundColor: bg, useCORS: true, logging: false });
+    html2canvas(wrapper, {
+      scale: s,
+      backgroundColor: bg,
+      useCORS: true,
+      logging: false,
+      width: w,
+      height: h,
+      x: 0,
+      y: 0,
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: w + 200,
+      windowHeight: h + 200
+    });
 
-  attempt(scale).then((canvas) => {
-    wrapper.remove();
+  const cleanup = () => { wrapper.remove(); restoreScroll(); };
+
+  // Fonts that are still loading make the capture throw on some mobile browsers.
+  const fontsReady = (document.fonts && document.fonts.ready)
+    ? document.fonts.ready.catch(() => {})
+    : Promise.resolve();
+
+  fontsReady.then(() => attempt(scale)).then((canvas) => {
+    cleanup();
     saveCanvas(canvas);
   }).catch(() => {
-    // One more try at the smallest scale before giving up.
+    // One more try at a smaller scale before giving up.
     attempt(Math.min(1, scale)).then((canvas) => {
-      wrapper.remove();
+      cleanup();
       saveCanvas(canvas);
     }).catch(() => {
-      wrapper.remove();
+      cleanup();
       restore();
       alert("ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।");
     });
@@ -1225,7 +1257,10 @@ function downloadTreeImage(id){
   // offscreen clone: reset zoom, drop unknown-name (leaf) cards
   const clone = el.cloneNode(true);
   clone.removeAttribute("id");
-  clone.style.zoom = 1;
+  // Remove zoom outright rather than setting it to 1 — html2canvas mishandles
+  // the zoom property on mobile browsers and the render can fail.
+  clone.style.removeProperty("zoom");
+  clone.removeAttribute("data-zoom");
   clone.querySelectorAll(".person-card .p-name.unknown").forEach((nameEl) => {
     const card = nameEl.closest(".person-card");
     if (card) card.remove();

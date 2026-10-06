@@ -748,6 +748,13 @@
   .person-card.root{box-shadow:0 6px 14px rgba(31,111,235,.35) !important;}
   .exporting .person-card.organic-node{transform:translate(-50%,0) !important;}
   .exporting svg.organic-edges{z-index:0;}
+
+  /* export look for the tree image */
+  .exporting .person-card{border-width:1.6px; box-shadow:0 4px 10px rgba(31,111,235,.18) !important; padding:7px 16px 7px 11px;}
+  .exporting .person-card .avatar{width:13px; height:13px;}
+  .exporting .person-card .p-name{font-size:.8rem;}
+  .exporting .person-card.root{padding:10px 22px 10px 15px; box-shadow:0 8px 18px rgba(31,111,235,.4) !important;}
+  .exporting .person-card.root .p-name{font-size:1rem;}
 </style>
 </head>
 <body>
@@ -1323,7 +1330,7 @@ function buildFramedFigure(contentNode, widthPx){
     '</svg>';
 
   const inner = document.createElement("div");
-  inner.style.cssText = "position:relative; display:inline-block; background:#FFFFFF; width:" + widthPx + "; overflow:hidden;";
+  inner.style.cssText = "position:relative; display:inline-block; background:#FFFFFF; border-radius:22px; width:" + widthPx + "; overflow:hidden;";
   inner.appendChild(watermark);
   inner.appendChild(header);
   inner.appendChild(contentNode);
@@ -1358,7 +1365,7 @@ function buildFramedFigure(contentNode, widthPx){
 
   const frame = document.createElement("div");
   frame.style.cssText =
-    "position:relative; display:inline-block; padding:46px; border-radius:6px; " +
+    "position:relative; display:inline-block; padding:46px; border-radius:34px; " +
     "background: radial-gradient(140% 100% at 50% 0%, #FFFFFF 0%, #EEF5FF 55%, #E3EEFF 100%); " +
     "border:2px solid #1F6FEB; " +
     "box-shadow:inset 0 0 0 6px #FFFFFF, inset 0 0 0 8px #1F6FEB, inset 0 0 0 13px #FFFFFF, inset 0 0 0 14px rgba(173,138,61,.5), 0 18px 46px rgba(31,74,52,.22);";
@@ -1408,19 +1415,72 @@ function downloadTreeImage(id){
   const el = document.getElementById(id);
   if (!el) return;
   const btn = document.querySelector('button[onclick*="' + id + '"][onclick*="downloadTreeImage"]');
+  const treeW = parseFloat(el.style.width) || el.getBoundingClientRect().width;
+  const SIDE = 124;
 
-  const treeWidth = el.style.width || (el.getBoundingClientRect().width + "px");
-
-  // offscreen clone: reset zoom, drop unknown-name (leaf) cards
+  // offscreen clone: reset zoom, drop unknown-name (leaf) cards, drop compass
   const clone = el.cloneNode(true);
   clone.removeAttribute("id");
   clone.style.zoom = 1;
-  clone.querySelectorAll(".person-card .p-name.unknown").forEach((nameEl) => {
-    const card = nameEl.closest(".person-card");
-    if (card) card.remove();
+  clone.style.position = "relative";
+  clone.style.zIndex = "1";
+  clone.querySelectorAll(".person-card .p-name.unknown").forEach((n) => { const c = n.closest(".person-card"); if (c) c.remove(); });
+  const rose = clone.querySelector(".compass-rose"); if (rose) rose.remove();
+
+  // colour each generation, collect row positions
+  const PAL = ["#1F6FEB","#2BA5D8","#14B8A6","#7A6CF0","#E8893C","#D9467A","#0E8F6E","#4C9AFF"];
+  const cards = Array.from(clone.querySelectorAll(".organic-node"));
+  const rows = {};
+  let minG = 99, maxG = 0, rootName = "";
+  cards.forEach((c) => {
+    const g = depthOf(c.dataset.code);
+    minG = Math.min(minG, g); maxG = Math.max(maxG, g);
+    if (rows[g] === undefined) rows[g] = parseFloat(c.style.top) || 0;
+    const col = PAL[(g - 1) % PAL.length];
+    if (c.classList.contains("root")){ rootName = (c.querySelector(".p-name") || {}).textContent || ""; return; }
+    c.style.borderColor = col + "99";
+    const av = c.querySelector(".avatar");
+    if (av){ av.style.background = col; av.style.boxShadow = "0 0 0 3px " + col + "33"; }
   });
 
-  exportFramedImage(() => buildFramedFigure(clone, treeWidth), "shikorer-sondhane-bongshotalika.png", btn, "#E3EEFF");
+  // joint dots where each branch leaves its parent
+  const svg = clone.querySelector("svg.organic-edges");
+  if (svg){
+    svg.querySelectorAll("path").forEach((p) => {
+      const n = (p.getAttribute("d").match(/-?\d+(\.\d+)?/g) || []).map(Number);
+      if (n.length < 2) return;
+      const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      dot.setAttribute("cx", n[0]); dot.setAttribute("cy", n[1]); dot.setAttribute("r", 4.5);
+      dot.setAttribute("fill", "#FFFFFF"); dot.setAttribute("stroke", "#1F6FEB"); dot.setAttribute("stroke-width", 2);
+      svg.appendChild(dot);
+    });
+  }
+
+  // container: rounded generation bands + labels on the left, tree on the right, stats below
+  const container = document.createElement("div");
+  container.style.cssText = "position:relative; padding-left:" + SIDE + "px; width:" + (treeW + SIDE) + "px; box-sizing:content-box;";
+  Object.keys(rows).forEach((g) => {
+    const col = PAL[(g - 1) % PAL.length], top = rows[g];
+    const band = document.createElement("div");
+    band.style.cssText = "position:absolute; left:14px; right:14px; top:" + (top - 20) + "px; height:74px; border-radius:40px; z-index:0; " +
+      "background:linear-gradient(90deg," + col + "26," + col + "0A 70%, transparent);";
+    const chip = document.createElement("div");
+    chip.style.cssText = "position:absolute; left:26px; top:" + (top - 1) + "px; height:36px; line-height:36px; padding:0 16px; border-radius:999px; z-index:2; " +
+      "background:" + col + "; color:#fff; font:700 13px 'Hind Siliguri',sans-serif; white-space:nowrap; box-shadow:0 4px 10px " + col + "55;";
+    chip.textContent = genLabel[g - 1] || (toBn(g) + "তম প্রজন্ম");
+    container.appendChild(band); container.appendChild(chip);
+  });
+  container.appendChild(clone);
+
+  const mkChip = (label, val) => '<span style="display:inline-block; margin:0 7px; padding:9px 22px; border-radius:999px; background:#fff; ' +
+    'border:1.5px solid #BFD9FF; box-shadow:0 6px 14px rgba(31,111,235,.12); font:500 13.5px \'Hind Siliguri\',sans-serif; color:#6B7A99;">' +
+    label + ' <b style="font-size:16px; color:#1F6FEB; margin-left:4px;">' + val + '</b></span>';
+  const stats = document.createElement("div");
+  stats.style.cssText = "position:relative; z-index:1; margin-left:-" + SIDE + "px; width:" + (treeW + SIDE) + "px; text-align:center; padding-top:22px;";
+  stats.innerHTML = mkChip("মোট সদস্য", toBn(cards.length)) + mkChip("প্রজন্ম", toBn(maxG - minG + 1)) + (rootName ? mkChip("শাখার মূল", rootName) : "");
+  container.appendChild(stats);
+
+  exportFramedImage(() => buildFramedFigure(container, (treeW + SIDE) + "px"), "shikorer-sondhane-bongshotalika.png", btn, "#E3EEFF");
 }
 
 function downloadLineageImage(btn){

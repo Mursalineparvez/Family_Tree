@@ -739,6 +739,7 @@
   /* download frames: no animation, so text is fully visible in the saved image */
   .exporting, .exporting *{animation:none !important; transition:none !important;}
   .exporting .chain-item, .exporting .person-card{transform:none !important;}
+  .exporting svg.organic-edges path{stroke-dasharray:none !important; stroke-dashoffset:0 !important;}
 </style>
 </head>
 <body>
@@ -1631,7 +1632,7 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
   var bar=document.getElementById('progress');
   addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%'},{passive:true});
   // draw tree branches
-  function drawEdges(root){(root.querySelectorAll?root.querySelectorAll('svg.organic-edges path'):[]).forEach(function(p){if(!p.classList.contains('draw')){p.setAttribute('pathLength','1');p.classList.add('draw');}});}
+  function drawEdges(root){(root.querySelectorAll?root.querySelectorAll('svg.organic-edges path'):[]).forEach(function(p){if(!p.classList.contains('draw') && !p.closest('.exporting')){p.setAttribute('pathLength','1');p.classList.add('draw');}});}
   drawEdges(document);
   new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1)drawEdges(n.matches&&n.matches('svg.organic-edges')?n.parentNode:n);});});}).observe(document.body,{childList:true,subtree:true});
   // count-up stats

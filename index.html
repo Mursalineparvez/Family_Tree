@@ -735,6 +735,10 @@
   .nav{position:fixed !important;top:0;left:0;right:0;width:100%;z-index:200;}
   .progress{top:0;z-index:300;}
   html{scroll-padding-top:84px;}
+
+  /* download frames: no animation, so text is fully visible in the saved image */
+  .exporting, .exporting *{animation:none !important; transition:none !important;}
+  .exporting .chain-item, .exporting .person-card{transform:none !important;}
 </style>
 </head>
 <body>
@@ -1370,6 +1374,7 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   const frame = buildFrameFn();
 
   const wrapper = document.createElement("div");
+  wrapper.className = "exporting";
   wrapper.style.cssText =
     "position:fixed; left:-99999px; top:0; display:inline-block; background:" + bg + "; padding:30px;";
   wrapper.appendChild(frame);

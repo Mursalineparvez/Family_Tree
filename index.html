@@ -729,6 +729,12 @@
   tbody tr{transition:background .2s,transform .2s}
   tbody tr:hover{transform:translateX(4px)}
   .zoom-btn:active,.lineage-download-btn:active{transform:scale(.92)}
+
+  /* ===== Fixed header ===== */
+  body{padding-top:67px;}
+  .nav{position:fixed !important;top:0;left:0;right:0;width:100%;z-index:200;}
+  .progress{top:0;z-index:300;}
+  html{scroll-padding-top:84px;}
 </style>
 </head>
 <body>

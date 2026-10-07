@@ -9,10 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --forest:#0B2A6F; --forest-deep:#0A1F4F; --forest-mid:#1F6FEB;
-    --parchment:#F3F8FF; --parchment-2:#EAF2FF; --card:#FFFFFF;
-    --gold:#1F6FEB; --gold-light:#BFD9FF; --gold-pale:#E3EEFF;
-    --text:#1B2A4A; --muted:#6B7A99; --rule:#DCE8FA;
+    --forest:#064E3B; --forest-deep:#063B2D; --forest-mid:#059669;
+    --parchment:#F0FBF6; --parchment-2:#E6F8EF; --card:#FFFFFF;
+    --gold:#059669; --gold-light:#A7E8C9; --gold-pale:#D9F7E8;
+    --text:#16302A; --muted:#5F7A6E; --rule:#D3EFE2;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -419,7 +419,7 @@
   }
   .person-card.root .avatar{background:var(--gold); width:11px; height:11px;}
   .person-card.root .p-name{font-size:.9rem; color:var(--forest-deep);}
-  .person-card.active{outline:2.5px solid #2E7D9A; outline-offset:2px;}
+  .person-card.active{outline:2.5px solid #298B4A; outline-offset:2px;}
 
   /* ---- generation tables ---- */
   .gen-block{
@@ -522,14 +522,14 @@
   }
 
   /* ===== Dentara-style theme overrides ===== */
-  body{background:radial-gradient(60% 40% at 0% 0%, #DCEBFF 0%, transparent 70%),radial-gradient(50% 35% at 100% 30%, #E4F0FF 0%, transparent 70%),linear-gradient(180deg,#F6FAFF 0%,#EEF5FF 100%);background-attachment:fixed;}
+  body{background:radial-gradient(60% 40% at 0% 0%, #D1F3E2 0%, transparent 70%),radial-gradient(50% 35% at 100% 30%, #E6FDF4 0%, transparent 70%),linear-gradient(180deg,#F3FCF8 0%,#EAF8F1 100%);background-attachment:fixed;}
   h1,h2,h3,.serif,.stat .num,.note-num,.tree-panel .panel-title{font-family:'Plus Jakarta Sans','Hind Siliguri',sans-serif;letter-spacing:-.01em;}
   main{max-width:1040px;}
   /* navbar */
   .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);}
   .nav-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:24px;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--forest-deep);}
-  .brand-ico{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#4C9AFF,#1F6FEB);display:grid;place-items:center;box-shadow:0 6px 14px rgba(31,111,235,.35);}
+  .brand-ico{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#34D399,#059669);display:grid;place-items:center;box-shadow:0 6px 14px rgba(5,150,105,.35);}
   .brand-ico svg{width:24px;height:24px;}
   .brand b{display:block;font-size:1.15rem;line-height:1.1;font-weight:700;}
   .brand small{display:block;font-size:.68rem;color:var(--muted);}
@@ -538,30 +538,30 @@
   .nav-links a:first-child,.nav-links a:hover{color:var(--forest-mid);border-bottom-color:var(--forest-mid);}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font:600 .92rem 'Hind Siliguri',sans-serif;text-decoration:none;cursor:pointer;border:1.5px solid var(--forest-mid);transition:transform .15s,box-shadow .15s;}
   .btn:hover{transform:translateY(-2px);}
-  .btn-primary{background:var(--forest-mid);color:#fff;box-shadow:0 8px 18px rgba(31,111,235,.35);}
+  .btn-primary{background:var(--forest-mid);color:#fff;box-shadow:0 8px 18px rgba(5,150,105,.35);}
   .btn-ghost{background:#fff;color:var(--forest-mid);}
   .nav .btn{padding:10px 18px;}
   @media(max-width:820px){.nav-links{display:none}.nav .btn{margin-left:auto}}
   /* hero */
-  .hero{text-align:left;background:radial-gradient(70% 90% at 85% 40%,#CFE3FF 0%,transparent 70%),linear-gradient(180deg,#F3F8FF 0%,#EAF3FF 100%);padding:56px 20px 70px;border-bottom:0;box-shadow:none;}
+  .hero{text-align:left;background:radial-gradient(70% 90% at 85% 40%,#BDEBD5 0%,transparent 70%),linear-gradient(180deg,#F0FBF6 0%,#ECFDF7 100%);padding:56px 20px 70px;border-bottom:0;box-shadow:none;}
   .hero::before,.hero::after{display:none;}
   .hero-grid{position:relative;z-index:2;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;}
   @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{order:-1;min-height:220px}}
   .pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--rule);color:var(--forest-mid);font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:999px;margin-bottom:18px;}
   .hero h1{font-size:clamp(2.2rem,5.2vw,3.6rem);line-height:1.2;margin:0 0 16px;color:var(--forest-deep);font-weight:800;}
   .hero h1 em{font-style:normal;color:var(--forest-mid);}
-  .hero p.lede{margin:0 0 26px;max-width:520px;color:#4A5B7D;font-size:1.05rem;}
+  .hero p.lede{margin:0 0 26px;max-width:520px;color:#4A6358;font-size:1.05rem;}
   .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px;}
   .stat-row{justify-content:flex-start;gap:14px;}
-  .stat{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--rule);border-radius:18px;padding:12px 18px;box-shadow:0 6px 16px rgba(31,111,235,.08);}
+  .stat{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--rule);border-radius:18px;padding:12px 18px;box-shadow:0 6px 16px rgba(5,150,105,.08);}
   .stat + .stat{border-left:1px solid var(--rule);}
   .stat .num{font-size:1.5rem;color:var(--forest-mid);}
   .stat .lbl{font-size:.8rem;margin:0;color:var(--text);}
   .hero-art{position:relative;min-height:340px;display:grid;place-items:center;}
-  .hero-art .orb{width:min(340px,80%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#DCEBFF 55%,#B8D5FF 100%);box-shadow:0 30px 60px rgba(31,111,235,.25), inset 0 -10px 30px rgba(31,111,235,.15);display:grid;place-items:center;}
+  .hero-art .orb{width:min(340px,80%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#D1F3E2 55%,#9EE3C3 100%);box-shadow:0 30px 60px rgba(5,150,105,.25), inset 0 -10px 30px rgba(5,150,105,.15);display:grid;place-items:center;}
   .hero-art .orb svg{width:62%;height:62%;}
   .hero-note{position:absolute;left:0;top:8px;font-family:'Hind Siliguri',cursive;font-style:italic;color:var(--forest-mid);font-size:1rem;line-height:1.4;transform:rotate(-6deg);}
-  .hero-badge{position:absolute;right:0;bottom:8px;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 12px 28px rgba(11,42,111,.16);display:flex;gap:10px;align-items:center;font-size:.82rem;line-height:1.3;color:var(--forest-deep);font-weight:600;}
+  .hero-badge{position:absolute;right:0;bottom:8px;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 12px 28px rgba(6,78,59,.16);display:flex;gap:10px;align-items:center;font-size:.82rem;line-height:1.3;color:var(--forest-deep);font-weight:600;}
   .hero-badge i{width:34px;height:34px;border-radius:50%;background:var(--gold-pale);display:grid;place-items:center;font-style:normal;}
   /* section heads */
   .section-head{text-align:left;margin:54px 0 20px;scroll-margin-top:84px;}
@@ -569,31 +569,31 @@
   .section-head h2{font-size:1.75rem;color:var(--forest-deep);font-weight:800;margin:0 0 4px;}
   .section-head p{font-size:.95rem;}
   /* cards */
-  .tree-panel{background:linear-gradient(160deg,#FFFFFF 0%,#F1F7FF 100%);border:1px solid var(--rule);border-radius:24px;box-shadow:0 14px 34px rgba(31,111,235,.10);}
+  .tree-panel{background:linear-gradient(160deg,#FFFFFF 0%,#F2FEFA 100%);border:1px solid var(--rule);border-radius:24px;box-shadow:0 14px 34px rgba(5,150,105,.10);}
   .full-tree-wrap{border-radius:0;}
-  .toolbar-wrap,.gen-block,.note-card{background:#fff;border:1px solid var(--rule);border-radius:20px;box-shadow:0 10px 26px rgba(31,111,235,.07);}
+  .toolbar-wrap,.gen-block,.note-card{background:#fff;border:1px solid var(--rule);border-radius:20px;box-shadow:0 10px 26px rgba(5,150,105,.07);}
   .note-card{border-left:1px solid var(--rule);border-radius:18px;}
-  .note-num{background:linear-gradient(145deg,#4C9AFF,#1F6FEB);}
-  .search-wrap input{background:#F3F8FF;border-radius:999px;}
-  .gen-block-head{background:linear-gradient(90deg,#EAF2FF,#F6FAFF);}
-  tbody tr:nth-child(even){background:#F6FAFF;}
-  tbody tr:hover{background:#E8F1FF;}
-  tbody tr.selected-row{background:#CFE3FF !important;}
-  .person-card{background:#fff;border:1.5px solid #BFD9FF;border-radius:999px;box-shadow:0 4px 12px rgba(31,111,235,.14);}
-  .person-card:hover{box-shadow:0 8px 18px rgba(31,111,235,.25);border-color:var(--forest-mid);}
+  .note-num{background:linear-gradient(145deg,#34D399,#059669);}
+  .search-wrap input{background:#F0FBF6;border-radius:999px;}
+  .gen-block-head{background:linear-gradient(90deg,#E6F8EF,#F3FCF8);}
+  tbody tr:nth-child(even){background:#F3FCF8;}
+  tbody tr:hover{background:#E0F5EA;}
+  tbody tr.selected-row{background:#BDEBD5 !important;}
+  .person-card{background:#fff;border:1.5px solid #A7E8C9;border-radius:999px;box-shadow:0 4px 12px rgba(5,150,105,.14);}
+  .person-card:hover{box-shadow:0 8px 18px rgba(5,150,105,.25);border-color:var(--forest-mid);}
   .person-card .avatar{background:var(--forest-mid);border-radius:50%;}
-  .person-card.root{background:linear-gradient(145deg,#4C9AFF,#1F6FEB);border-color:#1F6FEB;}
+  .person-card.root{background:linear-gradient(145deg,#34D399,#059669);border-color:#059669;}
   .person-card.root .p-name{color:#fff;}
   .person-card.root .avatar{background:#fff;}
-  .person-card.active{outline:3px solid #7FB2FF;}
-  .chain-item:not(.first)::before,.chain-item:not(.first)::after{background:rgba(31,111,235,.4);}
-  .node-box{background:#fff;border:1px solid #BFD9FF;border-radius:12px;}
-  .chain-item.current .node-box{background:var(--forest-mid);color:#fff;border-color:var(--forest-mid);box-shadow:0 8px 18px rgba(31,111,235,.35);}
-  .chain-item.current .gen-tag{color:#CFE3FF;}
+  .person-card.active{outline:3px solid #6EE7B7;}
+  .chain-item:not(.first)::before,.chain-item:not(.first)::after{background:rgba(5,150,105,.4);}
+  .node-box{background:#fff;border:1px solid #A7E8C9;border-radius:12px;}
+  .chain-item.current .node-box{background:var(--forest-mid);color:#fff;border-color:var(--forest-mid);box-shadow:0 8px 18px rgba(5,150,105,.35);}
+  .chain-item.current .gen-tag{color:#BDEBD5;}
   .zoom-btn,.lineage-download-btn{border-color:var(--forest-mid);color:var(--forest-mid);background:#fff;border-radius:999px;}
   .zoom-btn:hover,.lineage-download-btn:hover{background:var(--gold-pale);}
   /* footer = CTA banner */
-  footer{max-width:1040px;margin:50px auto 40px;padding:34px 34px;border:0;color:#E3EEFF;background:linear-gradient(120deg,#1F6FEB 0%,#1557C9 100%);border-radius:28px;box-shadow:0 20px 40px rgba(31,111,235,.35);}
+  footer{max-width:1040px;margin:50px auto 40px;padding:34px 34px;border:0;color:#D9F7E8;background:linear-gradient(120deg,#059669 0%,#13B584 100%);border-radius:28px;box-shadow:0 20px 40px rgba(5,150,105,.35);}
   footer strong,.contact-name{color:#fff;}
   .contact-link{color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:6px 16px;background:rgba(255,255,255,.12);}
   .contact-link:hover{background:#fff;color:var(--forest-mid);}
@@ -601,88 +601,88 @@
   .contact-name{width:100%;font-size:1.15rem;}
 
   /* ===== Premium polish ===== */
-  :root{--ink:#0A1F4F;--blue:#1F6FEB;--sky:#5AA0FF;--shadow-lg:0 30px 60px -20px rgba(16,60,160,.28);--shadow-md:0 14px 34px -12px rgba(16,60,160,.22);}
+  :root{--ink:#063B2D;--blue:#059669;--sky:#34D399;--shadow-lg:0 30px 60px -20px rgba(6,78,59,.28);--shadow-md:0 14px 34px -12px rgba(6,78,59,.22);}
   body{background:
-    radial-gradient(900px 500px at -5% -5%,#D6E8FF 0%,transparent 60%),
-    radial-gradient(700px 500px at 105% 25%,#DDEBFF 0%,transparent 60%),
-    radial-gradient(800px 500px at 50% 110%,#E4EFFF 0%,transparent 60%),#F5F9FF;background-attachment:fixed;}
+    radial-gradient(900px 500px at -5% -5%,#D9FCEF 0%,transparent 60%),
+    radial-gradient(700px 500px at 105% 25%,#E0FCF2 0%,transparent 60%),
+    radial-gradient(800px 500px at 50% 110%,#E6FDF5 0%,transparent 60%),#F2FBF7;background-attachment:fixed;}
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
-    background-image:radial-gradient(rgba(31,111,235,.12) 1px,transparent 1.2px);background-size:26px 26px;
+    background-image:radial-gradient(rgba(5,150,105,.12) 1px,transparent 1.2px);background-size:26px 26px;
     -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 55%);mask-image:linear-gradient(180deg,#000 0%,transparent 55%);}
   .nav,.hero,main,footer{position:relative;z-index:1;}
-  .nav{position:sticky;background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid rgba(31,111,235,.10);transition:box-shadow .25s;}
-  .nav.scrolled{box-shadow:0 10px 30px -12px rgba(16,60,160,.25);}
-  .brand-ico{background:linear-gradient(145deg,#6FB0FF 0%,#1F6FEB 55%,#1248B8 100%);box-shadow:0 8px 20px -4px rgba(31,111,235,.55),inset 0 1px 0 rgba(255,255,255,.5);}
+  .nav{position:sticky;background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid rgba(5,150,105,.10);transition:box-shadow .25s;}
+  .nav.scrolled{box-shadow:0 10px 30px -12px rgba(6,78,59,.25);}
+  .brand-ico{background:linear-gradient(145deg,#6EE7B7 0%,#059669 55%,#047857 100%);box-shadow:0 8px 20px -4px rgba(5,150,105,.55),inset 0 1px 0 rgba(255,255,255,.5);}
   .nav-links a{position:relative;border:0 !important;font-weight:600;}
   .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:var(--blue);transform:scaleX(0);transition:transform .25s;}
   .nav-links a:hover::after,.nav-links a:first-child::after{transform:scaleX(1);}
   .btn{letter-spacing:.01em;}
-  .btn-primary{background:linear-gradient(135deg,#3C8BFF 0%,#1F6FEB 50%,#1553C8 100%);border-color:transparent;box-shadow:0 12px 26px -8px rgba(31,111,235,.65),inset 0 1px 0 rgba(255,255,255,.35);position:relative;overflow:hidden;}
+  .btn-primary{background:linear-gradient(135deg,#10B981 0%,#059669 50%,#047857 100%);border-color:transparent;box-shadow:0 12px 26px -8px rgba(5,150,105,.65),inset 0 1px 0 rgba(255,255,255,.35);position:relative;overflow:hidden;}
   .btn-primary::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .6s;}
   .btn-primary:hover::after{left:130%;}
-  .btn-ghost{background:rgba(255,255,255,.8);backdrop-filter:blur(6px);box-shadow:0 8px 20px -10px rgba(31,111,235,.4);}
+  .btn-ghost{background:rgba(255,255,255,.8);backdrop-filter:blur(6px);box-shadow:0 8px 20px -10px rgba(5,150,105,.4);}
   /* hero */
   .hero{padding:70px 20px 96px;background:
-    radial-gradient(60% 80% at 82% 45%,rgba(163,200,255,.65) 0%,transparent 70%),
-    radial-gradient(40% 50% at 8% 90%,rgba(207,227,255,.8) 0%,transparent 70%),
-    linear-gradient(180deg,#F6FAFF 0%,#EAF3FF 100%);}
+    radial-gradient(60% 80% at 82% 45%,rgba(167,243,208,.65) 0%,transparent 70%),
+    radial-gradient(40% 50% at 8% 90%,rgba(209,250,229,.8) 0%,transparent 70%),
+    linear-gradient(180deg,#F3FCF8 0%,#ECFDF7 100%);}
   .hero::after{display:block;content:"";position:absolute;left:0;right:0;bottom:-1px;height:60px;border:0;border-radius:0;transform:none;top:auto;
-    background:#F5F9FF;-webkit-mask:radial-gradient(60px 60px at 50% 100%,transparent 98%,#000) ;mask:none;clip-path:ellipse(75% 100% at 50% 100%);}
-  .pill{background:rgba(255,255,255,.85);border:1px solid rgba(31,111,235,.18);box-shadow:0 8px 20px -10px rgba(31,111,235,.5);}
+    background:#F2FBF7;-webkit-mask:radial-gradient(60px 60px at 50% 100%,transparent 98%,#000) ;mask:none;clip-path:ellipse(75% 100% at 50% 100%);}
+  .pill{background:rgba(255,255,255,.85);border:1px solid rgba(5,150,105,.18);box-shadow:0 8px 20px -10px rgba(5,150,105,.5);}
   .hero h1{font-size:clamp(2.4rem,5.6vw,4rem);letter-spacing:-.02em;}
-  .hero h1 em{background:linear-gradient(100deg,#1248B8 0%,#1F6FEB 45%,#5AA0FF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+  .hero h1 em{background:linear-gradient(100deg,#047857 0%,#059669 45%,#34D399 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
   .hero p.lede{font-size:1.1rem;line-height:1.85;}
   .stat{background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow-md);border-radius:20px;transition:transform .25s,box-shadow .25s;}
   .stat:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
-  .stat .num{background:linear-gradient(135deg,#1248B8,#3C8BFF);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;}
-  .hero-art::before,.hero-art::after{content:"";position:absolute;border-radius:50%;border:1.5px solid rgba(31,111,235,.22);top:50%;left:50%;transform:translate(-50%,-50%);}
+  .stat .num{background:linear-gradient(135deg,#047857,#10B981);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;}
+  .hero-art::before,.hero-art::after{content:"";position:absolute;border-radius:50%;border:1.5px solid rgba(5,150,105,.22);top:50%;left:50%;transform:translate(-50%,-50%);}
   .hero-art::before{width:min(450px,96%);aspect-ratio:1;border-style:dashed;animation:spin 60s linear infinite;}
-  .hero-art::after{width:min(390px,86%);aspect-ratio:1;border-color:rgba(31,111,235,.12);}
+  .hero-art::after{width:min(390px,86%);aspect-ratio:1;border-color:rgba(5,150,105,.12);}
   @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   .hero-art .orb{position:relative;z-index:1;animation:float 6s ease-in-out infinite;
-    background:radial-gradient(circle at 30% 25%,#fff 0%,#E4F0FF 40%,#9CC5FF 100%);
-    box-shadow:0 40px 80px -20px rgba(31,111,235,.55),inset 0 -14px 40px rgba(31,111,235,.25),inset 0 10px 30px rgba(255,255,255,.9);}
-  .hero-art .orb svg{filter:drop-shadow(0 10px 18px rgba(18,72,184,.35));}
+    background:radial-gradient(circle at 30% 25%,#fff 0%,#E6FDF4 40%,#86DDB5 100%);
+    box-shadow:0 40px 80px -20px rgba(5,150,105,.55),inset 0 -14px 40px rgba(5,150,105,.25),inset 0 10px 30px rgba(255,255,255,.9);}
+  .hero-art .orb svg{filter:drop-shadow(0 10px 18px rgba(4,120,87,.35));}
   .hero-note{z-index:2;font-weight:600;}
   .hero-badge{z-index:2;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border:1px solid #fff;box-shadow:var(--shadow-lg);animation:float 7s ease-in-out infinite reverse;}
-  .hero-badge i{background:linear-gradient(145deg,#E3EEFF,#BFD9FF);}
+  .hero-badge i{background:linear-gradient(145deg,#D9F7E8,#A7E8C9);}
   .spark{position:absolute;z-index:2;color:var(--blue);font-size:1.5rem;animation:tw 3s ease-in-out infinite;}
   .spark.a{top:14%;right:16%}.spark.b{top:58%;left:6%;font-size:1rem;animation-delay:1s}.spark.c{bottom:18%;right:4%;font-size:.9rem;animation-delay:2s}
   @keyframes tw{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
   /* section heads */
   .section-head{margin:72px 0 26px;}
-  .section-head .kick{display:inline-block;background:linear-gradient(90deg,#E3EEFF,#F3F8FF);color:var(--blue);padding:5px 14px;border-radius:999px;font-size:.7rem;margin-bottom:10px;border:1px solid rgba(31,111,235,.15);}
+  .section-head .kick{display:inline-block;background:linear-gradient(90deg,#D9F7E8,#F0FBF6);color:var(--blue);padding:5px 14px;border-radius:999px;font-size:.7rem;margin-bottom:10px;border:1px solid rgba(5,150,105,.15);}
   .section-head h2{font-size:2rem;letter-spacing:-.02em;position:relative;padding-bottom:12px;}
-  .section-head h2::after{content:"";position:absolute;left:0;bottom:0;width:54px;height:4px;border-radius:4px;background:linear-gradient(90deg,#1F6FEB,#8DBFFF);}
+  .section-head h2::after{content:"";position:absolute;left:0;bottom:0;width:54px;height:4px;border-radius:4px;background:linear-gradient(90deg,#059669,#6EE7B7);}
   /* cards */
-  .tree-panel,.toolbar-wrap,.gen-block,.note-card{border:1px solid rgba(255,255,255,.9);outline:1px solid rgba(31,111,235,.10);outline-offset:-1px;box-shadow:var(--shadow-md);}
+  .tree-panel,.toolbar-wrap,.gen-block,.note-card{border:1px solid rgba(255,255,255,.9);outline:1px solid rgba(5,150,105,.10);outline-offset:-1px;box-shadow:var(--shadow-md);}
   .tree-panel{border-radius:28px;background:
-    radial-gradient(rgba(31,111,235,.10) 1px,transparent 1.2px) 0 0/22px 22px,
-    linear-gradient(160deg,#FFFFFF 0%,#EEF5FF 100%);}
+    radial-gradient(rgba(5,150,105,.10) 1px,transparent 1.2px) 0 0/22px 22px,
+    linear-gradient(160deg,#FFFFFF 0%,#EAF8F1 100%);}
   .full-tree-wrap{border-radius:0;}
   .toolbar-wrap{border-radius:24px;background:rgba(255,255,255,.9);}
-  .search-wrap input{border:1.5px solid #D5E5FF;padding:15px 20px 15px 46px;box-shadow:inset 0 2px 6px rgba(31,111,235,.06);}
-  .search-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 5px rgba(31,111,235,.14);background:#fff;}
+  .search-wrap input{border:1.5px solid #CBEEDC;padding:15px 20px 15px 46px;box-shadow:inset 0 2px 6px rgba(5,150,105,.06);}
+  .search-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 5px rgba(5,150,105,.14);background:#fff;}
   .person-card{transition:transform .2s,box-shadow .2s,border-color .2s;}
   .person-card:hover{transform:translateY(-3px) scale(1.03);}
-  .person-card.root{box-shadow:0 12px 26px -6px rgba(31,111,235,.6),inset 0 1px 0 rgba(255,255,255,.4);}
+  .person-card.root{box-shadow:0 12px 26px -6px rgba(5,150,105,.6),inset 0 1px 0 rgba(255,255,255,.4);}
   .gen-block{border-radius:24px;transition:transform .25s,box-shadow .25s;}
   .gen-block:hover{box-shadow:var(--shadow-lg);}
-  .gen-block-head{padding:16px 24px;border-bottom:1px solid #DCE8FA;}
+  .gen-block-head{padding:16px 24px;border-bottom:1px solid #D3EFE2;}
   .gen-block-head h3{font-size:1.1rem;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:10px;}
-  .gen-block-head h3::before{content:"";width:10px;height:10px;border-radius:50%;background:linear-gradient(145deg,#6FB0FF,#1F6FEB);box-shadow:0 0 0 4px rgba(31,111,235,.15);}
-  thead th{color:#7B8AAA;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;}
+  .gen-block-head h3::before{content:"";width:10px;height:10px;border-radius:50%;background:linear-gradient(145deg,#6EE7B7,#059669);box-shadow:0 0 0 4px rgba(5,150,105,.15);}
+  thead th{color:#6F8A7D;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;}
   td.name{color:var(--ink);transition:color .15s,padding .15s;}
   td.name:hover{color:var(--blue);text-decoration:none;padding-left:26px;}
   .note-card{border-radius:20px;padding:18px 22px;transition:transform .25s,box-shadow .25s;}
   .note-card:hover{transform:translateX(6px);box-shadow:var(--shadow-lg);}
-  .note-num{width:32px;height:32px;box-shadow:0 8px 16px -4px rgba(31,111,235,.55);}
+  .note-num{width:32px;height:32px;box-shadow:0 8px 16px -4px rgba(5,150,105,.55);}
   /* footer */
   footer{overflow:hidden;border-radius:32px;padding:46px 44px;background:
     radial-gradient(circle at 92% 8%,rgba(255,255,255,.22) 0,transparent 38%),
     radial-gradient(circle at 5% 110%,rgba(255,255,255,.16) 0,transparent 40%),
-    linear-gradient(120deg,#2B7CF5 0%,#1553C8 60%,#0E3E9E 100%);box-shadow:0 36px 70px -24px rgba(21,83,200,.7);}
+    linear-gradient(120deg,#10B981 0%,#047857 60%,#065F46 100%);box-shadow:0 36px 70px -24px rgba(4,120,87,.7);}
   footer::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:2px solid rgba(255,255,255,.18);}
   footer::after{content:"";position:absolute;right:-20px;top:-20px;width:140px;height:140px;border-radius:50%;border:2px solid rgba(255,255,255,.14);}
   footer p{position:relative;z-index:1;line-height:1.8;}
@@ -691,16 +691,16 @@
   /* reveal + scrollbar */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
   .reveal.in{opacity:1;transform:none;}
-  ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#B9D3FA;border-radius:10px;border:2px solid #F5F9FF}
+  ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#BEF5E3;border-radius:10px;border:2px solid #F2FBF7}
   @media(prefers-reduced-motion:reduce){*{animation:none !important}.reveal{opacity:1;transform:none}}
 
   /* ===== More animation ===== */
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;background:linear-gradient(90deg,#5AA0FF,#1F6FEB,#1248B8);box-shadow:0 0 12px rgba(31,111,235,.7);}
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;background:linear-gradient(90deg,#34D399,#059669,#047857);box-shadow:0 0 12px rgba(5,150,105,.7);}
   @keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
   @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
   @keyframes shimmer{to{background-position:200% center}}
   @keyframes draw{to{stroke-dashoffset:0}}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,111,235,.5)}70%{box-shadow:0 0 0 14px rgba(31,111,235,0)}100%{box-shadow:0 0 0 0 rgba(31,111,235,0)}}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(5,150,105,.5)}70%{box-shadow:0 0 0 14px rgba(5,150,105,0)}100%{box-shadow:0 0 0 0 rgba(5,150,105,0)}}
   @keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.7}100%{transform:translateY(-420px) rotate(160deg);opacity:0}}
   .nav{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
   .hero-grid>div:first-child>*{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
@@ -713,9 +713,9 @@
   .stat:nth-child(2){animation:pop .6s .82s cubic-bezier(.2,1.4,.4,1) both}
   .stat:nth-child(3){animation:pop .6s .94s cubic-bezier(.2,1.4,.4,1) both}
   .hero-art{animation:pop 1s .3s cubic-bezier(.2,1,.3,1) both}
-  .hero h1 em{background-size:200% auto;background-image:linear-gradient(100deg,#1248B8 0%,#3C8BFF 25%,#8DBFFF 50%,#3C8BFF 75%,#1248B8 100%);animation:shimmer 5s linear infinite}
+  .hero h1 em{background-size:200% auto;background-image:linear-gradient(100deg,#047857 0%,#10B981 25%,#6EE7B7 50%,#10B981 75%,#047857 100%);animation:shimmer 5s linear infinite}
   .brand-ico{animation:pulse 2.8s infinite}
-  .hero .bubble{position:absolute;bottom:-30px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,rgba(141,191,255,.55));animation:rise linear infinite;pointer-events:none;z-index:1}
+  .hero .bubble{position:absolute;bottom:-30px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,rgba(110,231,183,.55));animation:rise linear infinite;pointer-events:none;z-index:1}
   .person-card{animation:pop .5s cubic-bezier(.2,1.4,.4,1) backwards}
   .organic-node:nth-child(3n) .person-card{animation-delay:.15s}
   .organic-node:nth-child(3n+1) .person-card{animation-delay:.3s}
@@ -745,15 +745,15 @@
   .organic-node.person-card{animation-name:popc;}
   .organic-node.person-card:hover{transform:translate(-50%,-3px) scale(1.03);}
   @keyframes popc{from{opacity:0;transform:translate(-50%,12px) scale(.6)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
-  .person-card.root{box-shadow:0 6px 14px rgba(31,111,235,.35) !important;}
+  .person-card.root{box-shadow:0 6px 14px rgba(5,150,105,.35) !important;}
   .exporting .person-card.organic-node{transform:none !important;}
   .exporting svg.organic-edges{z-index:0;}
 
   /* export look for the tree image */
-  .exporting .person-card{border-width:1.6px; box-shadow:0 4px 10px rgba(31,111,235,.18) !important; padding:7px 16px 7px 11px;}
+  .exporting .person-card{border-width:1.6px; box-shadow:0 4px 10px rgba(5,150,105,.18) !important; padding:7px 16px 7px 11px;}
   .exporting .person-card .avatar{width:13px; height:13px;}
   .exporting .person-card .p-name{font-size:.8rem;}
-  .exporting .person-card.root{padding:10px 22px 10px 15px; box-shadow:0 8px 18px rgba(31,111,235,.4) !important;}
+  .exporting .person-card.root{padding:10px 22px 10px 15px; box-shadow:0 8px 18px rgba(5,150,105,.4) !important;}
   .exporting .person-card.root .p-name{font-size:1rem;}
 
   /* export: identical sizing on every device (no phone text-boost, no font-size drift) */
@@ -767,6 +767,61 @@
   .exporting .node-box{overflow:visible; padding-right:22px; white-space:nowrap; width:max-content;}
   .exporting .chain-tree{overflow:visible !important;}
   .exporting .chain-item{width:max-content; overflow:visible;}
+
+  /* ===== Pro layer 2 ===== */
+  ::selection{background:#A7E8C9;color:#063B2D}
+  :focus-visible{outline:3px solid rgba(5,150,105,.45);outline-offset:3px;border-radius:10px}
+  html{scroll-behavior:smooth}
+  body{font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  /* hero search */
+  .hero-search{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(5,150,105,.16);border-radius:999px;padding:6px 6px 6px 18px;max-width:520px;margin:0 0 18px;box-shadow:0 18px 40px -16px rgba(5,150,105,.45);transition:box-shadow .25s,border-color .25s;}
+  .hero-search:focus-within{border-color:var(--blue);box-shadow:0 0 0 5px rgba(5,150,105,.14),0 18px 40px -16px rgba(5,150,105,.5);}
+  .hero-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 .98rem 'Hind Siliguri',sans-serif;color:var(--text);padding:10px 0;}
+  .hero-search .btn{padding:11px 24px;}
+  .hero-btns{margin-bottom:28px}
+  /* feature strip overlapping the hero */
+  .features{position:relative;z-index:5;max-width:1040px;margin:-52px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .feat{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid #fff;border-radius:22px;padding:18px 18px;text-decoration:none;color:var(--ink);box-shadow:0 24px 44px -20px rgba(6,78,59,.38);outline:1px solid rgba(5,150,105,.08);outline-offset:-1px;transition:transform .25s,box-shadow .25s;}
+  .feat:hover{transform:translateY(-6px);box-shadow:0 30px 54px -18px rgba(6,78,59,.5);}
+  .feat-ico{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#6EE7B7,#059669 60%,#047857);box-shadow:0 10px 20px -6px rgba(5,150,105,.6);}
+  .feat b{display:block;font-size:1rem;font-weight:700;line-height:1.3}
+  .feat small{display:block;color:var(--muted);font-size:.8rem;line-height:1.45;margin-top:2px}
+  .feat i{margin-left:auto;font-style:normal;color:var(--blue);font-weight:700;transition:transform .25s}
+  .feat:hover i{transform:translateX(5px)}
+  @media(max-width:820px){.features{grid-template-columns:1fr;margin-top:-34px}}
+  @media(max-width:560px){.hero-search{padding-left:14px}.hero-search .btn{padding:10px 16px}}
+  /* generation jump pills */
+  .gen-pills{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px;}
+  .gen-pill{border:1.5px solid #C6EBD9;background:#fff;color:var(--ink);font:600 .85rem 'Hind Siliguri',sans-serif;padding:8px 16px;border-radius:999px;cursor:pointer;box-shadow:0 6px 14px -8px rgba(5,150,105,.4);transition:all .2s;}
+  .gen-pill:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-2px);}
+  /* tables */
+  .gen-block{scroll-margin-top:90px;overflow:hidden}
+  thead th{background:#EFFAF4;border-bottom:1px solid #D3EFE2;padding-top:12px;padding-bottom:12px}
+  tbody td{border-bottom:1px solid #E4F4EC}
+  td.name{position:relative;font-weight:600}
+  td.name::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:10px;background:linear-gradient(145deg,#6EE7B7,#059669);box-shadow:0 0 0 3px rgba(5,150,105,.14);vertical-align:middle}
+  td.name:hover{padding-left:inherit}
+  tbody tr{cursor:pointer}
+  /* notes */
+  .note-list{display:grid;gap:14px}
+  .note-card{align-items:flex-start;line-height:1.85}
+  .note-body b{color:var(--ink)}
+  /* nav scrollspy */
+  .nav-links a.active{color:var(--blue)}
+  .nav-links a.active::after{transform:scaleX(1)}
+  .nav-links a:first-child:not(.active)::after{transform:scaleX(0)}
+  /* footer */
+  footer{display:grid;grid-template-columns:1.25fr 1fr;gap:6px 36px;align-items:start}
+  footer>p{grid-column:1;margin:0 0 12px;color:rgba(255,255,255,.88)}
+  footer .contact-block{grid-column:2;grid-row:1 / span 3;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:22px;padding:22px;backdrop-filter:blur(8px);flex-direction:column;align-items:flex-start;position:relative;z-index:1}
+  footer .contact-link{width:100%}
+  .foot-bottom{grid-column:1 / -1;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.25);font-size:.82rem;color:rgba(255,255,255,.8);position:relative;z-index:1}
+  .foot-bottom a{color:#fff;text-decoration:none;font-weight:600}
+  @media(max-width:760px){footer{grid-template-columns:1fr;padding:34px 24px}footer .contact-block{grid-column:1;grid-row:auto}}
+  /* back to top */
+  .to-top{position:fixed;right:22px;bottom:22px;z-index:150;width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;color:#fff;font-size:1.3rem;font-weight:700;background:linear-gradient(145deg,#34D399,#059669);box-shadow:0 14px 28px -8px rgba(5,150,105,.7);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;transition:all .3s}
+  .to-top.show{opacity:1;transform:none;pointer-events:auto}
+  .to-top:hover{transform:translateY(-4px)}
 </style>
 </head>
 <body>
@@ -783,6 +838,7 @@
       <span class="pill">🌳 পারিবারিক ইতিহাস</span>
       <h1>নিজের <em>শিকড়ের</em><br>সন্ধানে</h1>
       <p class="lede">আমাদের গৌরবময় বংশতালিকা — মোঃ ধন গাজী থেকে শুরু হওয়া আট প্রজন্মের এক ধারাবাহিক ইতিহাস, যা প্রায় আড়াইশত বছরেরও বেশি সময় ধরে বহমান।</p>
+      <div class="hero-search" id="heroSearch"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5F7A6E" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" id="heroInput" placeholder="আপনার নাম খুঁজুন, যেমন: ফজলুল হক" aria-label="নাম খুঁজুন"><button type="button" class="btn btn-primary" id="heroGo">খুঁজুন</button></div>
       <div class="hero-btns"><a class="btn btn-primary" href="#tree">বংশ-ট্রি দেখুন →</a><a class="btn btn-ghost" href="#search">নাম খুঁজুন</a></div>
       <div class="stat-row">
         <div class="stat"><span class="num" id="statGens">৮</span><span class="lbl">প্রজন্ম</span></div>
@@ -792,11 +848,17 @@
     </div>
     <div class="hero-art">
       <span class="spark a">✦</span><span class="spark b">✦</span><span class="spark c">✦</span><div class="hero-note">শিকড় থেকে শাখায়,<br>প্রজন্মের গল্প ✦</div>
-      <div class="orb"><svg viewBox="0 0 120 120" fill="none" stroke="#1F6FEB" stroke-width="5" stroke-linecap="round"><path d="M60 108V66M60 66C60 50 40 50 40 34M60 66c0-16 20-16 20-32M60 84C60 74 28 78 24 60M60 84c0-10 32-6 36-24"/><circle cx="40" cy="30" r="8" fill="#1F6FEB"/><circle cx="80" cy="30" r="8" fill="#1F6FEB"/><circle cx="24" cy="56" r="8" fill="#1F6FEB"/><circle cx="96" cy="56" r="8" fill="#1F6FEB"/><circle cx="60" cy="108" r="6" fill="#1F6FEB"/></svg></div>
+      <div class="orb"><svg viewBox="0 0 120 120" fill="none" stroke="#059669" stroke-width="5" stroke-linecap="round"><path d="M60 108V66M60 66C60 50 40 50 40 34M60 66c0-16 20-16 20-32M60 84C60 74 28 78 24 60M60 84c0-10 32-6 36-24"/><circle cx="40" cy="30" r="8" fill="#059669"/><circle cx="80" cy="30" r="8" fill="#059669"/><circle cx="24" cy="56" r="8" fill="#059669"/><circle cx="96" cy="56" r="8" fill="#059669"/><circle cx="60" cy="108" r="6" fill="#059669"/></svg></div>
       <div class="hero-badge"><i>🌿</i><span>আট প্রজন্মের<br>সংরক্ষিত ইতিহাস</span></div>
     </div>
   </div>
 </header>
+
+<section class="features" aria-label="মূল সুবিধা">
+  <a class="feat" href="#tree"><span class="feat-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c0-4-5-4-5-8M12 13c0-4 5-4 5-8"/><circle cx="7" cy="4" r="1.6"/><circle cx="17" cy="4" r="1.6"/><circle cx="12" cy="21" r="1.2"/></svg></span><span><b>ইন্টারঅ্যাকটিভ বংশ-ট্রি</b><small>যেকোনো নামে ক্লিক করে বংশধারা দেখুন</small></span><i>→</i></a>
+  <a class="feat" href="#search"><span class="feat-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><span><b>দ্রুত নাম খুঁজুন</b><small>নাম লিখলেই মুহূর্তে ফলাফল</small></span><i>→</i></a>
+  <a class="feat" href="#generations"><span class="feat-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span><span><b>ছবি আকারে সংরক্ষণ</b><small>ট্রি ও বংশধারা ডাউনলোড করুন</small></span><i>→</i></a>
+</section>
 
 <main>
 
@@ -839,6 +901,8 @@
     <p>প্রজন্ম অনুযায়ী সম্পূর্ণ তালিকা — যেকোনো নামে ক্লিক করলে ট্রি দেখা যাবে</p>
   </div>
 
+  <div class="gen-pills" id="genPills" aria-label="প্রজন্মে যান"></div>
+
   <div id="genContainer"></div>
 
   <div class="section-head" id="notes">
@@ -868,6 +932,7 @@
       </a>
       <a class="contact-link" href="mailto:mdmursalineparvez@gmail.com">✉️&nbsp;mdmursalineparvez@gmail.com</a>
     </p>
+  <div class="foot-bottom"><span>© ২০২৬ শিকড়ের সন্ধানে · আমাদের বংশতালিকা</span><a href="#top">↑ উপরে যান</a></div>
   </footer>
 </main>
 
@@ -1161,12 +1226,12 @@ function computeLayout(rootCode){
 
 function compassRoseSvg(){
   return '<svg class="compass-rose" viewBox="0 0 60 60">' +
-    '<circle class="cr-line" cx="30" cy="30" r="22" fill="none" stroke="#1F6FEB" stroke-width="1.3"/>' +
-    '<line class="cr-line" x1="30" y1="4" x2="30" y2="56" stroke="#1F6FEB" stroke-width="1.3"/>' +
-    '<line class="cr-line" x1="4" y1="30" x2="56" y2="30" stroke="#1F6FEB" stroke-width="1.3"/>' +
-    '<line class="cr-line" x1="12" y1="12" x2="48" y2="48" stroke="#1F6FEB" stroke-width="1.3"/>' +
-    '<line class="cr-line" x1="48" y1="12" x2="12" y2="48" stroke="#1F6FEB" stroke-width="1.3"/>' +
-    '<circle class="cr-dot" cx="30" cy="30" r="3.4" fill="#1F6FEB"/>' +
+    '<circle class="cr-line" cx="30" cy="30" r="22" fill="none" stroke="#059669" stroke-width="1.3"/>' +
+    '<line class="cr-line" x1="30" y1="4" x2="30" y2="56" stroke="#059669" stroke-width="1.3"/>' +
+    '<line class="cr-line" x1="4" y1="30" x2="56" y2="30" stroke="#059669" stroke-width="1.3"/>' +
+    '<line class="cr-line" x1="12" y1="12" x2="48" y2="48" stroke="#059669" stroke-width="1.3"/>' +
+    '<line class="cr-line" x1="48" y1="12" x2="12" y2="48" stroke="#059669" stroke-width="1.3"/>' +
+    '<circle class="cr-dot" cx="30" cy="30" r="3.4" fill="#059669"/>' +
     '</svg>';
 }
 
@@ -1195,7 +1260,7 @@ function renderOrganicTree(rootCode, opts){
       const sw = Math.max(1.3, 3.6 - p.y * 0.32);
       const op = Math.max(0.42, 0.85 - p.y * 0.06);
       edgesSvg += '<path d="M ' + x1 + ' ' + y1 + ' C ' + (x1 + jitter) + ' ' + midY + ', ' +
-        (x2 - jitter) + ' ' + midY + ', ' + x2 + ' ' + y2 + '" fill="none" stroke="#1F6FEB" ' +
+        (x2 - jitter) + ' ' + midY + ', ' + x2 + ' ' + y2 + '" fill="none" stroke="#059669" ' +
         'stroke-width="' + sw + '" stroke-linecap="round" opacity="' + op + '"/>';
     });
   });
@@ -1249,27 +1314,27 @@ function adjustTreeZoom(id, delta){
 function buildFramedFigure(contentNode, widthPx){
   const caption = document.createElement("div");
   caption.style.cssText =
-    "font-family:'Hind Siliguri',sans-serif; font-size:16px; line-height:1.9; color:#1F6FEB; " +
+    "font-family:'Hind Siliguri',sans-serif; font-size:16px; line-height:1.9; color:#059669; " +
     "padding:20px 44px 6px; text-align:center; position:relative; z-index:1;";
   caption.innerHTML =
-    "<div style=\"font-family:'Hind Siliguri',serif; font-weight:700; color:#1F6FEB; font-size:17px; margin-bottom:6px; letter-spacing:.02em;\">তথ্যসূত্র:</div>" +
+    "<div style=\"font-family:'Hind Siliguri',serif; font-weight:700; color:#059669; font-size:17px; margin-bottom:6px; letter-spacing:.02em;\">তথ্যসূত্র:</div>" +
     "<div>মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে " +
     "ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।</div>";
 
   // small flourish icon used beside the title and at the very bottom
   const flourishIcon = (flip) =>
     '<svg width="30" height="14" viewBox="0 0 60 28" style="' + (flip ? "transform:scaleX(-1);" : "") + '">' +
-      '<path d="M2 24C14 24 18 6 30 6" fill="none" stroke="#1F6FEB" stroke-width="1.6" stroke-linecap="round"/>' +
-      '<path d="M30 6C34 10 38 6 40 2" fill="none" stroke="#1F6FEB" stroke-width="1.6" stroke-linecap="round"/>' +
-      '<circle cx="41" cy="2" r="2.4" fill="#1F6FEB"/>' +
+      '<path d="M2 24C14 24 18 6 30 6" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<path d="M30 6C34 10 38 6 40 2" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<circle cx="41" cy="2" r="2.4" fill="#059669"/>' +
     '</svg>';
 
   // decorative divider (leaf + lines) used under the header and above the caption
   const divider = (mt, mb) =>
     '<div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:' + mt + 'px 0 ' + mb + 'px; position:relative; z-index:1;">' +
-      '<span style="width:90px; height:1px; background:linear-gradient(90deg, transparent, #1F6FEB);"></span>' +
-      '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C7 6 4 11 6 16c1.4 3.4 4.4 5 6 6 1.6-1 4.6-2.6 6-6 2-5-1-10-6-14z" fill="#1F6FEB" opacity=".9"/><path d="M12 3v17" stroke="#E3EEFF" stroke-width="1" opacity=".8"/></svg>' +
-      '<span style="width:90px; height:1px; background:linear-gradient(90deg, #1F6FEB, transparent);"></span>' +
+      '<span style="width:90px; height:1px; background:linear-gradient(90deg, transparent, #059669);"></span>' +
+      '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C7 6 4 11 6 16c1.4 3.4 4.4 5 6 6 1.6-1 4.6-2.6 6-6 2-5-1-10-6-14z" fill="#059669" opacity=".9"/><path d="M12 3v17" stroke="#D9F7E8" stroke-width="1" opacity=".8"/></svg>' +
+      '<span style="width:90px; height:1px; background:linear-gradient(90deg, #059669, transparent);"></span>' +
     '</div>';
 
   // header banner: emblem + flourish-flanked title + subtitle
@@ -1277,21 +1342,21 @@ function buildFramedFigure(contentNode, widthPx){
   header.style.cssText = "text-align:center; padding:34px 30px 4px; position:relative; z-index:1;";
   header.innerHTML =
     '<svg width="58" height="58" viewBox="0 0 64 64" style="display:block; margin:0 auto 12px;">' +
-      '<circle cx="32" cy="32" r="30" fill="none" stroke="#1F6FEB" stroke-width="1.3" opacity=".6"/>' +
-      '<circle cx="32" cy="32" r="25" fill="none" stroke="#1F6FEB" stroke-width=".7" opacity=".35"/>' +
-      '<path d="M32 46V33" stroke="#0A1F4D" stroke-width="2.6" stroke-linecap="round"/>' +
-      '<path d="M32 38c-6-1-10-6-10-12 6 0 10 3 12 8" fill="#1F6FEB"/>' +
-      '<path d="M32 36c6-1 10-6 10-12-6 0-10 3-12 8" fill="#5AA0FF"/>' +
-      '<path d="M32 30c-5-1-8-5-8-9 5 0 8 2 9 6" fill="#1F6FEB"/>' +
-      '<path d="M32 28c5-1 8-5 8-9-5 0-8 2-9 6" fill="#5AA0FF"/>' +
-      '<circle cx="32" cy="18" r="3.6" fill="#1F6FEB"/>' +
+      '<circle cx="32" cy="32" r="30" fill="none" stroke="#059669" stroke-width="1.3" opacity=".6"/>' +
+      '<circle cx="32" cy="32" r="25" fill="none" stroke="#059669" stroke-width=".7" opacity=".35"/>' +
+      '<path d="M32 46V33" stroke="#063B2D" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<path d="M32 38c-6-1-10-6-10-12 6 0 10 3 12 8" fill="#059669"/>' +
+      '<path d="M32 36c6-1 10-6 10-12-6 0-10 3-12 8" fill="#34D399"/>' +
+      '<path d="M32 30c-5-1-8-5-8-9 5 0 8 2 9 6" fill="#059669"/>' +
+      '<path d="M32 28c5-1 8-5 8-9-5 0-8 2-9 6" fill="#34D399"/>' +
+      '<circle cx="32" cy="18" r="3.6" fill="#059669"/>' +
     '</svg>' +
     '<div style="display:flex; align-items:center; justify-content:center; gap:14px;">' +
       flourishIcon(true) +
-      '<div style="font-family:\'Hind Siliguri\',serif; font-weight:700; font-size:28px; color:#0A1F4D; letter-spacing:.03em;">শিকড়ের সন্ধানে</div>' +
+      '<div style="font-family:\'Hind Siliguri\',serif; font-weight:700; font-size:28px; color:#063B2D; letter-spacing:.03em;">শিকড়ের সন্ধানে</div>' +
       flourishIcon(false) +
     '</div>' +
-    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:13.5px; color:#6B7A99; margin-top:6px; letter-spacing:.02em;">আমাদের গৌরবময় বংশতালিকা</div>' +
+    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:13.5px; color:#5F7A6E; margin-top:6px; letter-spacing:.02em;">আমাদের গৌরবময় বংশতালিকা</div>' +
     divider(18, 0);
 
   const footerDivider = document.createElement("div");
@@ -1300,7 +1365,7 @@ function buildFramedFigure(contentNode, widthPx){
   const closingMark = document.createElement("div");
   closingMark.style.cssText = "text-align:center; padding:14px 0 4px; position:relative; z-index:1;";
   closingMark.innerHTML =
-    '<svg width="15" height="15" viewBox="0 0 24 24" style="display:inline-block; opacity:.8;"><path d="M12 2C7 6 4 11 6 16c1.4 3.4 4.4 5 6 6 1.6-1 4.6-2.6 6-6 2-5-1-10-6-14z" fill="#1F6FEB"/></svg>';
+    '<svg width="15" height="15" viewBox="0 0 24 24" style="display:inline-block; opacity:.8;"><path d="M12 2C7 6 4 11 6 16c1.4 3.4 4.4 5 6 6 1.6-1 4.6-2.6 6-6 2-5-1-10-6-14z" fill="#059669"/></svg>';
 
   // very faint background watermark — a big spreading banyan-style tree, sits behind all inner content
   const watermark = document.createElement("div");
@@ -1310,35 +1375,35 @@ function buildFramedFigure(contentNode, widthPx){
   watermark.innerHTML =
     '<svg width="94%" height="94%" viewBox="0 0 260 220">' +
       // ground roots spreading wide
-      '<path d="M130 216c-16-8-30-10-52-9" fill="none" stroke="#1F6FEB" stroke-width="4" stroke-linecap="round"/>' +
-      '<path d="M130 216c16-8 30-10 52-9" fill="none" stroke="#1F6FEB" stroke-width="4" stroke-linecap="round"/>' +
-      '<path d="M130 216c-6-6-9-11-9-20" fill="none" stroke="#1F6FEB" stroke-width="3.4" stroke-linecap="round"/>' +
-      '<path d="M130 216c6-6 9-11 9-20" fill="none" stroke="#1F6FEB" stroke-width="3.4" stroke-linecap="round"/>' +
-      '<path d="M130 216V128" fill="none" stroke="#1F6FEB" stroke-width="9" stroke-linecap="round"/>' +
+      '<path d="M130 216c-16-8-30-10-52-9" fill="none" stroke="#059669" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M130 216c16-8 30-10 52-9" fill="none" stroke="#059669" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M130 216c-6-6-9-11-9-20" fill="none" stroke="#059669" stroke-width="3.4" stroke-linecap="round"/>' +
+      '<path d="M130 216c6-6 9-11 9-20" fill="none" stroke="#059669" stroke-width="3.4" stroke-linecap="round"/>' +
+      '<path d="M130 216V128" fill="none" stroke="#059669" stroke-width="9" stroke-linecap="round"/>' +
       // wide banyan-style branch skeleton
-      '<path d="M130 150c-30-8-50-24-62-48" fill="none" stroke="#1F6FEB" stroke-width="6" stroke-linecap="round"/>' +
-      '<path d="M130 150c30-8 50-24 62-48" fill="none" stroke="#1F6FEB" stroke-width="6" stroke-linecap="round"/>' +
-      '<path d="M130 128c-40-4-68-16-86-38" fill="none" stroke="#1F6FEB" stroke-width="4.6" stroke-linecap="round"/>' +
-      '<path d="M130 128c40-4 68-16 86-38" fill="none" stroke="#1F6FEB" stroke-width="4.6" stroke-linecap="round"/>' +
-      '<path d="M100 108c-12-10-18-20-18-32" fill="none" stroke="#1F6FEB" stroke-width="3" stroke-linecap="round"/>' +
-      '<path d="M160 108c12-10 18-20 18-32" fill="none" stroke="#1F6FEB" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M130 150c-30-8-50-24-62-48" fill="none" stroke="#059669" stroke-width="6" stroke-linecap="round"/>' +
+      '<path d="M130 150c30-8 50-24 62-48" fill="none" stroke="#059669" stroke-width="6" stroke-linecap="round"/>' +
+      '<path d="M130 128c-40-4-68-16-86-38" fill="none" stroke="#059669" stroke-width="4.6" stroke-linecap="round"/>' +
+      '<path d="M130 128c40-4 68-16 86-38" fill="none" stroke="#059669" stroke-width="4.6" stroke-linecap="round"/>' +
+      '<path d="M100 108c-12-10-18-20-18-32" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M160 108c12-10 18-20 18-32" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round"/>' +
       // hanging aerial (prop) roots — a signature banyan feature
-      '<path d="M78 96c-2 26-2 46 2 66" fill="none" stroke="#1F6FEB" stroke-width="2.2" opacity=".8" stroke-linecap="round"/>' +
-      '<path d="M182 96c2 26 2 46-2 66" fill="none" stroke="#1F6FEB" stroke-width="2.2" opacity=".8" stroke-linecap="round"/>' +
-      '<path d="M56 108c-3 20-3 36 1 52" fill="none" stroke="#1F6FEB" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>' +
-      '<path d="M204 108c3 20 3 36-1 52" fill="none" stroke="#1F6FEB" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>' +
+      '<path d="M78 96c-2 26-2 46 2 66" fill="none" stroke="#059669" stroke-width="2.2" opacity=".8" stroke-linecap="round"/>' +
+      '<path d="M182 96c2 26 2 46-2 66" fill="none" stroke="#059669" stroke-width="2.2" opacity=".8" stroke-linecap="round"/>' +
+      '<path d="M56 108c-3 20-3 36 1 52" fill="none" stroke="#059669" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>' +
+      '<path d="M204 108c3 20 3 36-1 52" fill="none" stroke="#059669" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>' +
       // broad, layered spreading canopy (banyan trees fan out much wider than they are tall)
-      '<circle cx="130" cy="60" r="46" fill="#1F6FEB"/>' +
-      '<circle cx="70" cy="80" r="34" fill="#1F6FEB"/>' +
-      '<circle cx="190" cy="80" r="34" fill="#1F6FEB"/>' +
-      '<circle cx="34" cy="98" r="24" fill="#1F6FEB"/>' +
-      '<circle cx="226" cy="98" r="24" fill="#1F6FEB"/>' +
-      '<circle cx="100" cy="34" r="28" fill="#1F6FEB"/>' +
-      '<circle cx="160" cy="34" r="28" fill="#1F6FEB"/>' +
-      '<circle cx="130" cy="14" r="24" fill="#1F6FEB"/>' +
-      '<circle cx="60" cy="112" r="18" fill="#1F6FEB"/>' +
-      '<circle cx="200" cy="112" r="18" fill="#1F6FEB"/>' +
-      '<circle cx="130" cy="102" r="22" fill="#1F6FEB"/>' +
+      '<circle cx="130" cy="60" r="46" fill="#059669"/>' +
+      '<circle cx="70" cy="80" r="34" fill="#059669"/>' +
+      '<circle cx="190" cy="80" r="34" fill="#059669"/>' +
+      '<circle cx="34" cy="98" r="24" fill="#059669"/>' +
+      '<circle cx="226" cy="98" r="24" fill="#059669"/>' +
+      '<circle cx="100" cy="34" r="28" fill="#059669"/>' +
+      '<circle cx="160" cy="34" r="28" fill="#059669"/>' +
+      '<circle cx="130" cy="14" r="24" fill="#059669"/>' +
+      '<circle cx="60" cy="112" r="18" fill="#059669"/>' +
+      '<circle cx="200" cy="112" r="18" fill="#059669"/>' +
+      '<circle cx="130" cy="102" r="22" fill="#059669"/>' +
     '</svg>';
 
   const inner = document.createElement("div");
@@ -1354,33 +1419,33 @@ function buildFramedFigure(contentNode, widthPx){
   const cornerSvg = (rot) =>
     '<svg viewBox="0 0 100 100" width="70" height="70" style="position:absolute; ' + rot.pos +
     ' transform:rotate(' + rot.deg + 'deg); pointer-events:none;">' +
-    '<path d="M6 92 V30 Q6 6 30 6 H92" fill="none" stroke="#1F6FEB" stroke-width="3.2" stroke-linecap="round"/>' +
-    '<path d="M6 74 V38 Q6 20 24 20 H62" fill="none" stroke="#1F6FEB" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>' +
-    '<path d="M6 92c0-10 4-14 10-14" fill="none" stroke="#1F6FEB" stroke-width="2" stroke-linecap="round" opacity=".7"/>' +
-    '<path d="M92 6c-10 0-14 4-14 10" fill="none" stroke="#1F6FEB" stroke-width="2" stroke-linecap="round" opacity=".7"/>' +
+    '<path d="M6 92 V30 Q6 6 30 6 H92" fill="none" stroke="#059669" stroke-width="3.2" stroke-linecap="round"/>' +
+    '<path d="M6 74 V38 Q6 20 24 20 H62" fill="none" stroke="#059669" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>' +
+    '<path d="M6 92c0-10 4-14 10-14" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" opacity=".7"/>' +
+    '<path d="M92 6c-10 0-14 4-14 10" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" opacity=".7"/>' +
     '<g transform="translate(14,14)">' +
-      '<path d="M0 20C5 9 14 2 26 0 23 12 16 18 0 20Z" fill="#1F6FEB" opacity=".92"/>' +
-      '<path d="M0 34C7 20 18 13 34 11 29 25 18 32 0 34Z" fill="#5AA0FF" opacity=".85"/>' +
-      '<path d="M2 8C6 4 12 1 18 0" fill="none" stroke="#E3EEFF" stroke-width=".7" opacity=".6"/>' +
+      '<path d="M0 20C5 9 14 2 26 0 23 12 16 18 0 20Z" fill="#059669" opacity=".92"/>' +
+      '<path d="M0 34C7 20 18 13 34 11 29 25 18 32 0 34Z" fill="#34D399" opacity=".85"/>' +
+      '<path d="M2 8C6 4 12 1 18 0" fill="none" stroke="#D9F7E8" stroke-width=".7" opacity=".6"/>' +
     '</g>' +
-    '<circle cx="30" cy="30" r="4" fill="#1F6FEB"/>' +
+    '<circle cx="30" cy="30" r="4" fill="#059669"/>' +
     '<circle cx="30" cy="30" r="1.6" fill="#FFFFFF"/>' +
     '</svg>';
 
   // beaded dot border, set just inside the main gold rule for extra richness
   const beadStripH = (pos) =>
     '<div style="position:absolute; ' + pos + '; left:64px; right:64px; height:3px; ' +
-    'background-image:radial-gradient(circle, #1F6FEB 1.6px, transparent 2px); background-size:13px 3px; opacity:.8;"></div>';
+    'background-image:radial-gradient(circle, #059669 1.6px, transparent 2px); background-size:13px 3px; opacity:.8;"></div>';
   const beadStripV = (pos) =>
     '<div style="position:absolute; ' + pos + '; top:64px; bottom:64px; width:3px; ' +
-    'background-image:radial-gradient(circle, #1F6FEB 1.6px, transparent 2px); background-size:3px 13px; opacity:.8;"></div>';
+    'background-image:radial-gradient(circle, #059669 1.6px, transparent 2px); background-size:3px 13px; opacity:.8;"></div>';
 
   const frame = document.createElement("div");
   frame.style.cssText =
     "position:relative; display:inline-block; padding:46px; border-radius:34px; " +
-    "background: radial-gradient(140% 100% at 50% 0%, #FFFFFF 0%, #EEF5FF 55%, #E3EEFF 100%); " +
-    "border:2px solid #1F6FEB; " +
-    "box-shadow:inset 0 0 0 6px #FFFFFF, inset 0 0 0 8px #1F6FEB, inset 0 0 0 13px #FFFFFF, inset 0 0 0 14px rgba(173,138,61,.5), 0 18px 46px rgba(31,74,52,.22);";
+    "background: radial-gradient(140% 100% at 50% 0%, #FFFFFF 0%, #EAF8F1 55%, #D9F7E8 100%); " +
+    "border:2px solid #059669; " +
+    "box-shadow:inset 0 0 0 6px #FFFFFF, inset 0 0 0 8px #059669, inset 0 0 0 13px #FFFFFF, inset 0 0 0 14px rgba(173,138,61,.5), 0 18px 46px rgba(31,74,52,.22);";
   frame.innerHTML =
     beadStripH("top:26px") + beadStripH("bottom:26px") +
     beadStripV("left:26px") + beadStripV("right:26px") +
@@ -1399,7 +1464,7 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   if (btn){ btn.innerHTML = "প্রস্তুত হচ্ছে…"; btn.disabled = true; }
   const reset = () => { if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; } };
 
-  const bg = bgColor || "#E3EEFF";
+  const bg = bgColor || "#D9F7E8";
   const frame = buildFrameFn();
 
   // make sure the Bengali web font is really loaded on this device before measuring text,
@@ -1462,7 +1527,7 @@ function downloadTreeImage(id){
   const rose = clone.querySelector(".compass-rose"); if (rose) rose.remove();
 
   // colour each generation, collect row positions
-  const PAL = ["#1F6FEB","#2BA5D8","#14B8A6","#7A6CF0","#E8893C","#D9467A","#0E8F6E","#4C9AFF"];
+  const PAL = ["#059669","#0891B2","#7C3AED","#D97706","#DB2777","#2563EB","#65A30D","#0F766E"];
   const cards = Array.from(clone.querySelectorAll(".organic-node"));
   const rows = {};
   let minG = 99, maxG = 0, rootName = "";
@@ -1495,7 +1560,7 @@ function downloadTreeImage(id){
       if (n.length < 2) return;
       const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       dot.setAttribute("cx", n[n.length - 2]); dot.setAttribute("cy", n[n.length - 1]); dot.setAttribute("r", 4.5);
-      dot.setAttribute("fill", "#FFFFFF"); dot.setAttribute("stroke", "#1F6FEB"); dot.setAttribute("stroke-width", 2);
+      dot.setAttribute("fill", "#FFFFFF"); dot.setAttribute("stroke", "#059669"); dot.setAttribute("stroke-width", 2);
       svg.appendChild(dot);
     });
   }
@@ -1517,14 +1582,14 @@ function downloadTreeImage(id){
   container.appendChild(clone);
 
   const mkChip = (label, val) => '<span style="display:inline-block; margin:0 7px; padding:9px 22px; border-radius:999px; background:#fff; ' +
-    'border:1.5px solid #BFD9FF; box-shadow:0 6px 14px rgba(31,111,235,.12); font:500 13.5px \'Hind Siliguri\',sans-serif; color:#6B7A99;">' +
-    label + ' <b style="font-size:16px; color:#1F6FEB; margin-left:4px;">' + val + '</b></span>';
+    'border:1.5px solid #A7E8C9; box-shadow:0 6px 14px rgba(5,150,105,.12); font:500 13.5px \'Hind Siliguri\',sans-serif; color:#5F7A6E;">' +
+    label + ' <b style="font-size:16px; color:#059669; margin-left:4px;">' + val + '</b></span>';
   const stats = document.createElement("div");
   stats.style.cssText = "position:relative; z-index:1; margin-left:-" + SIDE + "px; width:" + (treeW + SIDE) + "px; text-align:center; padding-top:22px;";
   stats.innerHTML = mkChip("মোট সদস্য", toBn(cards.length)) + mkChip("প্রজন্ম", toBn(maxG - minG + 1)) + (rootName ? mkChip("শাখার মূল", rootName) : "");
   container.appendChild(stats);
 
-  exportFramedImage(() => buildFramedFigure(container, (treeW + SIDE) + "px"), "shikorer-sondhane-bongshotalika.png", btn, "#E3EEFF");
+  exportFramedImage(() => buildFramedFigure(container, (treeW + SIDE) + "px"), "shikorer-sondhane-bongshotalika.png", btn, "#D9F7E8");
 }
 
 function downloadLineageImage(btn){
@@ -1552,7 +1617,7 @@ function downloadLineageImage(btn){
     ct.style.paddingRight = "24px";
   }
 
-  exportFramedImage(() => buildLineageCertificateFigure(clone, measuredWidth), "shikorer-sondhane-bongshodhara.png", btn, "#E3EEFF");
+  exportFramedImage(() => buildLineageCertificateFigure(clone, measuredWidth), "shikorer-sondhane-bongshodhara.png", btn, "#D9F7E8");
 }
 
 // ---------- a fully different, certificate-style frame for the lineage-chain download ----------
@@ -1562,40 +1627,40 @@ function buildLineageCertificateFigure(contentNode, widthPx){
   header.style.cssText = "text-align:center; padding:38px 34px 6px; position:relative; z-index:1;";
   header.innerHTML =
     '<svg width="64" height="64" viewBox="0 0 64 64" style="display:block; margin:0 auto 14px;">' +
-      '<circle cx="32" cy="32" r="27" fill="#F3F8FF" stroke="#1F6FEB" stroke-width="2.4"/>' +
-      '<circle cx="32" cy="32" r="20" fill="none" stroke="#1F6FEB" stroke-width=".8" opacity=".55"/>' +
+      '<circle cx="32" cy="32" r="27" fill="#F0FBF6" stroke="#059669" stroke-width="2.4"/>' +
+      '<circle cx="32" cy="32" r="20" fill="none" stroke="#059669" stroke-width=".8" opacity=".55"/>' +
       // laurel sprigs left & right
-      '<g stroke="#1F6FEB" stroke-width="1.6" fill="#1F6FEB" opacity=".92">' +
+      '<g stroke="#059669" stroke-width="1.6" fill="#059669" opacity=".92">' +
         '<path d="M14 40c4 2 8 1 11-2M13 34c4 1 8 0 11-3M14 28c4 0 7-1 10-4" fill="none" stroke-linecap="round"/>' +
         '<path d="M50 40c-4 2-8 1-11-2M51 34c-4 1-8 0-11-3M50 28c-4 0-7-1-10-4" fill="none" stroke-linecap="round"/>' +
       '</g>' +
-      '<path d="M32 20v12l8 6" fill="none" stroke="#1F6FEB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<circle cx="32" cy="20" r="2.6" fill="#1F6FEB"/>' +
+      '<path d="M32 20v12l8 6" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="32" cy="20" r="2.6" fill="#059669"/>' +
     '</svg>' +
-    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:12.5px; letter-spacing:.14em; color:#1F6FEB; font-weight:700; margin-bottom:4px;">শিকড়ের সন্ধানে</div>' +
-    '<div style="font-family:\'Hind Siliguri\',serif; font-weight:700; font-size:27px; color:#0A1F4D;">প্রজন্মের পর প্রজন্ম, এক গৌরবগাথা</div>' +
-    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:13px; color:#6B7A99; margin-top:6px;">আদি পুরুষ থেকে বর্তমান পর্যন্ত ধারাবাহিক শাখা</div>' +
+    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:12.5px; letter-spacing:.14em; color:#059669; font-weight:700; margin-bottom:4px;">শিকড়ের সন্ধানে</div>' +
+    '<div style="font-family:\'Hind Siliguri\',serif; font-weight:700; font-size:27px; color:#063B2D;">প্রজন্মের পর প্রজন্ম, এক গৌরবগাথা</div>' +
+    '<div style="font-family:\'Hind Siliguri\',sans-serif; font-size:13px; color:#5F7A6E; margin-top:6px;">আদি পুরুষ থেকে বর্তমান পর্যন্ত ধারাবাহিক শাখা</div>' +
     '<div style="display:flex; align-items:center; justify-content:center; gap:10px; margin:18px 0 0;">' +
-      '<span style="width:60px; height:2px; background:#1F6FEB; opacity:.5;"></span>' +
-      '<span style="width:7px; height:7px; background:#1F6FEB; transform:rotate(45deg); display:inline-block;"></span>' +
-      '<span style="width:110px; height:1px; background:#1F6FEB; opacity:.3;"></span>' +
-      '<span style="width:7px; height:7px; background:#1F6FEB; transform:rotate(45deg); display:inline-block;"></span>' +
-      '<span style="width:60px; height:2px; background:#1F6FEB; opacity:.5;"></span>' +
+      '<span style="width:60px; height:2px; background:#059669; opacity:.5;"></span>' +
+      '<span style="width:7px; height:7px; background:#059669; transform:rotate(45deg); display:inline-block;"></span>' +
+      '<span style="width:110px; height:1px; background:#059669; opacity:.3;"></span>' +
+      '<span style="width:7px; height:7px; background:#059669; transform:rotate(45deg); display:inline-block;"></span>' +
+      '<span style="width:60px; height:2px; background:#059669; opacity:.5;"></span>' +
     '</div>';
 
   const footerRule = document.createElement("div");
   footerRule.style.cssText = "text-align:center; margin:22px 0 0; position:relative; z-index:1;";
   footerRule.innerHTML =
-    '<span style="display:inline-block; width:140px; height:1px; background:#1F6FEB; opacity:.35;"></span>';
+    '<span style="display:inline-block; width:140px; height:1px; background:#059669; opacity:.35;"></span>';
 
   // caption presented as a stamped note box, not a plain paragraph
   const caption = document.createElement("div");
   caption.style.cssText =
-    "font-family:'Hind Siliguri',sans-serif; font-size:15px; line-height:1.85; color:#1B2A4A; " +
+    "font-family:'Hind Siliguri',sans-serif; font-size:15px; line-height:1.85; color:#16302A; " +
     "margin:20px 34px 0; padding:16px 22px; text-align:center; position:relative; z-index:1; " +
     "background:rgba(156,107,48,.06); border:1px dashed rgba(156,107,48,.5); border-radius:10px;";
   caption.innerHTML =
-    "<div style=\"font-family:'Hind Siliguri',serif; font-weight:700; color:#1F6FEB; font-size:15px; margin-bottom:5px;\">তথ্যসূত্র:</div>" +
+    "<div style=\"font-family:'Hind Siliguri',serif; font-weight:700; color:#059669; font-size:15px; margin-bottom:5px;\">তথ্যসূত্র:</div>" +
     "<div>মৃত ফজলুল হক সাহেব প্রথম পাঁচ প্রজন্মের তথ্য সংগ্রহ করেন। পরবর্তীতে তাঁর ছেলে " +
     "ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ বাকি তিন প্রজন্মের তথ্য সংগ্রহ ও সংরক্ষণ করেন।</div>";
 
@@ -1603,10 +1668,10 @@ function buildLineageCertificateFigure(contentNode, widthPx){
   sealMark.style.cssText = "text-align:center; padding:18px 0 6px; position:relative; z-index:1;";
   sealMark.innerHTML =
     '<svg width="30" height="30" viewBox="0 0 40 40">' +
-      '<circle cx="20" cy="20" r="17" fill="none" stroke="#1F6FEB" stroke-width="1.4" opacity=".6"/>' +
-      '<circle cx="20" cy="20" r="11" fill="none" stroke="#1F6FEB" stroke-width=".8" opacity=".4"/>' +
-      '<path d="M20 11v9l6 4" fill="none" stroke="#1F6FEB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<circle cx="20" cy="11" r="2" fill="#1F6FEB"/>' +
+      '<circle cx="20" cy="20" r="17" fill="none" stroke="#059669" stroke-width="1.4" opacity=".6"/>' +
+      '<circle cx="20" cy="20" r="11" fill="none" stroke="#059669" stroke-width=".8" opacity=".4"/>' +
+      '<path d="M20 11v9l6 4" fill="none" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="20" cy="11" r="2" fill="#059669"/>' +
     '</svg>';
 
   // radiating "family wheel" watermark — deliberately different from the banyan-tree watermark
@@ -1617,17 +1682,17 @@ function buildLineageCertificateFigure(contentNode, widthPx){
   let rays = "";
   for (let i = 0; i < 16; i++){
     const angle = (i * 360) / 16;
-    rays += '<line x1="100" y1="100" x2="100" y2="6" stroke="#1F6FEB" stroke-width="2" ' +
+    rays += '<line x1="100" y1="100" x2="100" y2="6" stroke="#059669" stroke-width="2" ' +
       'transform="rotate(' + angle + ' 100 100)"/>';
   }
   watermark.innerHTML =
     '<svg width="76%" height="76%" viewBox="0 0 200 200">' +
-      '<circle cx="100" cy="100" r="94" fill="none" stroke="#1F6FEB" stroke-width="2"/>' +
-      '<circle cx="100" cy="100" r="70" fill="none" stroke="#1F6FEB" stroke-width="1.4"/>' +
-      '<circle cx="100" cy="100" r="46" fill="none" stroke="#1F6FEB" stroke-width="1.4"/>' +
-      '<circle cx="100" cy="100" r="22" fill="none" stroke="#1F6FEB" stroke-width="1.4"/>' +
+      '<circle cx="100" cy="100" r="94" fill="none" stroke="#059669" stroke-width="2"/>' +
+      '<circle cx="100" cy="100" r="70" fill="none" stroke="#059669" stroke-width="1.4"/>' +
+      '<circle cx="100" cy="100" r="46" fill="none" stroke="#059669" stroke-width="1.4"/>' +
+      '<circle cx="100" cy="100" r="22" fill="none" stroke="#059669" stroke-width="1.4"/>' +
       '<g opacity=".6">' + rays + '</g>' +
-      '<circle cx="100" cy="100" r="5" fill="#1F6FEB"/>' +
+      '<circle cx="100" cy="100" r="5" fill="#059669"/>' +
     '</svg>';
 
   const inner = document.createElement("div");
@@ -1645,22 +1710,22 @@ function buildLineageCertificateFigure(contentNode, widthPx){
   // circular "wax seal" medallions at the corners instead of curling vines
   const cornerMedallion = (pos) =>
     '<svg width="52" height="52" viewBox="0 0 52 52" style="position:absolute; ' + pos + '; pointer-events:none;">' +
-      '<circle cx="26" cy="26" r="23" fill="#FFFFFF" stroke="#1F6FEB" stroke-width="2.6"/>' +
-      '<circle cx="26" cy="26" r="17" fill="none" stroke="#1F6FEB" stroke-width=".8" opacity=".5"/>' +
-      '<g stroke="#1F6FEB" stroke-width="1.3" opacity=".85">' +
+      '<circle cx="26" cy="26" r="23" fill="#FFFFFF" stroke="#059669" stroke-width="2.6"/>' +
+      '<circle cx="26" cy="26" r="17" fill="none" stroke="#059669" stroke-width=".8" opacity=".5"/>' +
+      '<g stroke="#059669" stroke-width="1.3" opacity=".85">' +
         '<line x1="26" y1="9" x2="26" y2="14"/>' +
         '<line x1="26" y1="38" x2="26" y2="43"/>' +
         '<line x1="9" y1="26" x2="14" y2="26"/>' +
         '<line x1="38" y1="26" x2="43" y2="26"/>' +
       '</g>' +
-      '<circle cx="26" cy="26" r="3.4" fill="#1F6FEB"/>' +
+      '<circle cx="26" cy="26" r="3.4" fill="#059669"/>' +
     '</svg>';
 
   const frame = document.createElement("div");
   frame.style.cssText =
     "position:relative; display:inline-block; padding:44px; border-radius:26px; " +
-    "background: radial-gradient(130% 100% at 50% 0%, #FFFFFF 0%, #EEF5FF 55%, #DCE9FF 100%); " +
-    "border:1px solid #1F6FEB; " +
+    "background: radial-gradient(130% 100% at 50% 0%, #FFFFFF 0%, #EAF8F1 55%, #DFFCF3 100%); " +
+    "border:1px solid #059669; " +
     "box-shadow:inset 0 0 0 5px #FFFFFF, inset 0 0 0 6px rgba(156,107,48,.55), " +
     "inset 0 0 0 11px #FFFFFF, inset 0 0 0 12px rgba(46,93,69,.28), 0 18px 46px rgba(74,63,42,.22);";
   frame.innerHTML =
@@ -1768,6 +1833,33 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
     (function step(t){var p=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-p,3);el.textContent=toBn(Math.round(target*e));if(p<1)requestAnimationFrame(step);else setTimeout(function(){busy=false},50);})(t0);}
   new MutationObserver(function(){if(!busy)count();}).observe(el,{childList:true,characterData:true,subtree:true});
   setTimeout(function(){if(!busy)count();},900);
+})();
+</script>
+<button type="button" class="to-top" id="toTop" aria-label="উপরে যান">↑</button>
+<script>
+(function(){
+  // hero search -> real search box
+  var hi=document.getElementById('heroInput'),si=document.getElementById('searchInput');
+  function go(){var v=hi.value.trim();if(!v)return;si.value=v;si.dispatchEvent(new Event('input',{bubbles:true}));
+    document.getElementById('generations').scrollIntoView({behavior:'smooth'});}
+  document.getElementById('heroGo').addEventListener('click',go);
+  hi.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+  // generation jump pills
+  var pills=document.getElementById('genPills');
+  function buildPills(){var blocks=document.querySelectorAll('#genContainer .gen-block');if(!blocks.length||pills.children.length===blocks.length)return;
+    pills.innerHTML='';blocks.forEach(function(b,i){b.id='gen-'+(i+1);var h=b.querySelector('h3,.gen-title,.gen-block-head');
+      var t=(h?h.textContent:'প্রজন্ম '+(i+1)).replace(/\s+/g,' ').trim().split(/[·|–—(]/)[0].trim();
+      var p=document.createElement('button');p.type='button';p.className='gen-pill';p.textContent=t;
+      p.onclick=function(){b.scrollIntoView({behavior:'smooth',block:'start'})};pills.appendChild(p);});}
+  buildPills();new MutationObserver(buildPills).observe(document.getElementById('genContainer'),{childList:true});
+  // scrollspy + back to top
+  var links=[].slice.call(document.querySelectorAll('.nav-links a')),
+      secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}),
+      top=document.getElementById('toTop');
+  function spy(){var y=scrollY+140,cur=0;secs.forEach(function(el,i){if(el&&el.offsetTop<=y)cur=i;});
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur)});top.classList.toggle('show',scrollY>500);}
+  addEventListener('scroll',spy,{passive:true});spy();
+  top.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'})});
 })();
 </script>
 </body>

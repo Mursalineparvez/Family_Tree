@@ -746,7 +746,7 @@
   .organic-node.person-card:hover{transform:translate(-50%,-3px) scale(1.03);}
   @keyframes popc{from{opacity:0;transform:translate(-50%,12px) scale(.6)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
   .person-card.root{box-shadow:0 6px 14px rgba(31,111,235,.35) !important;}
-  .exporting .person-card.organic-node{transform:translate(-50%,0) !important;}
+  .exporting .person-card.organic-node{transform:none !important;}
   .exporting svg.organic-edges{z-index:0;}
 
   /* export look for the tree image */
@@ -763,6 +763,7 @@
   .exporting .person-card.root{padding:11px 26px 11px 16px !important;}
   .exporting .person-card.root .p-name{font-size:16px !important;}
   .exporting .organic-node{max-width:196px; width:max-content;}
+  .exporting .organic-node.root{max-width:300px;}
   .exporting .node-box{overflow:visible; padding-right:22px; white-space:nowrap; width:max-content;}
   .exporting .chain-tree{overflow:visible !important;}
   .exporting .chain-item{width:max-content; overflow:visible;}
@@ -1468,12 +1469,22 @@ function downloadTreeImage(id){
   cards.forEach((c) => {
     const g = depthOf(c.dataset.code);
     minG = Math.min(minG, g); maxG = Math.max(maxG, g);
-    if (rows[g] === undefined) rows[g] = parseFloat(c.style.top) || 0;
+    const nx = parseFloat(c.style.left) || 0, ny = parseFloat(c.style.top) || 0;
+    if (rows[g] === undefined) rows[g] = ny;
     const col = PAL[(g - 1) % PAL.length];
-    if (c.classList.contains("root")){ rootName = (c.querySelector(".p-name") || {}).textContent || ""; return; }
-    c.style.borderColor = col + "99";
-    const av = c.querySelector(".avatar");
-    if (av){ av.style.background = col; av.style.boxShadow = "0 0 0 3px " + col + "33"; }
+    if (c.classList.contains("root")){ rootName = (c.querySelector(".p-name") || {}).textContent || ""; }
+    else {
+      c.style.borderColor = col + "99";
+      const av = c.querySelector(".avatar");
+      if (av){ av.style.background = col; av.style.boxShadow = "0 0 0 3px " + col + "33"; }
+    }
+    // centre on (nx, ny) without CSS transforms
+    const holder = document.createElement("div");
+    holder.style.cssText = "position:absolute; z-index:2; width:0; display:flex; justify-content:center; left:" + nx + "px; top:" + ny + "px;";
+    c.parentNode.insertBefore(holder, c);
+    c.style.position = "static"; c.style.left = "auto"; c.style.top = "auto";
+    c.style.transform = "none"; c.style.flex = "0 0 auto"; c.style.margin = "0";
+    holder.appendChild(c);
   });
 
   // joint dots where each branch leaves its parent
@@ -1483,7 +1494,7 @@ function downloadTreeImage(id){
       const n = (p.getAttribute("d").match(/-?\d+(\.\d+)?/g) || []).map(Number);
       if (n.length < 2) return;
       const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      dot.setAttribute("cx", n[0]); dot.setAttribute("cy", n[1]); dot.setAttribute("r", 4.5);
+      dot.setAttribute("cx", n[n.length - 2]); dot.setAttribute("cy", n[n.length - 1]); dot.setAttribute("r", 4.5);
       dot.setAttribute("fill", "#FFFFFF"); dot.setAttribute("stroke", "#1F6FEB"); dot.setAttribute("stroke-width", 2);
       svg.appendChild(dot);
     });
@@ -1495,10 +1506,10 @@ function downloadTreeImage(id){
   Object.keys(rows).forEach((g) => {
     const col = PAL[(g - 1) % PAL.length], top = rows[g];
     const band = document.createElement("div");
-    band.style.cssText = "position:absolute; left:14px; right:14px; top:" + (top - 20) + "px; height:74px; border-radius:40px; z-index:0; " +
+    band.style.cssText = "position:absolute; left:14px; right:14px; top:" + (top - 22) + "px; height:84px; border-radius:42px; z-index:0; " +
       "background:linear-gradient(90deg," + col + "26," + col + "0A 70%, transparent);";
     const chip = document.createElement("div");
-    chip.style.cssText = "position:absolute; left:26px; top:" + (top - 1) + "px; height:36px; line-height:36px; padding:0 16px; border-radius:999px; z-index:2; " +
+    chip.style.cssText = "position:absolute; left:26px; top:" + (top + 2) + "px; height:36px; line-height:36px; padding:0 16px; border-radius:999px; z-index:2; " +
       "background:" + col + "; color:#fff; font:700 13px 'Hind Siliguri',sans-serif; white-space:nowrap; box-shadow:0 4px 10px " + col + "55;";
     chip.textContent = genLabel[g - 1] || (toBn(g) + "তম প্রজন্ম");
     container.appendChild(band); container.appendChild(chip);

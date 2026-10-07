@@ -874,6 +874,21 @@
   .section-head{margin-top:84px}
   .section-head h2{font-size:2.15rem}
   .section-head h2::after{width:64px}
+
+  /* ===== Simple & clean hero ===== */
+  .hero{padding:72px 0 90px;background:linear-gradient(180deg,#F2FCF7 0%,#E6F8EF 100%);}
+  .hero::after{height:48px}
+  .hero h1 em::after{display:none}
+  .hero-btns{margin:0 0 34px}
+  .stat-row{background:none;border:0;box-shadow:none;padding:0;gap:0}
+  .stat{padding:0 30px 0 0 !important;margin-right:30px;border-radius:0}
+  .stat:last-child{margin-right:0;padding-right:0 !important}
+  .stat + .stat{border-left:1px solid #BDEBD5 !important;padding-left:30px !important}
+  .stat .num{font-size:2rem}
+  .hero-art{min-height:340px}
+  .hero-art::before,.hero-art::after{display:none}
+  .glass-card{transform:none;animation:none;border-radius:28px;box-shadow:0 40px 80px -34px rgba(6,78,59,.5);width:min(440px,100%)}
+  .gc-top{border-bottom:1px solid #E1F3EA}
 </style>
 </head>
 <body>
@@ -885,12 +900,11 @@
   <a class="btn btn-primary" href="#search">নাম খুঁজুন</a>
 </div></nav>
 <header class="hero" id="top">
-  <span class="bubble" style="left:8%;width:14px;height:14px;animation-duration:9s;animation-delay:0s"></span><span class="bubble" style="left:22%;width:8px;height:8px;animation-duration:12s;animation-delay:2s"></span><span class="bubble" style="left:40%;width:18px;height:18px;animation-duration:11s;animation-delay:4s"></span><span class="bubble" style="left:58%;width:10px;height:10px;animation-duration:13s;animation-delay:1s"></span><span class="bubble" style="left:72%;width:14px;height:14px;animation-duration:10s;animation-delay:3s"></span><span class="bubble" style="left:90%;width:9px;height:9px;animation-duration:14s;animation-delay:5s"></span><div class="hero-grid">
+  <div class="hero-grid">
     <div>
       <span class="pill">🌳 পারিবারিক ইতিহাস</span>
       <h1>নিজের <em>শিকড়ের</em><br>সন্ধানে</h1>
       <p class="lede">আমাদের গৌরবময় বংশতালিকা — মোঃ ধন গাজী থেকে শুরু হওয়া আট প্রজন্মের এক ধারাবাহিক ইতিহাস, যা প্রায় আড়াইশত বছরেরও বেশি সময় ধরে বহমান।</p>
-      <div class="hero-search" id="heroSearch"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5F7A6E" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" id="heroInput" placeholder="আপনার নাম খুঁজুন, যেমন: ফজলুল হক" aria-label="নাম খুঁজুন"><button type="button" class="btn btn-primary" id="heroGo">খুঁজুন</button></div>
       <div class="hero-btns"><a class="btn btn-primary" href="#tree">বংশ-ট্রি দেখুন →</a><a class="btn btn-ghost" href="#search">নাম খুঁজুন</a></div>
       <div class="stat-row">
         <div class="stat"><span class="num" id="statGens">৮</span><span class="lbl">প্রজন্ম</span></div>
@@ -899,24 +913,15 @@
       </div>
     </div>
     <div class="hero-art">
-      <span class="spark a">✦</span><span class="spark b">✦</span><span class="spark c">✦</span>
+      
       <div class="glass-card">
-        <div class="gc-top"><span class="dots"><i></i><i></i><i></i></span><b>আমাদের বংশ-ট্রি</b><em>৮ প্রজন্ম</em></div>
+        <div class="gc-top"><b>আমাদের বংশ-ট্রি</b><em>৮ প্রজন্ম</em></div>
         <svg class="mini-tree" viewBox="0 0 360 240" fill="none"><defs><linearGradient id="gG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#047857"/></linearGradient></defs>
 <g stroke="#10B981" stroke-width="3.2" stroke-linecap="round" fill="none"><path class="ln" pathLength="1" d="M180 62C180 92 80 88 80 106" style="animation-delay:0.50s"/><path class="ln" pathLength="1" d="M180 62V104" style="animation-delay:0.62s"/><path class="ln" pathLength="1" d="M180 62C180 92 280 88 280 106" style="animation-delay:0.74s"/><path class="ln" pathLength="1" d="M80 138C80 165 45 160 45 188" style="animation-delay:0.86s"/><path class="ln" pathLength="1" d="M80 138C80 165 115 160 115 188" style="animation-delay:0.98s"/><path class="ln" pathLength="1" d="M180 138V188" style="animation-delay:1.10s"/><path class="ln" pathLength="1" d="M280 138C280 165 245 160 245 188" style="animation-delay:1.22s"/><path class="ln" pathLength="1" d="M280 138C280 165 315 160 315 188" style="animation-delay:1.34s"/></g><g class="nd" style="transform-origin:180px 40px"><circle cx="180" cy="40" r="22" fill="url(#gG)" stroke="#047857" stroke-width="3"/><circle cx="180" cy="35.2" r="6.2" fill="#fff"/><path d="M169.0 52.1c0-11.0 5.5-13.6 11.0-13.6s11.0 2.6 11.0 13.6" fill="#fff"/></g><g class="nd" style="transform-origin:80px 122px"><circle cx="80" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="80" cy="118.3" r="4.8" fill="#059669"/><path d="M71.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:180px 122px"><circle cx="180" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="180" cy="118.3" r="4.8" fill="#059669"/><path d="M171.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:280px 122px"><circle cx="280" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="280" cy="118.3" r="4.8" fill="#059669"/><path d="M271.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:45px 204px"><circle cx="45" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="45" cy="200.9" r="3.9" fill="#10B981"/><path d="M38.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:115px 204px"><circle cx="115" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="115" cy="200.9" r="3.9" fill="#10B981"/><path d="M108.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:180px 204px"><circle cx="180" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="180" cy="200.9" r="3.9" fill="#10B981"/><path d="M173.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:245px 204px"><circle cx="245" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="245" cy="200.9" r="3.9" fill="#10B981"/><path d="M238.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:315px 204px"><circle cx="315" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="315" cy="200.9" r="3.9" fill="#10B981"/><path d="M308.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g></svg>
       </div>
-      <div class="float-chip c1"><i>🌱</i><span><small>আদি পুরুষ</small><b>মোঃ ধন গাজী</b></span></div>
-      <div class="float-chip c2"><i>🔎</i><span><small>নাম লিখে</small><b>মুহূর্তে খুঁজুন</b></span></div>
-      <div class="float-chip c3"><i>⬇️</i><span><small>ছবি আকারে</small><b>সংরক্ষণ করুন</b></span></div>
-    </div>
+      </div>
   </div>
 </header>
-
-<section class="features" aria-label="মূল সুবিধা">
-  <a class="feat" href="#tree"><span class="feat-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c0-4-5-4-5-8M12 13c0-4 5-4 5-8"/><circle cx="7" cy="4" r="1.6"/><circle cx="17" cy="4" r="1.6"/><circle cx="12" cy="21" r="1.2"/></svg></span><span><b>ইন্টারঅ্যাকটিভ বংশ-ট্রি</b><small>যেকোনো নামে ক্লিক করে বংশধারা দেখুন</small></span><i>→</i></a>
-  <a class="feat" href="#search"><span class="feat-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><span><b>দ্রুত নাম খুঁজুন</b><small>নাম লিখলেই মুহূর্তে ফলাফল</small></span><i>→</i></a>
-  <a class="feat" href="#generations"><span class="feat-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span><span><b>ছবি আকারে সংরক্ষণ</b><small>ট্রি ও বংশধারা ডাউনলোড করুন</small></span><i>→</i></a>
-</section>
 
 <main>
 
@@ -1896,12 +1901,6 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
 <button type="button" class="to-top" id="toTop" aria-label="উপরে যান">↑</button>
 <script>
 (function(){
-  // hero search -> real search box
-  var hi=document.getElementById('heroInput'),si=document.getElementById('searchInput');
-  function go(){var v=hi.value.trim();if(!v)return;si.value=v;si.dispatchEvent(new Event('input',{bubbles:true}));
-    document.getElementById('generations').scrollIntoView({behavior:'smooth'});}
-  document.getElementById('heroGo').addEventListener('click',go);
-  hi.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
   // generation jump pills
   var pills=document.getElementById('genPills');
   function buildPills(){var blocks=document.querySelectorAll('#genContainer .gen-block');if(!blocks.length||pills.children.length===blocks.length)return;

@@ -763,7 +763,9 @@
   .exporting .person-card.root{padding:11px 26px 11px 16px !important;}
   .exporting .person-card.root .p-name{font-size:16px !important;}
   .exporting .organic-node{max-width:196px; width:max-content;}
-  .exporting .node-box{overflow:visible; padding-right:18px;}
+  .exporting .node-box{overflow:visible; padding-right:22px; white-space:nowrap; width:max-content;}
+  .exporting .chain-tree{overflow:visible !important;}
+  .exporting .chain-item{width:max-content; overflow:visible;}
 </style>
 </head>
 <body>
@@ -1528,7 +1530,16 @@ function downloadLineageImage(btn){
   if (chainTree) {
     neededWidth = Math.max(neededWidth, chainTree.scrollWidth + 40);
   }
-  const measuredWidth = Math.max(360, neededWidth) + "px";
+  // frame + padding eat into the inner width, so add generous slack; let the chain grow to fit its widest name
+  const measuredWidth = Math.max(360, neededWidth + 130) + "px";
+  const ct = clone.querySelector(".chain-tree");
+  if (ct){
+    ct.style.overflow = "visible";
+    ct.style.width = "max-content";
+    ct.style.minWidth = "100%";
+    ct.style.margin = "0 auto";
+    ct.style.paddingRight = "24px";
+  }
 
   exportFramedImage(() => buildLineageCertificateFigure(clone, measuredWidth), "shikorer-sondhane-bongshodhara.png", btn, "#E3EEFF");
 }

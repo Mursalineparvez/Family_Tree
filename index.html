@@ -889,6 +889,96 @@
   .hero-art::before,.hero-art::after{display:none}
   .glass-card{transform:none;animation:none;border-radius:28px;box-shadow:0 40px 80px -34px rgba(6,78,59,.5);width:min(440px,100%)}
   .gc-top{border-bottom:1px solid #E1F3EA}
+
+  /* ===== Hero tree illustration ===== */
+  .hero-art{min-height:420px}
+  .hero-tree{position:relative;z-index:2;width:min(470px,100%);height:auto;filter:drop-shadow(0 30px 40px rgba(6,78,59,.22))}
+  .hero-tree .sway{transform-origin:230px 300px;animation:sway 7s ease-in-out infinite}
+  .hero-tree .fruit{animation:fruit 3.2s ease-in-out infinite;transform-box:view-box}
+  .hero-tree .lf{animation:drift 6s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}
+  @keyframes fruit{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  @keyframes drift{0%,100%{opacity:.85;translate:0 0}50%{opacity:.5;translate:6px -10px}}
+  @media(max-width:860px){.hero-art{min-height:300px}.hero-tree{width:min(340px,92%)}}
+
+  /* ===== Hero lineage card ===== */
+  .hero-art{min-height:400px;display:grid;place-items:center;position:relative}
+  .hero-art::before{display:block;content:"";position:absolute;width:420px;height:420px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);border:0;animation:none;background:radial-gradient(circle,rgba(52,211,153,.35),transparent 68%);filter:blur(10px)}
+  .hero-art::after{display:block;content:"";position:absolute;width:min(420px,92%);height:360px;border-radius:30px;left:50%;top:50%;transform:translate(-46%,-46%) rotate(5deg);background:linear-gradient(145deg,#A7E8C9,#6EE7B7);opacity:.55;border:0;aspect-ratio:auto}
+  .lineage-card{position:relative;z-index:2;width:min(420px,100%);background:#fff;border-radius:28px;padding:22px 22px 18px;box-shadow:0 50px 90px -34px rgba(6,78,59,.55),0 0 0 1px rgba(5,150,105,.08);animation:float 7s ease-in-out infinite}
+  .lc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid #E4F4EC}
+  .lc-head b{display:block;font-size:1.15rem;color:#063B2D;font-weight:800}
+  .lc-head small{display:block;font-size:.76rem;color:#5F7A6E;margin-top:2px}
+  .lc-head em{font-style:normal;font-size:.76rem;font-weight:700;color:#047857;background:#D9F7E8;padding:6px 14px;border-radius:999px;white-space:nowrap}
+  .lc-list{list-style:none;margin:16px 0 8px;padding:0;position:relative}
+  .lc-list::before{content:"";position:absolute;left:15px;top:12px;bottom:26px;width:2px;background:linear-gradient(#34D399,#D3EFE2)}
+  .lc-row,.lc-more{position:relative;display:flex;align-items:center;gap:12px;margin:0 0 10px;padding-left:var(--ind,0);animation:up .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.5s + var(--i,0) * .12s)}
+  .lc-dot{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;color:#047857;background:#fff;border:2px solid #34D399;position:relative;z-index:1;margin-left:calc(-1 * var(--ind,0) + 0px);transform:translateX(var(--ind,0))}
+  .lc-row{padding-left:0}
+  .lc-card{flex:1;min-width:0;display:flex;align-items:center;gap:12px;background:#F5FBF8;border:1px solid #DDF1E8;border-radius:16px;padding:9px 14px 9px 9px;margin-left:var(--ind,0);transition:transform .25s,box-shadow .25s}
+  .lc-card:hover{transform:translateX(4px);box-shadow:0 12px 24px -12px rgba(5,150,105,.45)}
+  .lc-card.first{background:linear-gradient(120deg,#059669,#047857);border-color:transparent}
+  .lc-av{flex:0 0 38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(145deg,#34D399,#059669)}
+  .lc-card.first .lc-av{background:rgba(255,255,255,.22)}
+  .lc-txt b{display:block;font-size:.95rem;color:#063B2D;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lc-txt small{display:block;font-size:.72rem;color:#5F7A6E}
+  .lc-card.first b{color:#fff}.lc-card.first small{color:#CFF5E3}
+  .lc-more{color:#5F7A6E;font-size:.85rem;margin-top:2px;padding-left:var(--ind,0)}
+  .lc-more .lc-dot{margin-left:0;transform:none;border-style:dashed}
+  .lc-foot{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding:12px;border-radius:14px;background:#F0FBF6;color:#047857;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s}
+  .lc-foot:hover{background:#059669;color:#fff}
+  .lc-foot i{font-style:normal;transition:transform .25s}.lc-foot:hover i{transform:translateX(4px)}
+  @media(max-width:860px){.hero-art{min-height:auto;margin-bottom:10px}.hero-art::before,.hero-art::after{display:none}}
+
+  .lc-row .lc-dot{margin-left:0;transform:none}
+  .lc-row,.lc-more{padding-left:0}
+  .lc-more{padding-left:0}
+
+  /* ===== Clean centered hero ===== */
+  .hero{padding:84px 0 110px;text-align:center;background:
+    radial-gradient(60% 55% at 50% 0%,rgba(110,231,183,.45) 0%,transparent 70%),
+    linear-gradient(180deg,#F4FCF8 0%,#E8F8F0 100%);}
+  .hero::before{display:block;content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+    background-image:radial-gradient(rgba(5,150,105,.16) 1px,transparent 1.3px);background-size:24px 24px;
+    -webkit-mask-image:radial-gradient(70% 80% at 50% 30%,#000,transparent);mask-image:radial-gradient(70% 80% at 50% 30%,#000,transparent);}
+  .hero-grid{grid-template-columns:1fr;max-width:860px;justify-items:center}
+  .hero-grid>div{display:flex;flex-direction:column;align-items:center}
+  .pill{margin-bottom:22px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.25;margin-bottom:18px}
+  .hero h1 br{display:none}
+  .hero p.lede{max-width:640px;margin:0 auto 32px;font-size:1.1rem}
+  .hero-btns{justify-content:center;margin-bottom:46px}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:640px;background:#fff;border:1px solid #D3EFE2;border-radius:22px;padding:8px 0;box-shadow:0 26px 50px -28px rgba(6,78,59,.4)}
+  .stat{align-items:center !important;text-align:center;margin:0 !important;padding:14px 10px !important}
+  .stat + .stat{border-left:1px solid #E1F3EA !important;padding-left:10px !important}
+  .stat .num{font-size:2.2rem}
+  .stat .lbl{font-size:.82rem}
+  @media(max-width:520px){.stat .num{font-size:1.7rem}.stat .lbl{font-size:.72rem}}
+
+  /* ===== Restore orb hero (two columns) ===== */
+  .hero{padding:64px 0 100px;text-align:left;background:
+    radial-gradient(55% 70% at 85% 40%,rgba(110,231,183,.55) 0%,transparent 70%),
+    radial-gradient(40% 50% at 5% 95%,rgba(167,243,208,.6) 0%,transparent 70%),
+    linear-gradient(180deg,#F2FCF7 0%,#E3F7EE 100%)}
+  .hero::before{display:none}
+  .hero-grid{grid-template-columns:1.05fr .95fr;max-width:1100px;justify-items:stretch}
+  .hero-grid>div{display:block}
+  .hero h1{font-size:clamp(2.3rem,5.2vw,3.8rem);line-height:1.2}
+  .hero h1 br{display:inline}
+  .hero p.lede{margin:0 0 28px;max-width:520px;font-size:1.05rem}
+  .hero-btns{justify-content:flex-start;margin-bottom:34px}
+  .stat-row{display:inline-flex;width:auto;max-width:none;background:none;border:0;box-shadow:none;padding:0;gap:0}
+  .stat{align-items:flex-start !important;text-align:left;padding:0 30px 0 0 !important;margin:0 30px 0 0 !important}
+  .stat:last-child{margin-right:0 !important;padding-right:0 !important}
+  .stat + .stat{border-left:1px solid #BDEBD5 !important;padding-left:30px !important}
+  .hero-art{display:grid;place-items:center;position:relative;min-height:380px}
+  .hero-art::before{display:block;content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(450px,96%);height:auto;aspect-ratio:1;border-radius:50%;border:1.5px dashed rgba(5,150,105,.25);background:none;filter:none;opacity:1;animation:spin 60s linear infinite}
+  .hero-art::after{display:block;content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(390px,86%);height:auto;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(5,150,105,.14);background:none;opacity:1}
+  .hero-art .orb{display:grid}
+  .hero-art .hero-note{display:block}
+  .hero-art .hero-badge{display:flex}
+  .hero-art .orb{background:radial-gradient(circle at 30% 25%,#fff 0%,#E3F7EE 40%,#9EE3C3 100%);box-shadow:0 40px 80px -20px rgba(5,150,105,.5),inset 0 -14px 40px rgba(5,150,105,.2),inset 0 10px 30px rgba(255,255,255,.9)}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{order:-1;min-height:260px}}
 </style>
 </head>
 <body>
@@ -912,14 +1002,12 @@
         <div class="stat"><span class="num">১</span><span class="lbl">আদি পুরুষ</span></div>
       </div>
     </div>
-    <div class="hero-art">
-      
-      <div class="glass-card">
-        <div class="gc-top"><b>আমাদের বংশ-ট্রি</b><em>৮ প্রজন্ম</em></div>
-        <svg class="mini-tree" viewBox="0 0 360 240" fill="none"><defs><linearGradient id="gG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#047857"/></linearGradient></defs>
-<g stroke="#10B981" stroke-width="3.2" stroke-linecap="round" fill="none"><path class="ln" pathLength="1" d="M180 62C180 92 80 88 80 106" style="animation-delay:0.50s"/><path class="ln" pathLength="1" d="M180 62V104" style="animation-delay:0.62s"/><path class="ln" pathLength="1" d="M180 62C180 92 280 88 280 106" style="animation-delay:0.74s"/><path class="ln" pathLength="1" d="M80 138C80 165 45 160 45 188" style="animation-delay:0.86s"/><path class="ln" pathLength="1" d="M80 138C80 165 115 160 115 188" style="animation-delay:0.98s"/><path class="ln" pathLength="1" d="M180 138V188" style="animation-delay:1.10s"/><path class="ln" pathLength="1" d="M280 138C280 165 245 160 245 188" style="animation-delay:1.22s"/><path class="ln" pathLength="1" d="M280 138C280 165 315 160 315 188" style="animation-delay:1.34s"/></g><g class="nd" style="transform-origin:180px 40px"><circle cx="180" cy="40" r="22" fill="url(#gG)" stroke="#047857" stroke-width="3"/><circle cx="180" cy="35.2" r="6.2" fill="#fff"/><path d="M169.0 52.1c0-11.0 5.5-13.6 11.0-13.6s11.0 2.6 11.0 13.6" fill="#fff"/></g><g class="nd" style="transform-origin:80px 122px"><circle cx="80" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="80" cy="118.3" r="4.8" fill="#059669"/><path d="M71.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:180px 122px"><circle cx="180" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="180" cy="118.3" r="4.8" fill="#059669"/><path d="M171.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:280px 122px"><circle cx="280" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="280" cy="118.3" r="4.8" fill="#059669"/><path d="M271.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:45px 204px"><circle cx="45" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="45" cy="200.9" r="3.9" fill="#10B981"/><path d="M38.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:115px 204px"><circle cx="115" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="115" cy="200.9" r="3.9" fill="#10B981"/><path d="M108.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:180px 204px"><circle cx="180" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="180" cy="200.9" r="3.9" fill="#10B981"/><path d="M173.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:245px 204px"><circle cx="245" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="245" cy="200.9" r="3.9" fill="#10B981"/><path d="M238.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:315px 204px"><circle cx="315" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="315" cy="200.9" r="3.9" fill="#10B981"/><path d="M308.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g></svg>
-      </div>
-      </div>
+    
+  <div class="hero-art">
+      <span class="spark a">✦</span><span class="spark b">✦</span><span class="spark c">✦</span><div class="hero-note">শিকড় থেকে শাখায়,<br>প্রজন্মের গল্প ✦</div>
+      <div class="orb"><svg viewBox="0 0 120 120" fill="none" stroke="#059669" stroke-width="5" stroke-linecap="round"><path d="M60 108V66M60 66C60 50 40 50 40 34M60 66c0-16 20-16 20-32M60 84C60 74 28 78 24 60M60 84c0-10 32-6 36-24"/><circle cx="40" cy="30" r="8" fill="#059669"/><circle cx="80" cy="30" r="8" fill="#059669"/><circle cx="24" cy="56" r="8" fill="#059669"/><circle cx="96" cy="56" r="8" fill="#059669"/><circle cx="60" cy="108" r="6" fill="#059669"/></svg></div>
+      <div class="hero-badge"><i>🌿</i><span>আট প্রজন্মের<br>সংরক্ষিত ইতিহাস</span></div>
+    </div>
   </div>
 </header>
 

@@ -755,6 +755,15 @@
   .exporting .person-card .p-name{font-size:.8rem;}
   .exporting .person-card.root{padding:10px 22px 10px 15px; box-shadow:0 8px 18px rgba(31,111,235,.4) !important;}
   .exporting .person-card.root .p-name{font-size:1rem;}
+
+  /* export: identical sizing on every device (no phone text-boost, no font-size drift) */
+  .exporting, .exporting *{-webkit-text-size-adjust:none; text-size-adjust:none; text-rendering:geometricPrecision; font-kerning:normal;}
+  .exporting .person-card{overflow:visible; padding:8px 20px 8px 12px !important; gap:8px;}
+  .exporting .person-card .p-name{font-size:13px !important; line-height:1.45; padding-bottom:2px; overflow:visible;}
+  .exporting .person-card.root{padding:11px 26px 11px 16px !important;}
+  .exporting .person-card.root .p-name{font-size:16px !important;}
+  .exporting .organic-node{max-width:196px; width:max-content;}
+  .exporting .node-box{overflow:visible; padding-right:18px;}
 </style>
 </head>
 <body>
@@ -929,7 +938,7 @@ const DATA = [
   ["1.1.1.2.3.2","মোঃ রমজান"],
   ["1.1.1.2.4.1","মোঃ রাব্বি"],
 
-  ["1.1.1.1.1.1.1","মোঃ সজিব"],
+  ["1.1.1.1.1.1.1","ডাঃ সজিব"],
   ["1.1.1.1.1.2.1","ইঞ্জিনিয়ার মোঃ মোরসালিন পারভেজ"],
   ["1.1.1.1.1.2.2","মোঃ ফাহিম আবরার"],
   ["1.1.1.1.1.3.1","মোঃ মেহেদি হাসান"],
@@ -1385,30 +1394,52 @@ function exportFramedImage(buildFrameFn, filename, btn, bgColor){
   if (typeof html2canvas === "undefined") return;
   const originalLabel = btn ? btn.innerHTML : null;
   if (btn){ btn.innerHTML = "প্রস্তুত হচ্ছে…"; btn.disabled = true; }
+  const reset = () => { if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; } };
 
   const bg = bgColor || "#E3EEFF";
   const frame = buildFrameFn();
 
-  const wrapper = document.createElement("div");
-  wrapper.className = "exporting";
-  wrapper.style.cssText =
-    "position:fixed; left:-99999px; top:0; display:inline-block; background:" + bg + "; padding:30px;";
-  wrapper.appendChild(frame);
-  document.body.appendChild(wrapper);
+  // make sure the Bengali web font is really loaded on this device before measuring text,
+  // otherwise a fallback font gets measured and names get clipped in the saved image
+  const fontsReady = (document.fonts && document.fonts.load)
+    ? Promise.all([
+        document.fonts.load("400 14px 'Hind Siliguri'"),
+        document.fonts.load("500 14px 'Hind Siliguri'"),
+        document.fonts.load("600 14px 'Hind Siliguri'"),
+        document.fonts.load("700 14px 'Hind Siliguri'"),
+        document.fonts.ready
+      ]).catch(() => {})
+    : Promise.resolve();
+  const nextFrame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
-  html2canvas(wrapper, { scale: 3, backgroundColor: bg, useCORS: true }).then((canvas) => {
-    wrapper.remove();
-    const link = document.createElement("a");
-    link.download = filename;
-    link.href = canvas.toDataURL("image/png");
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; }
-  }).catch(() => {
-    wrapper.remove();
-    if (btn){ btn.innerHTML = originalLabel; btn.disabled = false; }
-  });
+  fontsReady.then(() => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "exporting";
+    wrapper.style.cssText =
+      "position:fixed; left:-99999px; top:0; display:inline-block; background:" + bg + "; padding:30px;";
+    wrapper.appendChild(frame);
+    document.body.appendChild(wrapper);
+
+    return nextFrame().then(() => {
+      // keep the canvas inside what phones/tablets can actually allocate
+      const w = wrapper.offsetWidth, h = wrapper.offsetHeight;
+      let scale = 3;
+      scale = Math.min(scale, 8000 / w, Math.sqrt(14000000 / (w * h)));
+      scale = Math.max(1, Math.round(scale * 100) / 100);
+      return html2canvas(wrapper, { scale: scale, backgroundColor: bg, useCORS: true, logging: false })
+        .then((canvas) => {
+          wrapper.remove();
+          const link = document.createElement("a");
+          link.download = filename;
+          link.href = canvas.toDataURL("image/png");
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          reset();
+        })
+        .catch(() => { wrapper.remove(); reset(); });
+    });
+  }).catch(reset);
 }
 
 function downloadTreeImage(id){

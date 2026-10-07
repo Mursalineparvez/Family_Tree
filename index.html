@@ -822,6 +822,58 @@
   .to-top{position:fixed;right:22px;bottom:22px;z-index:150;width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;color:#fff;font-size:1.3rem;font-weight:700;background:linear-gradient(145deg,#34D399,#059669);box-shadow:0 14px 28px -8px rgba(5,150,105,.7);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;transition:all .3s}
   .to-top.show{opacity:1;transform:none;pointer-events:auto}
   .to-top:hover{transform:translateY(-4px)}
+
+  /* ===== Hero & section upgrade ===== */
+  main,footer{max-width:1100px}
+  .hero-grid{max-width:1100px;padding:0 20px}
+  .features{max-width:1100px}
+  .hero{padding:64px 0 120px;background:
+    radial-gradient(55% 70% at 85% 40%,rgba(110,231,183,.55) 0%,transparent 70%),
+    radial-gradient(40% 50% at 5% 95%,rgba(167,243,208,.6) 0%,transparent 70%),
+    linear-gradient(180deg,#F2FCF7 0%,#E3F7EE 100%);}
+  .hero h1{position:relative}
+  .hero h1 em{position:relative;display:inline-block}
+  .hero h1 em::after{content:"";position:absolute;left:2%;right:2%;bottom:-6px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8C14 2 24 2 36 7S60 12 72 6s32-4 46 1' fill='none' stroke='%2334D399' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;animation:none}
+  /* stats as one glass panel */
+  .stat-row{display:inline-flex;gap:0;background:rgba(255,255,255,.92);border:1px solid #fff;border-radius:26px;padding:6px;box-shadow:0 24px 46px -22px rgba(6,78,59,.45);}
+  .stat{flex-direction:column;align-items:flex-start;gap:0;background:transparent !important;border:0 !important;box-shadow:none !important;border-radius:20px;padding:12px 26px;}
+  .stat + .stat{border-left:1px solid #D3EFE2 !important;border-radius:0}
+  .stat .num{font-size:2.1rem;line-height:1.1}
+  .stat .lbl{font-size:.78rem;color:#5F7A6E;margin-top:2px}
+  /* hero art: glass family-tree card */
+  .hero-art{min-height:380px}
+  .hero-art .orb,.hero-art .hero-note,.hero-art .hero-badge{display:none}
+  .glass-card{position:relative;z-index:2;width:min(430px,94%);border-radius:34px;padding:18px 20px 12px;background:linear-gradient(150deg,rgba(255,255,255,.96),rgba(255,255,255,.62));border:1px solid #fff;backdrop-filter:blur(14px);box-shadow:0 50px 90px -30px rgba(6,78,59,.55),0 0 0 8px rgba(255,255,255,.35);transform:rotate(-2.5deg);animation:float 7s ease-in-out infinite;}
+  .gc-top{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px dashed #BDEBD5;margin-bottom:6px}
+  .gc-top .dots{display:flex;gap:5px}.gc-top .dots i{width:9px;height:9px;border-radius:50%;background:#BDEBD5}.gc-top .dots i:first-child{background:#34D399}
+  .gc-top b{font-size:.9rem;color:#063B2D;font-weight:700}
+  .gc-top em{margin-left:auto;font-style:normal;font-size:.72rem;font-weight:700;color:#047857;background:#D9F7E8;padding:4px 12px;border-radius:999px}
+  .mini-tree{width:100%;height:auto;display:block}
+  .mini-tree .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.4s ease-out forwards}
+  .mini-tree .nd{opacity:0;animation:pop .6s cubic-bezier(.2,1.4,.4,1) forwards;transform-box:fill-box}
+  .mini-tree .nd:nth-of-type(1){animation-delay:.3s}.mini-tree .nd:nth-of-type(n+2){animation-delay:.9s}.mini-tree .nd:nth-of-type(n+5){animation-delay:1.3s}
+  .float-chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.95);border:1px solid #fff;border-radius:18px;padding:10px 16px 10px 10px;box-shadow:0 20px 40px -14px rgba(6,78,59,.45);animation:float 6s ease-in-out infinite}
+  .float-chip i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-size:1.1rem;background:linear-gradient(145deg,#D9F7E8,#A7E8C9)}
+  .float-chip small{display:block;font-size:.7rem;color:#5F7A6E;line-height:1.2}
+  .float-chip b{display:block;font-size:.88rem;color:#063B2D;line-height:1.3}
+  .float-chip.c1{left:-6px;top:30px;animation-delay:.4s}
+  .float-chip.c2{right:-4px;top:150px;animation-delay:1.2s}
+  .float-chip.c3{left:14px;bottom:6px;animation-delay:2s}
+  @media(max-width:860px){.hero-art{min-height:340px}.float-chip.c1{left:0}.float-chip.c2{right:0}}
+  @media(max-width:520px){.float-chip.c2{display:none}.stat{padding:10px 16px}.stat .num{font-size:1.6rem}}
+  /* feature cards */
+  .features{gap:18px;margin-top:-64px}
+  .feat{position:relative;overflow:hidden;padding:22px 20px;border-radius:26px}
+  .feat::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#34D399,#059669);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+  .feat:hover::before{transform:scaleX(1)}
+  .feat small{font-size:.82rem}
+  .feat i{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#D9F7E8;line-height:1;transition:all .25s}
+  .feat:hover i{background:#059669;color:#fff}
+  /* section heads */
+  .section-head .kick{display:table;margin-bottom:12px}
+  .section-head{margin-top:84px}
+  .section-head h2{font-size:2.15rem}
+  .section-head h2::after{width:64px}
 </style>
 </head>
 <body>
@@ -847,9 +899,15 @@
       </div>
     </div>
     <div class="hero-art">
-      <span class="spark a">✦</span><span class="spark b">✦</span><span class="spark c">✦</span><div class="hero-note">শিকড় থেকে শাখায়,<br>প্রজন্মের গল্প ✦</div>
-      <div class="orb"><svg viewBox="0 0 120 120" fill="none" stroke="#059669" stroke-width="5" stroke-linecap="round"><path d="M60 108V66M60 66C60 50 40 50 40 34M60 66c0-16 20-16 20-32M60 84C60 74 28 78 24 60M60 84c0-10 32-6 36-24"/><circle cx="40" cy="30" r="8" fill="#059669"/><circle cx="80" cy="30" r="8" fill="#059669"/><circle cx="24" cy="56" r="8" fill="#059669"/><circle cx="96" cy="56" r="8" fill="#059669"/><circle cx="60" cy="108" r="6" fill="#059669"/></svg></div>
-      <div class="hero-badge"><i>🌿</i><span>আট প্রজন্মের<br>সংরক্ষিত ইতিহাস</span></div>
+      <span class="spark a">✦</span><span class="spark b">✦</span><span class="spark c">✦</span>
+      <div class="glass-card">
+        <div class="gc-top"><span class="dots"><i></i><i></i><i></i></span><b>আমাদের বংশ-ট্রি</b><em>৮ প্রজন্ম</em></div>
+        <svg class="mini-tree" viewBox="0 0 360 240" fill="none"><defs><linearGradient id="gG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#047857"/></linearGradient></defs>
+<g stroke="#10B981" stroke-width="3.2" stroke-linecap="round" fill="none"><path class="ln" pathLength="1" d="M180 62C180 92 80 88 80 106" style="animation-delay:0.50s"/><path class="ln" pathLength="1" d="M180 62V104" style="animation-delay:0.62s"/><path class="ln" pathLength="1" d="M180 62C180 92 280 88 280 106" style="animation-delay:0.74s"/><path class="ln" pathLength="1" d="M80 138C80 165 45 160 45 188" style="animation-delay:0.86s"/><path class="ln" pathLength="1" d="M80 138C80 165 115 160 115 188" style="animation-delay:0.98s"/><path class="ln" pathLength="1" d="M180 138V188" style="animation-delay:1.10s"/><path class="ln" pathLength="1" d="M280 138C280 165 245 160 245 188" style="animation-delay:1.22s"/><path class="ln" pathLength="1" d="M280 138C280 165 315 160 315 188" style="animation-delay:1.34s"/></g><g class="nd" style="transform-origin:180px 40px"><circle cx="180" cy="40" r="22" fill="url(#gG)" stroke="#047857" stroke-width="3"/><circle cx="180" cy="35.2" r="6.2" fill="#fff"/><path d="M169.0 52.1c0-11.0 5.5-13.6 11.0-13.6s11.0 2.6 11.0 13.6" fill="#fff"/></g><g class="nd" style="transform-origin:80px 122px"><circle cx="80" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="80" cy="118.3" r="4.8" fill="#059669"/><path d="M71.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:180px 122px"><circle cx="180" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="180" cy="118.3" r="4.8" fill="#059669"/><path d="M171.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:280px 122px"><circle cx="280" cy="122" r="17" fill="#fff" stroke="#059669" stroke-width="3"/><circle cx="280" cy="118.3" r="4.8" fill="#059669"/><path d="M271.5 131.3c0-8.5 4.2-10.5 8.5-10.5s8.5 2.0 8.5 10.5" fill="#059669"/></g><g class="nd" style="transform-origin:45px 204px"><circle cx="45" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="45" cy="200.9" r="3.9" fill="#10B981"/><path d="M38.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:115px 204px"><circle cx="115" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="115" cy="200.9" r="3.9" fill="#10B981"/><path d="M108.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:180px 204px"><circle cx="180" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="180" cy="200.9" r="3.9" fill="#10B981"/><path d="M173.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:245px 204px"><circle cx="245" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="245" cy="200.9" r="3.9" fill="#10B981"/><path d="M238.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g><g class="nd" style="transform-origin:315px 204px"><circle cx="315" cy="204" r="14" fill="#fff" stroke="#10B981" stroke-width="3"/><circle cx="315" cy="200.9" r="3.9" fill="#10B981"/><path d="M308.0 211.7c0-7.0 3.5-8.7 7.0-8.7s7.0 1.7 7.0 8.7" fill="#10B981"/></g></svg>
+      </div>
+      <div class="float-chip c1"><i>🌱</i><span><small>আদি পুরুষ</small><b>মোঃ ধন গাজী</b></span></div>
+      <div class="float-chip c2"><i>🔎</i><span><small>নাম লিখে</small><b>মুহূর্তে খুঁজুন</b></span></div>
+      <div class="float-chip c3"><i>⬇️</i><span><small>ছবি আকারে</small><b>সংরক্ষণ করুন</b></span></div>
     </div>
   </div>
 </header>
